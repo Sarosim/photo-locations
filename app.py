@@ -18,5 +18,9 @@ def index():
 def landing():
     return render_template('landing.html', entries=mongo.db.details.find())
     
+@app.route('/add_location')    
+def add_location():
+    return render_template('addlocation.html')
+    
 if __name__ == '__main__':
     app.run(host=os.environ.get('IP'), port=int(os.environ.get('PORT')), debug=True)    
