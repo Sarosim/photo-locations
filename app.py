@@ -20,7 +20,13 @@ def landing():
     
 @app.route('/add_location')    
 def add_location():
-    return render_template('addlocation.html')
+    return render_template('addlocation.html', categories=mongo.db.categories.find())
+    
+@app.route('/insert_location', methods=['POST'])
+def insert_location():
+    entries=mongo.db.details
+    entries.insert_one(request.form.to_dict())
+    return redirect(url_for('landing'))
     
 if __name__ == '__main__':
     app.run(host=os.environ.get('IP'), port=int(os.environ.get('PORT')), debug=True)    

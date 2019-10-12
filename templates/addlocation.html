@@ -1,24 +1,22 @@
 {% extends 'base.html' %} {% block content %}
 
 <div class="container">
-    <form>
+    <form action="{{url_for('insert_location')}}" method="POST">
         <fieldset>
             <legend>Location Info</legend>
             <div class="form-group mb-0 row">
                 <div class="form-group mb-0 col-sm-8">
                     <label for="title" class="col-form-label">Title</label>
-                    <input type="text" class="form-control" required id="title" placeholder="Choose your Title">
+                    <input type="text" class="form-control" required id="title" name='title' placeholder="Choose your Title">
                     <small id="titlelHelp" class="form-text text-muted">The title that best describes the location where your picture was taken</small>
                 </div>
                 <div class="col-sm-4">
                     <label for="category" class="col-form-label">Category</label>
-                    <select class="form-control" required id="category">
-                        <!--HERE COMES A FOR LOOP LATER WHEN WIRED-->
+                    <select class="form-control" required id="category" name='category_name'>
                         <option value="" disabled selected>Choose your Category</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
-                        <option>5</option>
+                        {% for cat in categories %}
+                        <option value={{cat.category_name}}>{{cat.category_name}}</option>
+                        {% endfor %}
                     </select>
                     <small id="categoryHelp" class="form-text text-muted">The category that best describes your photo location</small>
                 </div>
@@ -26,68 +24,69 @@
             <div class="form-group row">
                 <div class="col-sm-6">
                     <label for="country" class="col-form-label">Country</label>
-                    <input type="text" class="form-control" required id="country" placeholder="e.g. United Kingdom">
+                    <input type="text" class="form-control" required id="country" name='country' placeholder="e.g. United Kingdom">
                 </div>
                 <div class="col-sm-6">
                     <label for="region" class="col-form-label">Region / City</label>
-                    <input type="text" class="form-control" id="region" placeholder="e.g. Lake District">
+                    <input type="text" class="form-control" id="region" name='region' placeholder="e.g. Lake District">
                 </div>
             </div>
             <div class="form-group row">
                 <div class="col-sm-4">
                     <label for="postCode" class="col-form-label">Post Code</label>
-                    <input type="text" class="form-control" id="postCode">
+                    <input type="text" class="form-control" id="postCode" name='post_code'>
                 </div>
                 <div class="col-sm-4">
                     <label for="latitude" class="col-form-label">Latitude</label>
-                    <input type="number" required class="form-control" id="latitude" step="0.000001">
+                    <input type="number" required class="form-control" id="latitude" name='lat' step="0.000001">
                 </div>
                 <div class="col-sm-4">
                     <label for="longitude" class="col-form-label">Longitude</label>
-                    <input type="number" required class="form-control" id="longitude" step="0.000001">
+                    <input type="number" required class="form-control" id="longitude" name='lon' step="0.000001">
                 </div>
             </div>
             <legend>Details of Your Photo</legend>
             <div class="form-group row">
                 <div class="col-sm-4">
                     <label for="camera" class="col-form-label">Camera</label>
-                    <input type="text" class="form-control" id="camera">
+                    <input type="text" class="form-control" id="camera" name='camera'>
                 </div>
                 <div class="col-sm-4">
                     <label for="lens" class="col-form-label">Lens</label>
-                    <input type="text" class="form-control" id="lens">
+                    <input type="text" class="form-control" id="lens" name='lens'>
                 </div>
                 <div class="col-sm-4">
                     <label for="filter" class="col-form-label">Filter(s)</label>
-                    <input type="text" class="form-control" id="filter">
+                    <input type="text" class="form-control" id="filter" name='filters'>
                 </div>
             </div>
             <div class="form-group row">
                 <div class="col-sm-7">
                     <label for="photographer" class="col-form-label">Photographer</label>
-                    <input type="text" required class="form-control" id="photographer">
+                    <input type="text" required class="form-control" id="photographer" name='photographer'>
                 </div>
                 <div class="col-sm-1"></div>
                 <div class="col-sm-4">
                     <div class="mt-5 custom-control custom-switch">
-                        <input type="checkbox" class="custom-control-input" id="tripod">
+                        <input type="checkbox" class="custom-control-input" id="tripod" name='tripod_used'>
                         <label class="custom-control-label" for="tripod">Tripod was used</label>
                     </div>
                 </div>
             </div>
             <div class="form-group">
                 <label for="dwscription">Description</label>
-                <textarea class="form-control" required id="description" rows="3" placeholder="Add as much information as possible about the location as well as your equipment and technique used to take your picture"></textarea>
+                <textarea class="form-control" required id="description" name='description' rows="3" placeholder="Add as much information as possible about the location as well as your equipment and technique used to take your picture"></textarea>
             </div>
-            <div class="form-group">
+<!--            <div class="form-group">
                 <label for="inputFile">File input</label>
                 <input type="file" class="form-control-file" id="inputFile" aria-describedby="fileHelp">
                 <small id="fileHelp" class="form-text text-muted">Upload your image - size restriction: 256 MB</small>
             </div>
             <div class="instruction">or, alternatively</div>
+--> 
             <div class="form-group">
                 <label for="url" class="col-form-label">URL</label>
-                <input type="url" class="form-control" id="url" placeholder="https://yourURL...">
+                <input type="url" class="form-control" id="url" name='image_url' placeholder="https://yourURL...">
                 <small id="urlHelp" class="form-text text-muted">Insert the link to your picture</small>
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>
