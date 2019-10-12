@@ -1,6 +1,20 @@
 {% extends 'base.html' %}
 {% block content %}
-<div>Hello here as well, NICE TO MEET YOU</div>
 
+<div>Hello World in LANDING</div>
 
+        {% for entry in entries %}
+        {{entry.title}}
+        {{entry.country}}
+        {{entry.region}}
+        {{entry.post_code}}
+        {{entry.lat}}
+        {{entry.lon}}
+        {{entry.image_url}}
+        {{entry.camera}}
+        {{entry.lens}}
+        {{entry.filters}}
+        {{entry.tripod_used}}
+        {{entry.description}}
+    {% endfor %}
 {% endblock %}
