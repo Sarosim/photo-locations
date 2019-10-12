@@ -1,20 +1,41 @@
-{% extends 'base.html' %}
-{% block content %}
+{% extends 'base.html' %} {% block content %}
 
-<div>Hello World in LANDING</div>
 
+<!--****************   The 'POSTCARDS' for displaying database enrtries nicely   *********************************-->
+<section>
+    <div class="row p-3">
         {% for entry in entries %}
-        {{entry.title}}
-        {{entry.country}}
-        {{entry.region}}
-        {{entry.post_code}}
-        {{entry.lat}}
-        {{entry.lon}}
-        {{entry.image_url}}
-        {{entry.camera}}
-        {{entry.lens}}
-        {{entry.filters}}
-        {{entry.tripod_used}}
-        {{entry.description}}
-    {% endfor %}
+        <div class="col-12 col-lg-4">
+            <div class="card mb-3">
+                <h3 class="card-header">{{entry.title}}</h3>
+                <!--<div class="card-body">
+                    <h5 class="card-title">Special title treatment</h5>
+                    <h6 class="card-subtitle text-muted">Support card subtitle</h6>
+                </div>-->
+                <img style="height: 200px; width: 100%; display: block;" src={{entry.image_url}}
+                    alt="Card image">
+                <div class="card-body">
+                    <span class="card-text pr-3">{{entry.country}}</span>
+                    <span class="card-text">{{entry.region}}</span>
+                </div>
+                <div class="card-body">
+                    <p class="card-text">{{entry.description}}</p>
+                </div>
+<!--    to be used for Links to business page - potential additional extra feature            <div class="card-body">
+                    <a href="#" class="card-link">Card link</a>
+                    <a href="#" class="card-link">Another link</a>
+                </div>
+-->
+                <div class="card-footer text-muted">
+                    <span>2 days ago</span>
+                    <span class='p-3'>Likes: 14</span>
+                    <span>Views: 1356</span>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+<!--**********************************  /. The 'POSTCARDS'  ********************************************************************-->
+
 {% endblock %}
