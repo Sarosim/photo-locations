@@ -2,3 +2,8 @@ postcard-link {
     background-color: #222;
     text-decoration: none;
 }
+
+.photo-display {
+    max-width: 100%;
+    max-height: 90vh;
+}
