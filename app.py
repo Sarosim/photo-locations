@@ -12,7 +12,7 @@ mongo=PyMongo(app)
 
 @app.route('/')
 def index():
-    return 'Hello World'
+    return redirect(url_for('landing'))
     
 @app.route('/landing')
 def landing():
@@ -27,6 +27,10 @@ def insert_location():
     entries=mongo.db.details
     entries.insert_one(request.form.to_dict())
     return redirect(url_for('landing'))
+    
+@app.route('/display_details')
+def display_details():
+    return render_template('details.html')
     
 if __name__ == '__main__':
     app.run(host=os.environ.get('IP'), port=int(os.environ.get('PORT')), debug=True)    
