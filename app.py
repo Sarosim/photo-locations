@@ -40,5 +40,26 @@ def edit_record(record_id):
     category_list = mongo.db.categories.find()
     return render_template('updatelocation.html', record = the_record, categories = category_list)
     
+@app.route('/save_updates/<record_id>', methods=["POST"])
+def save_updates(record_id):
+    details = mongo.db.details
+    details.update({'_id': ObjectId(record_id)},
+    {
+        'title': request.form.get('title'),
+        'category_name': request.form.get('category_name'),
+        'country': request.form.get('country'),
+        'region': request.form.get('region'),
+        'post_code': request.form.get('post_code'),
+        'lat': request.form.get('lat'),
+        'lon': request.form.get('lon'),
+        'camera': request.form.get('camera'),
+        'lens': request.form.get('lens'),
+        'filters': request.form.get('filters'),
+        'photographer': request.form.get('photographer'),
+        'tripod_used': request.form.get('tripod_used'),
+        'description': request.form.get('description'),
+        'image_url': request.form.get('image_url')
+    })
+    return redirect(url_for('landing'))
 if __name__ == '__main__':
     app.run(host=os.environ.get('IP'), port=int(os.environ.get('PORT')), debug=True)    
