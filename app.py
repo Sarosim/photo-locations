@@ -28,9 +28,17 @@ def insert_location():
     entries.insert_one(request.form.to_dict())
     return redirect(url_for('landing'))
     
-@app.route('/display_details')
-def display_details():
-    return render_template('details.html')
+@app.route('/display_details/<rec_id>')
+def display_details(rec_id):
+    the_record = mongo.db.details.find_one({"_id": ObjectId(rec_id)})
+    category_list = mongo.db.categories.find()
+    return render_template('details.html', record = the_record, categories = category_list)
+    
+@app.route('/edit_record/<record_id>')
+def edit_record(record_id):
+    the_record = mongo.db.details.find_one({"_id": ObjectId(record_id)})
+    category_list = mongo.db.categories.find()
+    return render_template('updatelocation.html', record = the_record, categories = category_list)
     
 if __name__ == '__main__':
     app.run(host=os.environ.get('IP'), port=int(os.environ.get('PORT')), debug=True)    

@@ -6,7 +6,7 @@
     <div class="row p-3">
         {% for entry in entries %}
         <div class="col-12 col-lg-4">
-            <a class=posstcard-link href="{{url_for('display_details')}}">
+            <a class=postcard-link href="{{url_for('display_details', rec_id = entry._id)}}">
                 <div class="postcard card mb-3">
                     <h3 class="card-header">{{entry.title}}</h3>
                     <!--<div class="card-body">

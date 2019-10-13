@@ -1,35 +1,74 @@
 {% extends 'base.html' %} {% block content %}
 
 <section>
-
+    <!--WE are sending here one document from the details collection named 'record' and all the collections as a list named 'categories'-->
     <div class="row mx-auto">
-        <div class="col-md-8">
+        <div class="col-md-8 text-center">
             <h3>Picture</h3>
-            <img class='photo-display' src="https://scontent-lht6-1.xx.fbcdn.net/v/t1.0-9/31949639_1403627683116325_1540507277612548096_o.jpg?_nc_cat=109&_nc_oc=AQmZZZwbyAnGnL-RZDTQ6pBuuFFUIkiuPwFWJIAio8ZSOfACav4Fgs-nXkLpxnu5ac8&_nc_ht=scontent-lht6-1.xx&oh=3b40cdedb45649c2775f677749f72522&oe=5E2BBD61"></img>
+            <img class='photo-display' src="{{record.image_url}}"></img>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-4 text-center">
             <h3>Details</h3>
-            <div class="row">
-<!--                <div class="col-sm-4">
-                    title of the fields
+            <div class="row text-left">
+                <div class="col-sm-4">
+                    <h5>{{ record.title }}</h5>
                 </div>
                 <div class="col-sm-8">
-                    field data
-                </div>-->
-                <table class="table table-hover">
-                 <!--   <thead>
-                        <tr>
-                            <th scope="col">Type</th>
-                            <th scope="col">Column heading</th>
-                        </tr>
-                    </thead>-->
+                    <span>{{ record.description }}<span>
+                </div>
+            </div>
+            <div class="row">
+                <table class="table table-striped text-left">
                     <tbody>
-                        <tr class="table-light"> <!-- alternate default, light, and secondary-->
-                            <th scope="row">Title of field</th>
-                            <td>field data</td>
+                        <tr class="table">
+                            <!-- may alternate default, light, and secondary-->
+                            <th scope="row">Title</th>
+                            <td>{{ record.title }}</td>
+                        </tr>
+                        <tr class="table">
+                            <th scope="row">Category</th>
+                            <td>{{ record.category_name }}</td>
+                        </tr>
+                        <tr class="table">
+                            <th scope="row">Country</th>
+                            <td>{{ record.country }}</td>
+                        </tr>
+                        <tr class="table">
+                            <th scope="row">Region/City</th>
+                            <td>{{ record.region }}</td>
+                        </tr>
+                        <tr class="table">
+                            <th scope="row">Post Code</th>
+                            <td>{{ record.post_code }}</td>
+                        </tr>
+                        <tr class="table">
+                            <th scope="row">Coordinates</th>
+                            <td>{{ record.lat }} ,&nbsp; {{ record.lon }}</td>
+                        </tr>
+                        <tr class="table">
+                            <th scope="row">Camera</th>
+                            <td>{{ record.camera }}</td>
+                        </tr>
+                        <tr class="table">
+                            <th scope="row">Lens</th>
+                            <td>{{ record.lens }}</td>
+                        </tr>
+                        <tr class="table">
+                            <th scope="row">Filter(s)</th>
+                            <td>{{ record.filters }}</td>
+                        </tr>
+                        <tr class="table">
+                            <th scope="row">Tripod</th>
+                            <td>{{ record.tripod_used }}</td>
+                        </tr>
+                        <tr class="table">
+                            <th scope="row">Photographer</th>
+                            <td>{{ record.photographer }}</td>
                         </tr>
                 </table>
-                </table>
+                <div class="buttons">
+                    <a href="{{url_for('edit_record', record_id = record._id)}}" type="button" class="btn btn-info">Edit record</a>
+                </div>
             </div>
         </div>
     </div>
