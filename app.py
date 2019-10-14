@@ -16,7 +16,7 @@ def index():
     
 @app.route('/landing')
 def landing():
-    return render_template('landing.html', entries=mongo.db.details.find())
+    return render_template('landing.html', entries=mongo.db.details.find().sort([('date_modified', -1)]))
     
 @app.route('/add_location')    
 def add_location():
