@@ -2,7 +2,7 @@ import os
 from flask import Flask, render_template, redirect, request, url_for
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
-
+import time
 
 app=Flask(__name__)
 
@@ -16,7 +16,7 @@ def index():
     
 @app.route('/landing')
 def landing():
-    return render_template('landing.html', entries=mongo.db.details.find().sort([('date_modified', -1)]))
+    return render_template('landing.html', entries = mongo.db.details.find().sort([('date_modified', -1)]))
     
 @app.route('/add_location')    
 def add_location():
@@ -42,6 +42,8 @@ def edit_record(record_id):
     
 @app.route('/save_updates/<record_id>', methods=["POST"])
 def save_updates(record_id):
+    the_timestamp = time.time()
+    timestamp = time.gmtime(the_timestamp)
     details = mongo.db.details
     details.update({'_id': ObjectId(record_id)},
     {
@@ -58,7 +60,8 @@ def save_updates(record_id):
         'photographer': request.form.get('photographer'),
         'tripod_used': request.form.get('tripod_used'),
         'description': request.form.get('description'),
-        'image_url': request.form.get('image_url')
+        'image_url': request.form.get('image_url'),
+        'date_modified': timestamp
     })
     return redirect(url_for('landing'))
     
