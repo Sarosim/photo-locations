@@ -1,28 +1,39 @@
+/*POSTCARD ON LANDING PAGE*/
+
 postcard-link {
     background-color: #222;
     text-decoration: none;
 }
 
-.photo-display {
-    max-width: 100%;
-    max-height: 90vh;
+postcard-text-left {
+    float: left;
 }
 
-.image-small {
-    max-height: 200px;
+postcard-text-right {
+    float: right;
 }
 
 .postcard-image {
     display: block;
     max-width: 96%;
-   /* max-height: 200px;*/
-  
     height: auto;
     margin-left: auto;
     margin-right: auto;
-    border-radius: 12px;
-    
+    border-radius: 10px;
 }
+
+/*DETAILS PAGE*/
+.photo-display {
+    max-width: 100%;
+    max-height: 90vh;
+}
+
+/*UPDATE LOCATION PAGE*/
+.image-small {
+    max-height: 200px;
+}
+
+
 
 .postcard-image: hover {
     -webkit-filter: blur(4px);
