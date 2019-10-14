@@ -61,5 +61,14 @@ def save_updates(record_id):
         'image_url': request.form.get('image_url')
     })
     return redirect(url_for('landing'))
+    
+@app.route('/delete_record/<record_id>')
+def delete_record(record_id):
+    mongo.db.details.remove({'_id': ObjectId(record_id)})
+    return redirect(url_for('landing'))
+    
+    
+    
+    
 if __name__ == '__main__':
     app.run(host=os.environ.get('IP'), port=int(os.environ.get('PORT')), debug=True)    
