@@ -11,3 +11,20 @@ postcard-link {
 .image-small {
     max-height: 200px;
 }
+
+.postcard-image {
+    display: block;
+    max-width: 96%;
+   /* max-height: 200px;*/
+  
+    height: auto;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 12px;
+    
+}
+
+.postcard-image: hover {
+    -webkit-filter: blur(4px);
+    filter: blur(4px);
+}
