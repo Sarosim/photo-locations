@@ -1,7 +1,7 @@
 {% extends 'base.html' %} {% block content %}
 
 <div>
-    <a class=postcard-link href="{{url_for('add_location')}}">
+    <a class="this-is-temporary" href="{{url_for('add_location')}}">
         <button class>ADD</button>
     </a>
 </div>
@@ -13,10 +13,12 @@
             <div class="card bg-light mb-3">
                 <div class="card-header">{{entry.category_name}}</div>
                 <a class=postcard-link href="{{url_for('display_details', rec_id = entry._id)}}">
-                    <img class="postcard-image" src="{{entry.image_url}}" alt="Card image">
+                    <img class="postcard-image" id="{{entry._id}}" src="{{entry.image_url}}" alt="Card image">
                 </a>
                 <div class="card-body">
-                    <h4 class="card-title">{{entry.title}}</h4>
+                    <a class=postcard-title-link href="{{url_for('display_details', rec_id = entry._id)}}">
+                        <h4 class="card-title">{{entry.title}}</h4>
+                    </a>
                     <span class="card-text postcard-text-left pr-3">{{entry.country}}</span>
                     <span class="card-text postcard-text-left"></span>
                 </div>

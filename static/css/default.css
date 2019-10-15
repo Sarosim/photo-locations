@@ -14,9 +14,9 @@
     border-radius: 10px;
 }
 
-.postcard-image: hover {
-    -webkit-filter: blur(4px);
-    filter: blur(4px);
+.postcard-image-blur {
+    -webkit-filter: blur(6px);
+    filter: blur(6px);
 }
 
 /*DETAILS PAGE*/
