@@ -9,22 +9,30 @@
 <section>
     <div class="row p-3">
         {% for entry in entries %}
-        <div class="col-12 col-lg-3">
-            <div class="postcard card mb-3">
-                <h4 class="card-header mx-auto">{{entry.title}}</h4>
+        <div class="col-12 col-sm-6 col-lg-4 col-xl-3 py-3">
+            <div class="card bg-light mb-3">
+                <div class="card-header">{{entry.category_name}}</div>
                 <a class=postcard-link href="{{url_for('display_details', rec_id = entry._id)}}">
                     <img class="postcard-image" src="{{entry.image_url}}" alt="Card image">
                 </a>
                 <div class="card-body">
+                    <h4 class="card-title">{{entry.title}}</h4>
                     <span class="card-text postcard-text-left pr-3">{{entry.country}}</span>
-                    <span class="card-text postcard-text-left">{{entry.category_name}}</span>
+                    <span class="card-text postcard-text-left"></span>
                 </div>
                 <div class="card-footer text-muted">
-                    <span class='p-3'>Likes:<span class="badge badge-info postcard-text-left p-1 m-2">{{ entry.liked }}</span></span>
-                    <span class='p-3'>Views:<span class="badge badge-info p-1 m-2">{{ entry.viewed }}</span></span>
+                    <div class="card-data">
+                        <div class='p-1'>
+                            <span class='mr-1'>Likes:</span>
+                            <span class="badge badge-info">{{ entry.liked }}</span>
+                        </div>
+                        <div class='p-1'>
+                            <span class='mr-1'>Views:</span>
+                            <span class="badge badge-info postcard-text-right">{{ entry.viewed }}</span>
+                        </div>
+                    </div>
                 </div>
             </div>
-
         </div>
         {% endfor %}
     </div>

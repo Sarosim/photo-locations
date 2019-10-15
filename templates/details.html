@@ -65,6 +65,10 @@
                             <th scope="row">Photographer</th>
                             <td>{{ record.photographer }}</td>
                         </tr>
+                        <tr class="table">
+                            <th scope="row">Year</th>
+                            <td>{{ year }}</td>
+                        </tr>
                 </table>
                 <div class="buttons">
                     <a href="{{url_for('edit_record', record_id = record._id)}}" type="button" class="btn btn-info">Edit record</a>
