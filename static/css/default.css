@@ -31,3 +31,74 @@
 .image-small {
     max-height: 200px;
 }
+
+/*************************  INDEX.HTML  *******************************************/
+
+.callout-container {
+    min-height: 95vh;
+    background: url('https://live.staticflickr.com/65535/48906355932_38ae8045dc_k.jpg') no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    padding: 0;
+}
+
+.jumbotron {
+    background-color: transparent;
+}
+
+.jumbotron h1 {
+    text-shadow: 0 0 5px #fff,
+    0 0 4px #fff,
+    0 0 8px #fff,
+    0 0 12px #fff,
+    0 0 16px #fff,
+    0 0 20px #fff,
+    0 0 25px rgba(240, 173, 78, 1),
+    0 0 30px rgba(240, 173, 78, .9),
+    0 0 35px rgba(240, 173, 78, .8);
+    color: #004290;
+    font-size: 3.4rem;
+    padding-bottom: 4px;
+}
+
+.lead {
+    font-weight: bolder;
+    color: indigo;
+    text-shadow: 0 0 5px #fff,
+    0 0 4px #fff,
+    0 0 8px #fff,
+    0 0 12px #fff,
+    0 0 16px #fff,
+    0 0 20px #fff,
+    0 0 25px rgba(240, 173, 78, 1),
+    0 0 30px rgba(240, 173, 78, .9),
+    0 0 35px rgba(240, 173, 78, .8);
+}
+
+.map-box {
+    width: 76%;
+    height: 50vh;
+    background-color: #e74c3c;
+    margin: 25px;
+}
+.instructions-container {
+    background-color: transparent;
+}
+
+.instructions-box {
+        width: 76%;
+    height: 50vh;
+    background-color: transparent;
+    margin: 25px;
+
+}
+
+.black-text {
+    color: white;
+}

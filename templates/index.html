@@ -1,26 +1,60 @@
 {% extends 'base.html' %} {% block content %}
 
 
-    <!-- ************** Jumbotron ********************* -->
+<!-- ************** Jumbotron ********************* -->
 
-    <div class="container-fluid callout-container">
-        <div class="row">
-            <div class="col-12">
-                <section class="callout jumbotron text-center py-0 pt-md-5">
-                    <h1>Landscape photography locations</h1>
-                    <h1 class="d-none d-md-inline">find stunning photo locations </h1>
-                    <p class="lead py-0 py-md-5">
-                        near you or when on holidays
-                        <span class="d-none d-md-inline"> ... or get inspiration for your next trip</span>
-                    </p>
-                 </section>
-            </div>
+<div class="container-fluid callout-container">
+    <div class="row">
+        <div class="col-12">
+            <section class="callout jumbotron text-center py-0 pt-md-2">
+                <h1>Landscape Photography Locations</h1>
+                <h1 class="d-none d-md-inline">Find stunning photo locations </h1>
+                <p class="lead py-0 py-md-5">
+                    near you or when on holidays...
+                    <span class="d-none d-md-inline"> ... or get inspiration for your next trip</span>
+                </p>
+            </section>
         </div>
     </div>
-    <!-- *************** /. Jumbotron ********************* -->
+</div>
+<!-- *************** /. Jumbotron ********************* -->
+
+<!-- ********************* MAP ********************* -->
+
+<div class="container map-container">
+    <section class="map">
+        <div class="row">
+            <div class="col-12">
+                <div class="section-title mt-5 mb-3 text-center">
+                    <h2>Find a location on the Map</h2>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 map-box">
+            </div>
+        </div>
+    </section>
+</div>
+
+<!-- ******************** /. MAP ********************* -->
 
 
+<!-- *************** Further Instructions ********************* -->
 
+<div class="container-fluid callout-container">
+    <section class="callout jumbotron text-center py-0 pt-md-2">
+        <div class="row">
+            <h2 class="black-text">Further information come here</h2>
+            <div class="row">
+                <div class="col-12 instructions-box">
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<!-- *************** /. Instructions  ********************* -->
 
 
 {% endblock %}
