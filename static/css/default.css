@@ -1,4 +1,12 @@
-/*POSTCARD ON LANDING PAGE*/
+/******************** NAVBAR ********************/
+
+.navbar {
+    font-family: 'Black And White Picture', sans-serif;
+    font-size: x-large;
+
+}
+
+/***************** POSTCARD ON LANDING PAGE *********************/
 
 .card-data {
     display: flex;
@@ -34,18 +42,19 @@
 
 /*************************  INDEX.HTML  *******************************************/
 
+/*************************  Jumbotron  *******************************************/
+
 .callout-container {
-    min-height: 95vh;
+    min-height: 100vh;
     background: url('https://live.staticflickr.com/65535/48906355932_38ae8045dc_k.jpg') no-repeat center center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
     display: flex;
-    align-items: center;
     justify-content: center;
     position: relative;
-    padding: 0;
+    padding-top: 10vh;
 }
 
 .jumbotron {
@@ -63,13 +72,15 @@
     0 0 30px rgba(240, 173, 78, .9),
     0 0 35px rgba(240, 173, 78, .8);
     color: #004290;
+    font-weight: 700;
     font-size: 3.4rem;
     padding-bottom: 4px;
 }
 
 .lead {
-    font-weight: bolder;
-    color: indigo;
+    font-weight: 700;
+    font-size: 2rem;
+    color: #aa3c9e;
     text-shadow: 0 0 5px #fff,
     0 0 4px #fff,
     0 0 8px #fff,
@@ -81,24 +92,52 @@
     0 0 35px rgba(240, 173, 78, .8);
 }
 
-.map-box {
-    width: 76%;
-    height: 50vh;
-    background-color: #e74c3c;
-    margin: 25px;
+/*************************  MAP Section  *******************************************/
+
+.map-container {
+    margin-top: -1vh;
+
 }
+
+.section-title {
+    color: #b77846;
+    text-shadow: 0 0 5px #fff,
+    0 0 4px #fff,
+    0 0 8px #fff,
+    0 0 12px #fff,
+    0 0 16px #fff,
+    0 0 20px #fff,
+    0 0 25px rgba(240, 173, 78, 1),
+    0 0 30px rgba(240, 173, 78, .9),
+    0 0 35px rgba(240, 173, 78, .8);
+
+}
+
+/*.google-maps {
+        position: relative;
+        padding-bottom: 75%; 
+        height: 40vh;
+        overflow: hidden;
+    }
+    .google-maps iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100% !important;
+        height: 100% !important;
+    }
+*/
+
+/*************************  Further info  *******************************************/
+
 .instructions-container {
     background-color: transparent;
 }
 
 .instructions-box {
-        width: 76%;
+    width: 76%;
     height: 50vh;
     background-color: transparent;
     margin: 25px;
 
-}
-
-.black-text {
-    color: white;
 }
