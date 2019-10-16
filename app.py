@@ -11,8 +11,9 @@ app.config['MONGO_URI']='mongodb+srv://nick:n1ckUser@myfirstcluster-mbpma.mongod
 mongo=PyMongo(app)
 
 @app.route('/')
+@app.route('/index')
 def index():
-    return redirect(url_for('landing'))
+    return render_template('index.html', counter = mongo.db.details.find().count())
     
 @app.route('/landing')
 def landing():
@@ -25,7 +26,10 @@ def add_location():
 @app.route('/insert_location', methods=['POST'])
 def insert_location():
     entries=mongo.db.details
+    the_timestamp = time.time()
     entries.insert_one(request.form.to_dict())
+ #   the_id = request.form.to_dict('_id')
+ #   mongo.db.details.find_one_and_update({'_id': ObjectId(the_id)}, {'$set': {'date_modified': the_timestamp}})
     return redirect(url_for('landing'))
     
 @app.route('/display_details/<rec_id>')

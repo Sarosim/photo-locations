@@ -19,6 +19,13 @@
     height: 35px;
 }
 
+nav-link {
+    padding-left: 25px;
+    padding-right: 25px;
+}
+
+/******************** /. NAVBAR ********************/
+
 /***************** POSTCARD ON LANDING PAGE *********************/
 
 .card-data {
@@ -104,6 +111,24 @@
     font-weight: 500;
     font-size: 2.8rem;
     padding-bottom: 4px;
+}
+
+.jumbotron h4 {
+    text-shadow: 0 0 5px #fff,
+    0 0 4px #fff,
+    0 0 8px #fff,
+    0 0 12px #fff,
+    0 0 16px #fff,
+    0 0 20px #fff,
+    0 0 25px rgba(240, 173, 78, 1),
+    0 0 30px rgba(240, 173, 78, .9),
+    0 0 35px rgba(240, 173, 78, .8);
+    color: #004290;
+    font-weight: 500;
+    font-size: 3.1rem;
+    padding-bottom: 4px;
+    position: absolute;
+    bottom: 15vh;
 }
 
 .lead {
