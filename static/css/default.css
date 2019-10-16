@@ -19,11 +19,6 @@
     height: 35px;
 }
 
-nav-link {
-    padding-left: 25px;
-    padding-right: 25px;
-}
-
 /******************** /. NAVBAR ********************/
 
 /***************** POSTCARD ON LANDING PAGE *********************/
@@ -35,11 +30,11 @@ nav-link {
 
 .postcard-image {
     display: block;
-    max-width: 94%;
+    max-width: 100%;
     height: auto;
     margin-left: auto;
     margin-right: auto;
-    border-radius: 10px;
+    border-radius: 1px;
 }
 
 .postcard-image-blur {
