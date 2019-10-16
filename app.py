@@ -3,6 +3,7 @@ from flask import Flask, render_template, redirect, request, url_for
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
 import time
+import datetime
 
 app=Flask(__name__)
 
@@ -26,7 +27,7 @@ def add_location():
 @app.route('/insert_location', methods=['POST'])
 def insert_location():
     entries=mongo.db.details
-    the_timestamp = time.time()
+    the_timestamp = datetime.datetime.utcnow()
     entries.insert_one(request.form.to_dict())
  #   the_id = request.form.to_dict('_id')
  #   mongo.db.details.find_one_and_update({'_id': ObjectId(the_id)}, {'$set': {'date_modified': the_timestamp}})
@@ -47,7 +48,7 @@ def edit_record(record_id):
 @app.route('/save_updates/<record_id>', methods=["POST"])
 def save_updates(record_id):
     the_timestamp = time.time()
-    timestamp = time.gmtime(the_timestamp)
+    timestamp = datetime.datetime.utcnow()
     details = mongo.db.details
     details.update({'_id': ObjectId(record_id)},
     {
