@@ -2,8 +2,21 @@
 
 .navbar {
     font-family: 'Black And White Picture', sans-serif;
-    font-size: x-large;
+    font-size: 2rem;
 
+}
+
+.navbar-brand {
+    background-color: white;
+    margin-left: 10px;
+    margin-right: 10px;
+    border-radius: 50%;
+    padding: 6px;
+}
+
+.navbar-logo-img {
+    width: 35px;
+    height: 35px;
 }
 
 /***************** POSTCARD ON LANDING PAGE *********************/
@@ -74,6 +87,22 @@
     color: #004290;
     font-weight: 700;
     font-size: 3.4rem;
+    padding-bottom: 4px;
+}
+
+.jumbotron h2 {
+    text-shadow: 0 0 5px #fff,
+    0 0 4px #fff,
+    0 0 8px #fff,
+    0 0 12px #fff,
+    0 0 16px #fff,
+    0 0 20px #fff,
+    0 0 25px rgba(240, 173, 78, 1),
+    0 0 30px rgba(240, 173, 78, .9),
+    0 0 35px rgba(240, 173, 78, .8);
+    color: #004290;
+    font-weight: 500;
+    font-size: 2.8rem;
     padding-bottom: 4px;
 }
 
