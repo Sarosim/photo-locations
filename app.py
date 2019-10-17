@@ -27,10 +27,10 @@ def add_location():
 @app.route('/insert_location', methods=['POST'])
 def insert_location():
     entries=mongo.db.details
-    the_timestamp = datetime.datetime.utcnow()
-    entries.insert_one(request.form.to_dict())
- #   the_id = request.form.to_dict('_id')
- #   mongo.db.details.find_one_and_update({'_id': ObjectId(the_id)}, {'$set': {'date_modified': the_timestamp}})
+    new_id = entries.insert_one(request.form.to_dict()).inserted_id
+    new_entry = entries.find_one({'_id': new_id})
+    entries.update({'_id': new_id},
+        {'$currentDate': {'date_modified': True }})
     return redirect(url_for('landing'))
     
 @app.route('/display_details/<rec_id>')
@@ -47,7 +47,6 @@ def edit_record(record_id):
     
 @app.route('/save_updates/<record_id>', methods=["POST"])
 def save_updates(record_id):
-    the_timestamp = time.time()
     timestamp = datetime.datetime.utcnow()
     details = mongo.db.details
     details.update({'_id': ObjectId(record_id)},
