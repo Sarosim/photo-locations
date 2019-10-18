@@ -69,7 +69,8 @@
     display: flex;
     justify-content: center;
     position: relative;
-    padding-top: 10vh;
+    min-width: 100vh;
+    
 }
 
 .jumbotron {
@@ -189,4 +190,24 @@
     background-color: transparent;
     margin: 25px;
 
+}
+/********************MEDIA QUERIES for INDEX ***********************/
+
+@media only screen and (max-width: 600px) {
+    .jumbotron h1 {
+        font-size: 2rem;
+        font-weight: 600;
+    }    
+    .jumbotron h2 {
+        font-size: 1.7rem;
+        font-weight: 400;
+    }    
+    .jumbotron h4 {
+        font-size: 1.5rem;
+        font-weight: 300;
+    }    
+    .lead {
+        font-size: 1.6rem;
+        font-weight: 400;
+    }    
 }
