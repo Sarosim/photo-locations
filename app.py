@@ -28,7 +28,7 @@ def add_location():
 def insert_location():
     entries=mongo.db.details
     new_id = entries.insert_one(request.form.to_dict()).inserted_id
-    new_entry = entries.find_one({'_id': new_id})
+#    new_entry = entries.find_one({'_id': new_id})
     entries.update({'_id': new_id},
         {'$currentDate': {'date_modified': True }})
     return redirect(url_for('landing'))
@@ -36,6 +36,15 @@ def insert_location():
 @app.route('/display_details/<rec_id>')
 def display_details(rec_id):
     the_record = mongo.db.details.find_one({"_id": ObjectId(rec_id)})
+    the_record = mongo.db.details.find_one({"_id": ObjectId(rec_id)})
+    if 'num_of_views' in the_record:
+        prev_num_views = mongo.db.details.find_one({"_id": ObjectId(rec_id)})['num_of_views']
+        new_num_views = prev_num_views + 1
+    else:
+        new_num_views = 1
+    entries=mongo.db.details
+    entries.update({'_id': ObjectId(rec_id)},
+        {'$set': {'num_of_views': new_num_views}})
     category_list = mongo.db.categories.find()
     return render_template('details.html', record = the_record, categories = category_list)
     
