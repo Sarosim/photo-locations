@@ -5,6 +5,7 @@
     var thisPicture;
     var picture;
 
+/*bluring the pictures that are not in focus on the landing page*/
     function blurAllTheOthers(element) {
         for (var i = 0; i < pictures.length; i++) {
             picture = pictures[i];
@@ -31,4 +32,5 @@
         unBlur();
     });
 
+/*end of IIFE*/
 })();

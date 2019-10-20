@@ -9,15 +9,7 @@
         </div>
         <div class="col-md-4 text-center">
             <h3>Details</h3>
-            <div class="row text-left">
-                <div class="col-sm-4">
-                    <h5>{{ record.title }}</h5>
-                </div>
-                <div class="col-sm-8">
-                    <span>{{ record.description }}<span>
-                </div>
-            </div>
-            <div class="row">
+            <div class="row mr-3">
                 <table class="table table-striped text-left">
                     <tbody>
                         <tr class="table">
@@ -69,14 +61,41 @@
                             <th scope="row">Year</th>
                             <td>{{ year }}</td>
                         </tr>
+                    </tbody>
                 </table>
-                <div class="buttons">
-                    <a href="{{url_for('edit_record', record_id = record._id)}}" type="button" class="btn btn-info">Edit record</a>
-                </div>
-                <div class="buttons">
-                    <a href="{{url_for('delete_record', record_id = record._id)}}" type="button" class="btn btn-info">Delete record</a>
+                <div class="col-12">
+                    <div class="row btn-row p-2">
+                        <div class="buttons">
+                            <a href="{{url_for('edit_record', record_id = record._id)}}" type="button" class="btn btn-info">Edit</a>
+                        </div>
+                        <div class="buttons">
+                            <a href="{{url_for('delete_record', record_id = record._id)}}" type="button" class="btn btn-outline-danger">Delete</a>
+                        </div>
+                    </div>
+                    <div class="row likes-and-views-row p-2">
+                        <div class="likes p-2">
+                            <a href="{{url_for('add_like', record_id = record._id)}}" title="Click to add a LIKE" class="invisible-like-btn">
+                                <i class="far fa-thumbs-up"></i>
+                                </a>
+                            <span class='mr-1'></span>
+                            <span class="badge badge-info">{{ record.num_of_likes }}</span>
+                        </div>
+
+                        <div class="views p-2">
+                            <span class='mr-1'><i class="far fa-eye"></i></span>
+                            <span class="badge badge-info postcard-text-right">{{ record.num_of_views }}</span>
+                        </div>
+                    </div>
                 </div>
             </div>
+        </div>
+    </div>
+    <div class="row text-left">
+        <div class="col-sm-4">
+            <h5>{{ record.title }}</h5>
+        </div>
+        <div class="col-sm-8">
+            <span>{{ record.description }}</span>
         </div>
     </div>
 

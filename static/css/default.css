@@ -1,8 +1,25 @@
+a:link {
+  text-decoration: none;
+}
+
+a:visited {
+  text-decoration: none;
+  text-shadow: #888;
+}
+
+a:hover {
+  text-decoration: none;
+  font-weight: 700;
+}
+
+a:active {
+  text-decoration: none;
+}
 /******************** NAVBAR ********************/
 
 .navbar {
     font-family: 'Black And White Picture', sans-serif;
-    font-size: 2rem;
+    font-size: 1.8rem;
 
 }
 
@@ -21,7 +38,7 @@
 
 /******************** /. NAVBAR ********************/
 
-/***************** POSTCARD ON LANDING PAGE *********************/
+/***************************************** POSTCARD ON LANDING PAGE *********************/
 
 .card-data {
     display: flex;
@@ -42,22 +59,15 @@
     filter: blur(6px);
 }
 
-/*DETAILS PAGE*/
-
-.photo-display {
-    max-width: 100%;
-    max-height: 90vh;
-}
-
 /*UPDATE LOCATION PAGE*/
 
 .image-small {
     max-height: 200px;
 }
 
-/*************************  INDEX.HTML  *******************************************/
+/*****************************************  INDEX.HTML  *******************************************/
 
-/*************************  Jumbotron  *******************************************/
+/*************************  Jumbotron  ********************************/
 
 .callout-container {
     min-height: 100vh;
@@ -142,7 +152,7 @@
     0 0 35px rgba(240, 173, 78, .8);
 }
 
-/*************************  MAP Section  *******************************************/
+/*************************  MAP Section  *****************************/
 
 .map-container {
     margin-top: -1vh;
@@ -178,7 +188,7 @@
     }
 */
 
-/*************************  Further info  *******************************************/
+/*************************  Further info  *******************/
 
 .instructions-container {
     background-color: transparent;
@@ -191,7 +201,7 @@
     margin: 25px;
 
 }
-/********************MEDIA QUERIES for INDEX ***********************/
+/********************MEDIA QUERIES for INDEX ****************/
 
 @media only screen and (max-width: 600px) {
     .jumbotron h1 {
@@ -210,4 +220,33 @@
         font-size: 1.6rem;
         font-weight: 400;
     }    
+}
+
+
+/***************************** DETAILS HTML *****************************************************/
+
+.photo-display {
+    max-width: 100%;
+    max-height: 90vh;
+}
+
+.row-others {
+    display: block;
+}
+.likes-and-views-row {
+    display: flex;
+    justify-content: center;
+    color: #3498DB;
+    font-size: large;
+}
+
+.btn-row {
+    display: flex;
+    justify-content: space-around;
+}
+
+.invisible-like-btn {
+    background-color: transparent;
+    border: 0;
+    padding: 0;
 }
