@@ -155,8 +155,12 @@ a:active {
 /*************************  MAP Section  *****************************/
 
 .map-container {
-    margin-top: -1vh;
+    margin-top: 0;
+    height: 750px;
+}
 
+div #map {
+    height: 600px;
 }
 
 .section-title {
@@ -172,21 +176,6 @@ a:active {
     0 0 35px rgba(240, 173, 78, .8);
 
 }
-
-/*.google-maps {
-        position: relative;
-        padding-bottom: 75%; 
-        height: 40vh;
-        overflow: hidden;
-    }
-    .google-maps iframe {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100% !important;
-        height: 100% !important;
-    }
-*/
 
 /*************************  Further info  *******************/
 

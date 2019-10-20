@@ -26,8 +26,8 @@
 
 <!-- ********************* MAP ********************* -->
 
-<div class="container map-container d-none d-md-inline" id='map'>
-    <section class="map">
+<div class="container map-container d-none d-md-block">
+    <section>
         <div class="row">
             <div class="col-12">
                 <div class="section-title mt-5 mb-3 text-center">
@@ -35,13 +35,13 @@
                 </div>
             </div>
         </div>
-        <div class="row mx-auto p-4">
-            <div class="google-maps mx-auto">
-                <iframe src="https://www.google.com/maps/embed" width="900px" height="500px" frameborder="0" style="border:0"></iframe>
-            </div>
-        </div>
+
     </section>
+    <div>
+        <div id="map"></div>
+    </div>
 </div>
+
 
 <!-- ******************** /. MAP ********************* -->
 
@@ -62,5 +62,14 @@
 
 <!-- *************** /. Instructions  ********************* -->
 
+<script type="text/javascript" src="static/js/map.js"></script>
 
+<script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js"></script>
+
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCh5hquqnIYsTyfmzkJds-warsV1FJ4smU&callback=initMap" type="text/javascript"></script>
 {% endblock %}
+<!--API KEY: AIzaSyCh5hquqnIYsTyfmzkJds-warsV1FJ4smU 
+
+second: AIzaSyCh5hquqnIYsTyfmzkJds-warsV1FJ4smU
+
+-->

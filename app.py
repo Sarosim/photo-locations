@@ -14,7 +14,23 @@ mongo=PyMongo(app)
 @app.route('/')
 @app.route('/index')
 def index():
-    return render_template('index.html', counter = mongo.db.details.find().count())
+    entries = mongo.db.details.find()
+    locations = []
+    location = {}
+# Creating the dictionary of the locations to pass to the Google map API
+    for entry in entries:
+# because of the schema wasn't set up properly at the beginning, the database contains mixed types for lat/lon (as well as recods without...), so I have to check for type
+        if 'lat' in entry:
+            if isinstance(entry['lat'], str):
+                location['lat'] = float(entry['lat'])
+                location['lng'] = float(entry['lon'])
+            else:
+                location['lat'] = entry['lat']
+                location['lng'] = entry['lon']
+            locations.append(location)
+        print('9******************************************************************************************************************************')    
+        print(type(locations))
+    return render_template('index.html', counter = mongo.db.details.find().count(), locs = locations)
     
 @app.route('/landing')
 def landing():
