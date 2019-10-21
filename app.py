@@ -22,19 +22,15 @@ def index():
     for entry in entries:
 # because of the schema wasn't set up properly at the beginning, the database contains mixed types for lat/lon (as well as documents without...), so I have to check for type
         if 'lat' in entry:
-            if isinstance(entry['lat'], str):
-                location['lat'] = float(entry['lat'])
-                location['lng'] = float(entry['lon'])
+            if isinstance(entry["lat"], str):
+                location["lat"] = float(entry["lat"])
+                location["lng"] = float(entry["lon"])
             else:
-                location['lat'] = entry['lat']
-                location['lng'] = entry['lon']
+                location["lat"] = float(str(entry["lat"])) #has to be in a format JSON can sterilize (Decimal128 is not), Float can not take decimal128 as argument either...
+                location["lng"] = float(str(entry["lon"]))
             locations.append(location)
-        print(type(locations))
-        print(locations)
-        x = [{"lat": 51.374227, "lng": -2.35839}, {"lat": 51.374227, "lng": -2.35839}]
         # convert into JSON:
-        y = json.dumps(x)
-        print(y)
+        y = json.dumps(locations)
     return render_template('index.html', counter = mongo.db.details.find().count(), data_source = y) 
     
 @app.route('/landing')
