@@ -51,7 +51,6 @@ def insert_location():
     
 @app.route('/display_details/<rec_id>')
 def display_details(rec_id):
-    the_record = mongo.db.details.find_one({"_id": ObjectId(rec_id)})
     entries=mongo.db.details
 # This is the previous workaround, I'm keeping it here for a while, the syntax might help with other solutions...
 #    if 'num_of_views' in the_record:
@@ -62,6 +61,7 @@ def display_details(rec_id):
     #entries.update({'_id': ObjectId(rec_id)},
      #   {'$set': {'num_of_views': new_num_views}})
     entries.update({'_id': ObjectId(rec_id)}, {'$inc': {'num_of_views': 1}})
+    the_record = mongo.db.details.find_one({"_id": ObjectId(rec_id)})
     category_list = mongo.db.categories.find()
     return render_template('details.html', record = the_record, categories = category_list)
     
@@ -97,10 +97,10 @@ def save_updates(record_id):
     
 @app.route('/add_like/<record_id>', methods=['GET','POST'])
 def add_like(record_id):
-    the_record = mongo.db.details.find_one({"_id": ObjectId(record_id)})
     entries=mongo.db.details
     entries.update({'_id': ObjectId(record_id)}, {'$inc': {'num_of_likes': 1}})
     category_list = mongo.db.categories.find()
+    the_record = mongo.db.details.find_one({"_id": ObjectId(record_id)})
     return render_template('details.html', record = the_record, categories = category_list)
     
     
