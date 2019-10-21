@@ -1,4 +1,5 @@
 import os 
+import json
 from flask import Flask, render_template, redirect, request, url_for
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
@@ -19,7 +20,7 @@ def index():
     location = {}
 # Creating the dictionary of the locations to pass to the Google map API
     for entry in entries:
-# because of the schema wasn't set up properly at the beginning, the database contains mixed types for lat/lon (as well as recods without...), so I have to check for type
+# because of the schema wasn't set up properly at the beginning, the database contains mixed types for lat/lon (as well as documents without...), so I have to check for type
         if 'lat' in entry:
             if isinstance(entry['lat'], str):
                 location['lat'] = float(entry['lat'])
@@ -28,9 +29,13 @@ def index():
                 location['lat'] = entry['lat']
                 location['lng'] = entry['lon']
             locations.append(location)
-        print('9******************************************************************************************************************************')    
         print(type(locations))
-    return render_template('index.html', counter = mongo.db.details.find().count(), locs = locations)
+        print(locations)
+        x = [{"lat": 51.374227, "lng": -2.35839}, {"lat": 51.374227, "lng": -2.35839}]
+        # convert into JSON:
+        y = json.dumps(x)
+        print(y)
+    return render_template('index.html', counter = mongo.db.details.find().count(), data_source = y) 
     
 @app.route('/landing')
 def landing():
