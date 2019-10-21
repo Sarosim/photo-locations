@@ -42,14 +42,20 @@ def landing():
 @app.route('/add_location')    
 def add_location():
     return render_template('addlocation.html', categories=mongo.db.categories.find())
-    
+
+# Inserting the new document into the details collection     
 @app.route('/insert_location', methods=['POST'])
 def insert_location():
     entries=mongo.db.details
+    # inserting and retrieving the _id tha was generated at insertion
     new_id = entries.insert_one(request.form.to_dict()).inserted_id
-#    new_entry = entries.find_one({'_id': new_id})
+    # "initializing" the date_modified and the num_of_views, num_of_likes fields
     entries.update({'_id': new_id},
-        {'$currentDate': {'date_modified': True }})
+    {
+        '$currentDate': {'date_modified': True},
+        '$set': {'num_of_views': 0,
+                'num_of_likes': 0}        
+    })
     return redirect(url_for('landing'))
     
 @app.route('/display_details/<rec_id>')
