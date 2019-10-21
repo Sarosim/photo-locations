@@ -45,7 +45,6 @@
 
 <!-- ******************** /. MAP ********************* -->
 
-
 <!-- *************** Further Instructions ********************* -->
 
 <div class="container-fluid callout-container">
@@ -63,13 +62,47 @@
 <!-- *************** /. Instructions  ********************* -->
 
 <script>
-    console.log("***************");
-       var data_source = {{data_source|tojson}};
-       
-       console.log(data_source);
+    //receiving the location coordinates from the route function >> map.js is handling the Google map API markers
+    var data_source = {{ data_source | tojson }};
+
+/*    console.log(data_source);
+
+    for (var k = 0; k < data_source.length; k++) {
+        console.log("---------------");
+        console.log(data_source[k]);
+    }*/
 </script>
 
-<script type="text/javascript" src="static/js/map.js"></script>
+<script>
+    function initMap() {
+
+        var map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 3,
+            center: { lat: 35, lng: 0 }
+        });
+
+        // Create an array of alphabetical characters used to label the markers.
+        var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        var locations = data_source;
+        console.log(locations);
+
+        // Add some markers to the map.
+        // Note: The code uses the JavaScript Array.prototype.map() method to
+        // create an array of markers based on a given "locations" array.
+        // The map() method here has nothing to do with the Google Maps API.
+        var markers = locations.map(function(location, i) {
+            return new google.maps.Marker({
+                position: location,
+                label: labels[i % labels.length]
+            });
+        });
+
+        // Add a marker clusterer to manage the markers.
+        var markerCluster = new MarkerClusterer(map, markers, { imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m' });
+    }
+</script>
+
+<!--<script type="text/javascript" src="static/js/map.js"></script>-->
 
 <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js"></script>
 
