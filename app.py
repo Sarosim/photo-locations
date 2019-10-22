@@ -110,7 +110,7 @@ def add_like(record_id):
     entries.update({'_id': ObjectId(record_id)}, {'$inc': {'num_of_likes': 1}})
     category_list = mongo.db.categories.find()
     the_record = mongo.db.details.find_one({"_id": ObjectId(record_id)})
-    return render_template('details.html', record = the_record, categories = category_list)
+    return redirect(url_for('display_details', rec_id = record_id))
     
     
 @app.route('/delete_record/<record_id>')
