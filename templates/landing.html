@@ -1,6 +1,33 @@
 {% extends 'base.html' %} {% block content %}
 
 
+<!--****************   The FILTER and SEARCH dropdowns and input fields   *********************************-->
+<section>
+    <div class="row">
+        <div class="col-12 col-md-4">
+            <div class="form-group p-2 p-md-4 mr-5">
+                <label for="Select1">Filter by Country</label>
+                <select class="form-control" id="Select1">
+                    {% for country in countries %}
+                        <option>{{ country }}</option>
+                    {% endfor %}    
+                </select>
+            </div>
+        </div>
+        <div class="col-12 col-md-4">
+            <div class="form-group p-2 p-md-4 mr-5">
+                <label for="exampleSelect2">Filter by Category</label>
+                <select class="form-control" id="Select2">
+                    {% for category in categories %}
+                        <option>{{ category }}</option>
+                    {% endfor %}    
+                </select>
+            </div>
+        </div>
+    </div>
+</section>
+
+
 <!--****************   The 'POSTCARDS' for displaying database enrtries nicely   *********************************-->
 <section>
     <div class="row p-3">
