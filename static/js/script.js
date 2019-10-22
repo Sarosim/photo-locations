@@ -38,7 +38,8 @@
     var selectCountry = document.getElementById("Select1");
     selectCountry.addEventListener("change", function() {
         console.log(document.getElementById("Select1").value);
-        //here is the action to do when country selected - like: usp.set('selected_country', document.getElementById("Select1").value)
+        usp.set('selected_country', document.getElementById("Select1").value);
+        console.log(usp.toString());
     });
 /*end of IIFE*/
 })();
