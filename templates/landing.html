@@ -5,10 +5,10 @@
 <section>
     <div class="row">
         <div class="col-12 col-md-4">
-            <div class="form-group p-2 p-md-4 mr-5" action="{{url_for('filtering')}}">
+            <div class="form-group p-2 p-md-4 mr-5" action="">
                 <label for="Select1">Filter by Country</label>
                 <select class="form-control" id="Select1">
-                    <option title="Leave empty if you don't want to filter"></option>
+                    <option title="Leave empty if you don't want to filter" value='unfiltered'></option>
                     {% for country in countries %}
                         <option>{{ country }}</option>
                     {% endfor %}    
@@ -19,11 +19,16 @@
             <div class="form-group p-2 p-md-4 mr-5">
                 <label for="exampleSelect2">Filter by Category</label>
                 <select class="form-control" id="Select2">
-                    <option title="Leave empty if you don't want to filter" value='Not filtered'></option>
+                    <option title="Leave empty if you don't want to filter" value='unfiltered'></option>
                     {% for category in categories %}
                         <option>{{ category.category_name }}</option>
                     {% endfor %}    
                 </select>
+            </div>
+        </div>
+        <div class="col-12 col-md-4">
+            <div class="buttons p-2 p-md-4 mr-5">
+                <a href="{{url_for('filtering', search_param = 'selected_category=Seascape&selected_country=Russia')}}" type="button" class="btn btn-outline-warning mt-5" id="filter_button">Let's Gooo... !!!</a>
             </div>
         </div>
     </div>
@@ -67,15 +72,32 @@
 <!--**********************************  /. The 'POSTCARDS'  ********************************************************************-->
 
 <script>
-    // Event listener for the country selector drop-down
+    
     var selected_country;
     const usp = new URLSearchParams();
     var selectCountry = document.getElementById("Select1");
+    var selected_category;
+    var selectCategory = document.getElementById("Select2");
+    var filterButton = document.getElementById('filter_button');
+    var newString;
+    
+    // Event listener for the country selector drop-down
     selectCountry.addEventListener("change", function() {
-        console.log(document.getElementById("Select1").value);
-        usp.set('selected_country', document.getElementById("Select1").value);
-        console.log(usp.toString());
+        usp.set('selected_country', selectCountry.value);
+        newString = "{{url_for('filtering', search_param = ".concat("'?", usp.toString(), "')}}");
+        console.log(newString);
+        //filterButton.attribute = newString;
     });
+
+    // Event listener for the category selector drop-down
+    selectCategory.addEventListener("change", function() {
+        usp.set('selected_category', selectCategory.value);
+   
+        //filterButton.attribute = newString;    
+    });
+    
+    
+    
 </script>
 
 

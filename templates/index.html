@@ -61,6 +61,14 @@
 
 <!-- *************** /. Instructions  ********************* -->
 
+
+<script>
+    const usp = new URLSearchParams();
+    usp.set('selected_country', 'Gruzia');
+    var newString = "{{url_for('filtering', search_param = ".concat("'?", usp.toString(), "')}}");
+    console.log(newString);
+</script>
+
 <script>
     //receiving the location coordinates from the route function >> map.js is handling the Google map API markers
     var data_source = {{ data_source | tojson }};

@@ -12,6 +12,9 @@ app.config["MONGO_DBNAME"]='photo_locations'
 app.config['MONGO_URI']='mongodb+srv://nick:n1ckUser@myfirstcluster-mbpma.mongodb.net/photo_locations?retryWrites=true&w=majority'
 mongo=PyMongo(app)
 
+
+
+
 @app.route('/')
 @app.route('/index')
 def index():
@@ -35,6 +38,8 @@ def index():
 #   y = json.dumps(locations) THIS WASN'T needed in my case, as I convert on the javaScript sire with: |tojson
     return render_template('index.html', counter = mongo.db.details.find().count(), data_source = locations) 
 
+
+
 # The Landing page where filtering and search can be performed, locations are diplayed in cards with primary info.    
 @app.route('/landing')
 def landing():
@@ -46,21 +51,24 @@ def landing():
         print(the_country)
         if the_country not in countries:
             countries.append(the_country)
-    print(countries.sort())  
     # getting the categories for the dropdown
     category_list = mongo.db.categories.find()
     return render_template('landing.html', entries = mongo.db.details.find().sort([('date_modified', -1)]), countries = countries, categories = category_list)
 
+
 # Filtering based on input from landing page 
-@app.route('/filtering')
-def filtering():
+@app.route('/filtering/<search_param>')
+def filtering(search_param):
+    print(search_param)
     return redirect(url_for('index'))
     
 
-    
+# Displaying the form to be filled for adding a new location
 @app.route('/add_location')    
 def add_location():
     return render_template('addlocation.html', categories=mongo.db.categories.find())
+
+
 
 # Inserting the new document into the details collection     
 @app.route('/insert_location', methods=['POST'])
@@ -77,6 +85,9 @@ def insert_location():
     })
     return redirect(url_for('landing'))
     
+
+
+# Displaying the selected location's details and the picture      
 @app.route('/display_details/<rec_id>')
 def display_details(rec_id):
     entries=mongo.db.details
@@ -92,13 +103,19 @@ def display_details(rec_id):
     the_record = mongo.db.details.find_one({"_id": ObjectId(rec_id)})
     category_list = mongo.db.categories.find()
     return render_template('details.html', record = the_record, categories = category_list)
-    
+
+
+
+# Rendering the form for editing a record    
 @app.route('/edit_record/<record_id>')
 def edit_record(record_id):
     the_record = mongo.db.details.find_one({"_id": ObjectId(record_id)})
     category_list = mongo.db.categories.find()
     return render_template('updatelocation.html', record = the_record, categories = category_list)
     
+
+
+# Saving the form data from the Edit feature
 @app.route('/save_updates/<record_id>', methods=["POST"])
 def save_updates(record_id):
     timestamp = datetime.datetime.utcnow()
@@ -123,6 +140,9 @@ def save_updates(record_id):
     })
     return redirect(url_for('landing'))
     
+
+
+# Increasing the number of likes 
 @app.route('/add_like/<record_id>', methods=['GET','POST'])
 def add_like(record_id):
     entries=mongo.db.details
@@ -131,14 +151,14 @@ def add_like(record_id):
     the_record = mongo.db.details.find_one({"_id": ObjectId(record_id)})
     return redirect(url_for('display_details', rec_id = record_id))
     
-    
+
+
+# Deleting the selected document from the collection    
 @app.route('/delete_record/<record_id>')
 def delete_record(record_id):
     mongo.db.details.remove({'_id': ObjectId(record_id)})
     return redirect(url_for('landing'))
     
-    
-    
-    
+
 if __name__ == '__main__':
     app.run(host=os.environ.get('IP'), port=int(os.environ.get('PORT')), debug=True)    
