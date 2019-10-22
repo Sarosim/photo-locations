@@ -5,9 +5,10 @@
 <section>
     <div class="row">
         <div class="col-12 col-md-4">
-            <div class="form-group p-2 p-md-4 mr-5">
+            <div class="form-group p-2 p-md-4 mr-5" action="{{url_for('filtering')}}">
                 <label for="Select1">Filter by Country</label>
                 <select class="form-control" id="Select1">
+                    <option title="Leave empty if you don't want to filter"></option>
                     {% for country in countries %}
                         <option>{{ country }}</option>
                     {% endfor %}    
@@ -18,8 +19,9 @@
             <div class="form-group p-2 p-md-4 mr-5">
                 <label for="exampleSelect2">Filter by Category</label>
                 <select class="form-control" id="Select2">
+                    <option title="Leave empty if you don't want to filter" value='Not filtered'></option>
                     {% for category in categories %}
-                        <option>{{ category }}</option>
+                        <option>{{ category.category_name }}</option>
                     {% endfor %}    
                 </select>
             </div>
@@ -63,5 +65,8 @@
     </div>
 </section>
 <!--**********************************  /. The 'POSTCARDS'  ********************************************************************-->
+
+
+
 
 {% endblock %}

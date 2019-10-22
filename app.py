@@ -34,10 +34,29 @@ def index():
 #   convert into JSON: 
 #   y = json.dumps(locations) THIS WASN'T needed in my case, as I convert on the javaScript sire with: |tojson
     return render_template('index.html', counter = mongo.db.details.find().count(), data_source = locations) 
-    
+
+# The Landing page where filtering and search can be performed, locations are diplayed in cards with primary info.    
 @app.route('/landing')
 def landing():
-    return render_template('landing.html', entries = mongo.db.details.find().sort([('date_modified', -1)]))
+    # Creating the list of countries for the dropdown
+    countries = []
+    entries = mongo.db.details.find()
+    for entry in entries:
+        the_country = entry['country'].title() #capitalising each word in the country name to display nicely and avoid duplications
+        print(the_country)
+        if the_country not in countries:
+            countries.append(the_country)
+    print(countries.sort())  
+    # getting the categories for the dropdown
+    category_list = mongo.db.categories.find()
+    return render_template('landing.html', entries = mongo.db.details.find().sort([('date_modified', -1)]), countries = countries, categories = category_list)
+
+# Filtering based on input from landing page 
+@app.route('/filtering')
+def filtering():
+    return redirect(url_for('index'))
+    
+
     
 @app.route('/add_location')    
 def add_location():
