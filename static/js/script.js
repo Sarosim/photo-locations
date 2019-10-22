@@ -32,14 +32,6 @@
         unBlur();
     });
 
-    // Event listener for the country selector drop-down
-    var selected_country;
-    const usp = new URLSearchParams();
-    var selectCountry = document.getElementById("Select1");
-    selectCountry.addEventListener("change", function() {
-        console.log(document.getElementById("Select1").value);
-        usp.set('selected_country', document.getElementById("Select1").value);
-        console.log(usp.toString());
-    });
+
 /*end of IIFE*/
 })();
