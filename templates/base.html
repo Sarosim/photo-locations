@@ -20,8 +20,8 @@
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary py-0">
         <a class="navbar-brand" href="{{url_for('index')}}"><img class="navbar-logo-img" src="{{url_for('static', filename='images/camera.ico')}}"></img></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mynavbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
         <div class="collapse navbar-collapse" id="mynavbar">
             <ul class="navbar-nav mr-auto">
@@ -32,10 +32,12 @@
                     <a class="nav-link px-3" href="{{url_for('landing')}}">Search</a>
                 </li>
                 <li class="nav-item d-none d-md-inline">
-                    <a class="nav-link px-3" href="index#map">Map</a> <!--THIS should scroll down to the map-->
+                    <a class="nav-link px-3" href="index#map">Map</a>
+                    <!--THIS should scroll down to the map-->
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link px-3" href="{{url_for('add_location')}}">Add New</a> <!--THIS should scroll down to the map-->
+                    <a class="nav-link px-3" href="{{url_for('add_location')}}">Add New</a>
+                    <!--THIS should scroll down to the map-->
                 </li>
             </ul>
             <ul class="navbar-nav">
@@ -47,7 +49,7 @@
                 </li>
         </div>
     </nav>
-
+    <div class="margin-for-navbar"></div>
     <div>
         {% block content %} {% endblock %}
     </div>

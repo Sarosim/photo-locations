@@ -19,8 +19,12 @@ a:active {
 
 .navbar {
     font-family: 'Black And White Picture', sans-serif;
-    font-size: 1.8rem;
-
+    font-size: 1.6rem;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 10;
+    height: 50px;
 }
 
 .navbar-brand {
@@ -34,6 +38,10 @@ a:active {
 .navbar-logo-img {
     width: 35px;
     height: 35px;
+}
+
+.margin-for-navbar {
+    margin-top: 50px;
 }
 
 /******************** /. NAVBAR ********************/
