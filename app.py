@@ -51,6 +51,7 @@ def landing():
         print(the_country)
         if the_country not in countries:
             countries.append(the_country)
+    countries.sort()
     # getting the categories for the dropdown
     category_list = mongo.db.categories.find()
     return render_template('landing.html', entries = mongo.db.details.find().sort([('date_modified', -1)]), countries = countries, categories = category_list)

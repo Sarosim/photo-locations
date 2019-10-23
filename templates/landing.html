@@ -28,7 +28,7 @@
         </div>
         <div class="col-12 col-md-4">
             <div class="buttons p-2 p-md-4 mr-5">
-                <a href="{{url_for('filtering', search_param = 'selected_category=Seascape&selected_country=Russia')}}" type="button" class="btn btn-outline-warning mt-5" id="filter_button">Let's Gooo... !!!</a>
+                <a href="{{url_for('filtering', search_param = 'selected_country=Hungary&selected_category=Cityscape')}}" type="button" class="btn btn-outline-warning mt-5" id="filter_button">Let's Gooo... !!!</a>
             </div>
         </div>
     </div>
@@ -72,31 +72,28 @@
 <!--**********************************  /. The 'POSTCARDS'  ********************************************************************-->
 
 <script>
-    
+
+   
     var selected_country;
+    var selected_category;
     const usp = new URLSearchParams();
     var selectCountry = document.getElementById("Select1");
-    var selected_category;
     var selectCategory = document.getElementById("Select2");
-    var filterButton = document.getElementById('filter_button');
-    var newString;
+    
     
     // Event listener for the country selector drop-down
     selectCountry.addEventListener("change", function() {
+        console.log(selectCountry.value);
         usp.set('selected_country', selectCountry.value);
-        newString = "{{url_for('filtering', search_param = ".concat("'?", usp.toString(), "')}}");
-        console.log(newString);
-        //filterButton.attribute = newString;
+        console.log(usp.toString());
     });
-
+    
     // Event listener for the category selector drop-down
     selectCategory.addEventListener("change", function() {
+        console.log(selectCategory.value);
         usp.set('selected_category', selectCategory.value);
-   
-        //filterButton.attribute = newString;    
+        console.log(usp.toString());
     });
-    
-    
     
 </script>
 
