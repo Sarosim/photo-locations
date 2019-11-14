@@ -28,7 +28,7 @@
         </div>
         <div class="col-12 col-md-4">
             <div class="buttons p-2 p-md-4 mr-5">
-                <a href="{{url_for('filtering', search_param = 'selected_country=Hungary&selected_category=Cityscape')}}" type="button" class="btn btn-outline-warning mt-5" id="filter_button">Let's Gooo... !!!</a>
+                <a href="{{url_for('filtering', search_param = searchParam)}}" type="button" class="btn btn-outline-warning mt-5" id="filter_button">Let's Gooo... !!!</a>
             </div>
         </div>
     </div>
@@ -38,35 +38,37 @@
 <!--****************   The 'POSTCARDS' for displaying database enrtries nicely   *********************************-->
 <section>
     <div class="row p-3">
-        {% for entry in entries %}
-        <div class="col-12 col-sm-6 col-lg-4 col-xl-3 py-3">
-            <div class="card bg-light mb-3">
-                <div class="card-header">{{entry.category_name}}</div>
-                <a class=postcard-link href="{{url_for('display_details', rec_id = entry._id)}}">
-                    <img class="postcard-image" id="{{entry._id}}" src="{{entry.image_url}}" alt="Card image">
-                </a>
-                <div class="card-body">
-                    <a class=postcard-title-link href="{{url_for('display_details', rec_id = entry._id)}}">
-                        <h4 class="card-title">{{entry.title}}</h4>
+        <div class="postcard-container">
+            {% for entry in entries %}
+            <!--<div class="col-12 col-sm-6 col-lg-4 col-xl-3 py-3">-->
+                <div class="flex-cards card bg-light mb-3">
+                    <div class="card-header">{{entry.category_name}}</div>
+                    <a class=postcard-link href="{{url_for('display_details', rec_id = entry._id)}}">
+                        <img class="postcard-image" id="{{entry._id}}" src="{{entry.image_url}}" alt="Card image">
                     </a>
-                    <span class="card-text postcard-text-left pr-3">{{entry.country}}</span>
-                    <span class="card-text postcard-text-left"></span>
-                </div>
-                <div class="card-footer text-muted">
-                    <div class="card-data">
-                        <div class='p-1'>
-                            <span class='mr-1'>Likes:</span>
-                            <span class="badge badge-info">{{ entry.num_of_likes }}</span>
-                        </div>
-                        <div class='p-1'>
-                            <span class='mr-1'>Views:</span>
-                            <span class="badge badge-info postcard-text-right">{{ entry.num_of_views }}</span>
+                    <div class="card-body">
+                        <a class=postcard-title-link href="{{url_for('display_details', rec_id = entry._id)}}">
+                            <h4 class="card-title">{{entry.title}}</h4>
+                        </a>
+                        <span class="card-text pr-3">{{entry.country}}</span>
+                        <span class="card-text"></span>
+                    </div>
+                    <div class="card-footer text-muted">
+                        <div class="card-data">
+                            <div class='p-1'>
+                                <span class='mr-1'>Likes:</span>
+                                <span class="badge badge-info">{{ entry.num_of_likes }}</span>
+                            </div>
+                            <div class='p-1'>
+                                <span class='mr-1'>Views:</span>
+                                <span class="badge badge-info postcard-text-right">{{ entry.num_of_views }}</span>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            <!--</div>-->
+            {% endfor %}
         </div>
-        {% endfor %}
     </div>
 </section>
 <!--**********************************  /. The 'POSTCARDS'  ********************************************************************-->
@@ -79,6 +81,7 @@
     const usp = new URLSearchParams();
     var selectCountry = document.getElementById("Select1");
     var selectCategory = document.getElementById("Select2");
+    var searchParam;
     
     
     // Event listener for the country selector drop-down
@@ -86,6 +89,7 @@
         console.log(selectCountry.value);
         usp.set('selected_country', selectCountry.value);
         console.log(usp.toString());
+        searchParam = usp.toString();
     });
     
     // Event listener for the category selector drop-down
@@ -93,6 +97,7 @@
         console.log(selectCategory.value);
         usp.set('selected_category', selectCategory.value);
         console.log(usp.toString());
+        searchParam = usp.toString();
     });
     
 </script>

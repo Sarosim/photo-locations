@@ -14,17 +14,16 @@ mongo=PyMongo(app)
 
 
 
-
 @app.route('/')
 @app.route('/index')
 def index():
     entries = mongo.db.details.find()
-    locations = []
     location = {}
+    data_to_send_to_map = {}
+    data_to_send_all = []
 # Creating the dictionary of the locations to pass to the Google map API
-    n = 0
     for entry in entries:
-# because of the schema wasn't set up properly at the beginning, the database contains mixed types for lat/lon (as well as documents without...), so I have to check for type
+# because of the schema wasn't set up properly at the beginning, the database contains mixed types for lat/lon (as well as documents without...), so I have to check for existance and type
         if "lat" in entry:
             if isinstance(entry["lat"], str):
                 location["lat"] = float(entry["lat"])
@@ -33,10 +32,17 @@ def index():
                 location["lat"] = float(str(entry["lat"])) #has to be in a format JSON can sterilize (Decimal128 is not), Float can not take decimal128 as argument either...
                 location["lng"] = float(str(entry["lon"]))
             clone_of_location = location.copy()
-            locations.append(clone_of_location)
+# On top of the coordinates, I send more info 
+            data_to_send_to_map["id"] = str(entry["_id"])
+            data_to_send_to_map["cat"] = entry['category_name']
+            data_to_send_to_map["title"] = entry["title"]
+            data_to_send_to_map["point"] = clone_of_location
+            data_to_send_to_map["url"] = entry['image_url'] #Currently not used, will see if needed
+            clone_of_data = data_to_send_to_map.copy()
+            data_to_send_all.append(clone_of_data)
 #   convert into JSON: 
-#   y = json.dumps(locations) THIS WASN'T needed in my case, as I convert on the javaScript sire with: |tojson
-    return render_template('index.html', counter = mongo.db.details.find().count(), data_source = locations) 
+#   y = json.dumps(locations) THIS WASN'T needed in my case, as I convert on the javaScript side with: |tojson
+    return render_template('index.html', counter = mongo.db.details.find().count(), data_source = data_to_send_all) 
 
 
 
@@ -48,7 +54,7 @@ def landing():
     entries = mongo.db.details.find()
     for entry in entries:
         the_country = entry['country'].title() #capitalising each word in the country name to display nicely and avoid duplications
-        print(the_country)
+  #      print(the_country)
         if the_country not in countries:
             countries.append(the_country)
     countries.sort()
