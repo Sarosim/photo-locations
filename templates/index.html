@@ -76,8 +76,8 @@
     function initMap() {
 
         var map = new google.maps.Map(document.getElementById('map'), {
-            zoom: 3,
-            center: { lat: 35, lng: 0 }
+            zoom: 5,
+            center: { lat: 46.6, lng: 7.4 }
         });
         var id
         var category
@@ -150,7 +150,12 @@
         }
 
         // Add a marker clusterer to manage the markers.
-        var markerCluster = new MarkerClusterer(map, markers, { imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m' });
+        var markerCluster = new MarkerClusterer(map, markers, { 
+            imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m',
+            averageCenter: true,
+            gridSize: 20,
+        });
+        console.log(markerCluster)
     }
 </script>
 
