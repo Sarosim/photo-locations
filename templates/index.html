@@ -123,16 +123,21 @@
                 title: title,
                 url: combinedLink
             });
-
+            //Assigning value to the infoWindow
             infoWindow.setContent(infowincontent);
+            //Creating a clone of it to prevent it from changing with the original infoWindow object on next loop
+            var clonedInfoWindow = Object.assign({}, infoWindow);
+            console.log(infoWindow);
+            console.log(clonedInfoWindow);
+
             //Adding the Google API's listener to the marker
                 //Display the infoWindow on moseover
             marker.addListener('mouseover', function() {
-                infoWindow.open(map, this);
+                clonedInfoWindow.open(map, this);
             });
                 // ... and hide it on mouseout
             marker.addListener('mouseout', function() {
-                infoWindow.close();
+                clonedInfoWindow.close();
             });
             //Adding an event listener to the marker with the url to the details view of that location
             google.maps.event.addListener(marker, 'click', function() {
