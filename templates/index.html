@@ -101,6 +101,9 @@
             location = data_source[i]["point"];
             imgUrl = data_source[i]["url"];
             detailsLink = "{{ url_for('display_details', rec_id=id) }}"
+            // This is a workaround for the id not passing through to the url:
+            var combinedLink = detailsLink.concat(id); 
+
             //Creating content for the Google map API' infoWindow 
             infowincontent = document.createElement('div');
             strong = document.createElement('strong');
@@ -111,14 +114,16 @@
             text.textContent = category
             infowincontent.appendChild(text);
             icon = customLabel[category] || {};
+
             //Putting the marker together
             marker = new google.maps.Marker({
                 map: map,
                 position: location,
                 label: icon.label,
                 title: title,
-                url: detailsLink
+                url: combinedLink
             });
+
             infoWindow.setContent(infowincontent);
             //Adding the Google API's listener to the marker
                 //Display the infoWindow on moseover
