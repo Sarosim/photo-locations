@@ -37,7 +37,6 @@ def index():
             data_to_send_to_map["cat"] = entry['category_name']
             data_to_send_to_map["title"] = entry["title"]
             data_to_send_to_map["point"] = clone_of_location
-            data_to_send_to_map["url"] = entry['image_url'] #Currently not used, will see if needed
             clone_of_data = data_to_send_to_map.copy()
             data_to_send_all.append(clone_of_data)
 #   convert into JSON: 

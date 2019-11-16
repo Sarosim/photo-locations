@@ -99,7 +99,6 @@
             category= data_source[i]["cat"];
             title = data_source[i]["title"]
             location = data_source[i]["point"];
-            imgUrl = data_source[i]["url"];
             detailsLink = "{{ url_for('display_details', rec_id=id) }}"
             // This is a workaround for the id not passing through to the url:
             var combinedLink = detailsLink.concat(id); 
@@ -125,7 +124,7 @@
             });
             //Assigning value to the infoWindow
             infoWindow.setContent(infowincontent);
-            //Creating a clone of it to prevent it from changing with the original infoWindow object on next loop
+            //Creating a clone of it to prevent it from changing with the original infoWindow object on the next iteration
             var clonedInfoWindow = Object.assign({}, infoWindow);
             console.log(infoWindow);
             console.log(clonedInfoWindow);
@@ -139,11 +138,14 @@
             marker.addListener('mouseout', function() {
                 clonedInfoWindow.close();
             });
+            //This cloning currently still not working, probably I need a deep copy... (will get back to it later if time permits)
+            
             //Adding an event listener to the marker with the url to the details view of that location
             google.maps.event.addListener(marker, 'click', function() {
                 window.location.href = this.url;
             });
-            // adding the marker to the array of markers for the 
+
+            // adding the marker to the array of markers for the marker Clusterer
             markers.push(marker);
         }
 
