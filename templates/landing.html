@@ -17,7 +17,7 @@
         </div>
         <div class="col-12 col-md-4">
             <div class="form-group p-2 p-md-4 mr-5">
-                <label for="exampleSelect2">Filter by Category</label>
+                <label for="Select2">Filter by Category</label>
                 <select class="form-control" id="Select2">
                     <option title="Leave empty if you don't want to filter" value='unfiltered'></option>
                     {% for category in categories %}
@@ -28,7 +28,7 @@
         </div>
         <div class="col-12 col-md-4">
             <div class="buttons p-2 p-md-4 mr-5">
-                <a href="{{url_for('filtering', search_param = searchParam)}}" type="button" class="btn btn-outline-warning mt-5" id="filter_button">Let's Gooo... !!!</a>
+                <a href="{{ url_for('filtering', search_param = usp) }}" type="button" class="btn btn-outline-warning mt-5" id="filter_button">{{ searchParam }}Let's Gooo... !!!</a>
             </div>
         </div>
     </div>
@@ -82,6 +82,7 @@
     var selectCountry = document.getElementById("Select1");
     var selectCategory = document.getElementById("Select2");
     var searchParam;
+    var filter_btn = document.getElementById("filter_button");
     
     
     // Event listener for the country selector drop-down
@@ -90,14 +91,19 @@
         usp.set('selected_country', selectCountry.value);
         console.log(usp.toString());
         searchParam = usp.toString();
+        console.log("searchParam = ");
+        console.log(searchParam);
+//        filter_btn.href = '/filtering/'.concat(searchParam);
     });
     
     // Event listener for the category selector drop-down
     selectCategory.addEventListener("change", function() {
         console.log(selectCategory.value);
         usp.set('selected_category', selectCategory.value);
-        console.log(usp.toString());
+        console.log("USP: (not stringified)");
+        console.log(usp);
         searchParam = usp.toString();
+//        filter_btn.href = '/filtering/'.concat(searchParam);
     });
     
 </script>

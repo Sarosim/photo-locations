@@ -62,12 +62,14 @@ def landing():
     return render_template('landing.html', entries = mongo.db.details.find().sort([('date_modified', -1)]), countries = countries, categories = category_list)
 
 
+
 # Filtering based on input from landing page 
 @app.route('/filtering/<search_param>')
 def filtering(search_param):
     print(search_param)
     return redirect(url_for('index'))
     
+
 
 # Displaying the form to be filled for adding a new location
 @app.route('/add_location')    
@@ -126,6 +128,18 @@ def edit_record(record_id):
 def save_updates(record_id):
     timestamp = datetime.datetime.utcnow()
     details = mongo.db.details
+    the_record = mongo.db.details.find_one({"_id": ObjectId(record_id)})
+    #I have to check whether the num_of_views and/or num_of_likes fields exist, because these were later introduced rherefore not all documents have these fields
+    if "num_of_views" in the_record:
+        #Setting its value to rewrite to the document
+        views = int(the_record["num_of_views"])
+    else:
+        #Setting it to zero if din't exist
+        views = 0
+    if "num_of_likes" in the_record:
+        likes = int(the_record["num_of_likes"])
+    else:
+        likes = 0
     details.update({'_id': ObjectId(record_id)},
     {
         'title': request.form.get('title'),
@@ -142,11 +156,29 @@ def save_updates(record_id):
         'tripod_used': request.form.get('tripod_used'),
         'description': request.form.get('description'),
         'image_url': request.form.get('image_url'),
-        'date_modified': timestamp
+        'date_modified': timestamp,
+        'num_of_views': views,
+        'num_of_likes': likes,
     })
     return redirect(url_for('landing'))
-    
 
+#title:"Badacsony"
+#category_name :"Seascape"
+#country :"HUNGARY"
+#region:"Badacsony"
+#post_code:"8121"
+#lat:"46"
+#lon:"17.1"
+#camera:"Samsung phone"
+#lens:"built-in"
+#filters:"on mobile??? :)"
+#photographer:"Aniko Sarosine Balatoni"
+#tripod_used:null
+#description:"Modified 16 Oct 15:04"
+#image_url:"https://scontent-lht6-1.xx.fbcdn.net/v/t1.0-9/68745926_260488815957600..."
+#date_modified:2019-11-16T23:38:49.682+00:00    
+#num_of_views:14
+#num_of_likes:10
 
 # Increasing the number of likes 
 @app.route('/add_like/<record_id>', methods=['GET','POST'])

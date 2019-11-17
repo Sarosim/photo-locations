@@ -74,8 +74,10 @@
                 <div class="col-sm-4">
                     <div class="mt-5 custom-control custom-switch">
                         {% if record.tripod_used %}
-                        <input type="checkbox" checked class="custom-control-input" id="tripod" name='tripod_used'> {% else %}
-                        <input type="checkbox" class="custom-control-input" id="tripod" name='tripod_used'> {% endif %}
+                            <input type="checkbox" checked class="custom-control-input" id="tripod" name='tripod_used'> 
+                        {% else %}
+                            <input type="checkbox" class="custom-control-input" id="tripod" name='tripod_used'> 
+                        {% endif %}
                         <label class="custom-control-label" for="tripod">Tripod was used</label>
                     </div>
                 </div>
