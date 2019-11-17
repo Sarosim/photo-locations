@@ -155,10 +155,6 @@ def save_updates(record_id):
     else:
         likes = 0
 
-    #Check the content of tripod_used fieldand converting it to boolean
-    print("This is the save_updates entry to the database:")
-    print(the_record["tripod_used"])
-    
     details.update({'_id': ObjectId(record_id)},
     {
         '$set': {
