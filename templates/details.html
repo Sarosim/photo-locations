@@ -1,5 +1,27 @@
 {% extends 'base.html' %} {% block content %}
 
+<!-- Modal for confirming deletion of records -->
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="deleteModalLabel">Are You Sure?</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Ide jon a szoveg?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Ooops, NO</button>
+        <a href="{{url_for('delete_record', record_id = record._id)}}" type="button" class="btn btn-outline-danger">Sure, Delete!</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+
 <section>
     <!--WE are sending here one document from the details collection named 'record' and all the collections as a list named 'categories'-->
     <div class="row mx-auto">
@@ -68,8 +90,10 @@
                         <div class="buttons">
                             <a href="{{url_for('edit_record', record_id = record._id)}}" type="button" class="btn btn-info">Edit</a>
                         </div>
+
                         <div class="buttons">
-                            <a href="{{url_for('delete_record', record_id = record._id)}}" type="button" class="btn btn-outline-danger">Delete</a>
+                            <!-- Button trigger modal -->
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#deleteModal">Delete</button>
                         </div>
                     </div>
                     <div class="row likes-and-views-row p-2">
