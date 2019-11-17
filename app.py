@@ -12,32 +12,21 @@ app.config["MONGO_DBNAME"]='photo_locations'
 app.config['MONGO_URI']='mongodb+srv://nick:n1ckUser@myfirstcluster-mbpma.mongodb.net/photo_locations?retryWrites=true&w=majority'
 mongo=PyMongo(app)
 
-# Helper function for eliminating inconsistencies in the tripod_used field:
-def fix_tripod():
-    entries = mongo.db.details.find()
-    details = mongo.db.details
-    for entry in entries:
-        print("ID: ")
-        print(entry['_id'])
-        print("tripod_used: ")
-        print(entry["tripod_used"])
-        #If it contains tripod field
-        if "tripod_used" in entry:
-            if entry["tripod_used"] == "on":
-                entry["tripod_used"] = True
-            if entry["tripod_used"]  == "":
-                entry["tripod_used"]  = False
-            if entry["tripod_used"]  == None:
-                entry["tripod_used"]  = False    
-        
-        #If it doesn't contain tripod_used field
+
+#check tripod_used field and convert to boolean
+def check_tripod(this_id):
+    entries=mongo.db.details
+    the_record = entries.find_one({"_id": ObjectId(this_id)})
+    if "tripod_used" in the_record:
+        if the_record["tripod_used"] == "on":
+            tripod_y_n = True
         else:
-            entry["tripod_used"] = False
-        details.update_one({'_id': entry['_id']},
-        {
-            "$set": {"tripod_used": entry["tripod_used"]}
-        })
-fix_tripod()
+            tripod_y_n = False
+    else:
+        tripod_y_n = False
+    return tripod_y_n
+
+
 
 @app.route('/')
 @app.route('/index')
@@ -107,7 +96,7 @@ def add_location():
 @app.route('/insert_location', methods=['POST'])
 def insert_location():
     entries=mongo.db.details
-    # inserting and retrieving the _id tha was generated at insertion
+    # inserting and retrieving the _id that was generated at insertion
     new_id = entries.insert_one(request.form.to_dict()).inserted_id
     # "initializing" the date_modified and the num_of_views, num_of_likes fields
     entries.update({'_id': new_id},
@@ -116,6 +105,13 @@ def insert_location():
         '$set': {'num_of_views': 0,
                 'num_of_likes': 0}        
     })
+    
+    #check tripod_used field and convert to boolean with the helper function
+    entries.update_one({"_id": ObjectId(new_id)},
+        {
+            "$set": {"tripod_used": check_tripod(new_id)}
+        })
+
     return redirect(url_for('landing'))
     
 
@@ -159,28 +155,32 @@ def save_updates(record_id):
     else:
         likes = 0
 
-    #I have to check the content of tripod_used fields exist, because these were later introduced therefore not all documents have these fields
-
-
+    #Check the content of tripod_used fieldand converting it to boolean
+    print("This is the save_updates entry to the database:")
+    print(the_record["tripod_used"])
+    
     details.update({'_id': ObjectId(record_id)},
     {
-        'title': request.form.get('title'),
-        'category_name': request.form.get('category_name'),
-        'country': request.form.get('country'),
-        'region': request.form.get('region'),
-        'post_code': request.form.get('post_code'),
-        'lat': request.form.get('lat'),
-        'lon': request.form.get('lon'),
-        'camera': request.form.get('camera'),
-        'lens': request.form.get('lens'),
-        'filters': request.form.get('filters'),
-        'photographer': request.form.get('photographer'),
-        'tripod_used': request.form.get('tripod_used'),
-        'description': request.form.get('description'),
-        'image_url': request.form.get('image_url'),
-        'date_modified': timestamp,
-        'num_of_views': views,
-        'num_of_likes': likes,
+        '$set': {
+            'title': request.form.get('title'),
+            'category_name': request.form.get('category_name'),
+            'country': request.form.get('country'),
+            'region': request.form.get('region'),
+            'post_code': request.form.get('post_code'),
+            'lat': request.form.get('lat'),
+            'lon': request.form.get('lon'),
+            'camera': request.form.get('camera'),
+            'lens': request.form.get('lens'),
+            'filters': request.form.get('filters'),
+            'photographer': request.form.get('photographer'),
+            #Use the helper function to determine boolean value for tripod_used:
+            'tripod_used': check_tripod(record_id),
+            'description': request.form.get('description'),
+            'image_url': request.form.get('image_url'),
+            'date_modified': timestamp,
+            'num_of_views': views,
+            'num_of_likes': likes,
+        }
     })
     return redirect(url_for('landing'))
 

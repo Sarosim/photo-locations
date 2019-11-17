@@ -74,7 +74,7 @@
                         </tr>
                         <tr class="table">
                             <th scope="row">Tripod</th>
-                            <td>{{ record.tripod_used }}</td>
+                            <td>{% if record.tripod_used == True %}Used{% else %}Not used{% endif %} </td>
                         </tr>
                         <tr class="table">
                             <th scope="row">Photographer</th>
