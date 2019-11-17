@@ -99,14 +99,7 @@ def insert_location():
 @app.route('/display_details/<rec_id>')
 def display_details(rec_id):
     entries=mongo.db.details
-# This is the previous workaround, I'm keeping it here for a while, the syntax might help with other solutions...
-#    if 'num_of_views' in the_record:
- #       prev_num_views = mongo.db.details.find_one({"_id": ObjectId(rec_id)})['num_of_views']
-  #      new_num_views = prev_num_views + 1
-    #else:
-   #     new_num_views = 1
-    #entries.update({'_id': ObjectId(rec_id)},
-     #   {'$set': {'num_of_views': new_num_views}})
+    #Incrementing the number of views for the selected/displayed location
     entries.update({'_id': ObjectId(rec_id)}, {'$inc': {'num_of_views': 1}})
     the_record = mongo.db.details.find_one({"_id": ObjectId(rec_id)})
     category_list = mongo.db.categories.find()
@@ -162,29 +155,16 @@ def save_updates(record_id):
     })
     return redirect(url_for('landing'))
 
-#title:"Badacsony"
-#category_name :"Seascape"
-#country :"HUNGARY"
-#region:"Badacsony"
-#post_code:"8121"
-#lat:"46"
-#lon:"17.1"
-#camera:"Samsung phone"
-#lens:"built-in"
-#filters:"on mobile??? :)"
-#photographer:"Aniko Sarosine Balatoni"
-#tripod_used:null
-#description:"Modified 16 Oct 15:04"
-#image_url:"https://scontent-lht6-1.xx.fbcdn.net/v/t1.0-9/68745926_260488815957600..."
-#date_modified:2019-11-16T23:38:49.682+00:00    
-#num_of_views:14
-#num_of_likes:10
+
 
 # Increasing the number of likes 
-@app.route('/add_like/<record_id>', methods=['GET','POST'])
+@app.route('/add_like/<record_id>', methods=['GET','POST']) #NO NEED FOR POST I GUESS!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 def add_like(record_id):
     entries=mongo.db.details
     entries.update({'_id': ObjectId(record_id)}, {'$inc': {'num_of_likes': 1}})
+    #Because of redirecting to the display_details page, the number of views will be incremented there.
+    #To compensate it, I decrease the num of views by 1 here, because it is not a new viewing of the page:
+    entries.update({'_id': ObjectId(record_id)}, {'$inc': {'num_of_views': -1}})
     category_list = mongo.db.categories.find()
     the_record = mongo.db.details.find_one({"_id": ObjectId(record_id)})
     return redirect(url_for('display_details', rec_id = record_id))
