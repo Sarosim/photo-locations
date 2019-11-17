@@ -178,11 +178,11 @@ a:active {
 
 .map-container {
     margin-top: 0;
-    height: 950px;
+    height: 95vh;
 }
 
 div #map {
-    height: 800px;
+    height: 80vh;
 }
 
 .section-title {
