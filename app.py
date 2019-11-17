@@ -12,7 +12,32 @@ app.config["MONGO_DBNAME"]='photo_locations'
 app.config['MONGO_URI']='mongodb+srv://nick:n1ckUser@myfirstcluster-mbpma.mongodb.net/photo_locations?retryWrites=true&w=majority'
 mongo=PyMongo(app)
 
-
+# Helper function for eliminating inconsistencies in the tripod_used field:
+def fix_tripod():
+    entries = mongo.db.details.find()
+    details = mongo.db.details
+    for entry in entries:
+        print("ID: ")
+        print(entry['_id'])
+        print("tripod_used: ")
+        print(entry["tripod_used"])
+        #If it contains tripod field
+        if "tripod_used" in entry:
+            if entry["tripod_used"] == "on":
+                entry["tripod_used"] = True
+            if entry["tripod_used"]  == "":
+                entry["tripod_used"]  = False
+            if entry["tripod_used"]  == None:
+                entry["tripod_used"]  = False    
+        
+        #If it doesn't contain tripod_used field
+        else:
+            entry["tripod_used"] = False
+        details.update_one({'_id': entry['_id']},
+        {
+            "$set": {"tripod_used": entry["tripod_used"]}
+        })
+fix_tripod()
 
 @app.route('/')
 @app.route('/index')
@@ -122,7 +147,7 @@ def save_updates(record_id):
     timestamp = datetime.datetime.utcnow()
     details = mongo.db.details
     the_record = mongo.db.details.find_one({"_id": ObjectId(record_id)})
-    #I have to check whether the num_of_views and/or num_of_likes fields exist, because these were later introduced rherefore not all documents have these fields
+    #I have to check whether the num_of_views and/or num_of_likes fields exist, because these were later introduced therefore not all documents have these fields
     if "num_of_views" in the_record:
         #Setting its value to rewrite to the document
         views = int(the_record["num_of_views"])
@@ -133,6 +158,10 @@ def save_updates(record_id):
         likes = int(the_record["num_of_likes"])
     else:
         likes = 0
+
+    #I have to check the content of tripod_used fields exist, because these were later introduced therefore not all documents have these fields
+
+
     details.update({'_id': ObjectId(record_id)},
     {
         'title': request.form.get('title'),
