@@ -62,29 +62,30 @@ def index():
 # The Landing page where filtering and search can be performed, locations are diplayed in cards with primary info.    
 @app.route('/landing')
 def landing():
+    filters = {}
     # Checking if there is a filtering request
     entries_to_send = mongo.db.details.find().sort([('date_modified', -1)])
     if request.args:
         filters = request.args.to_dict()
         
+        #Removing filter from dictionary of filters if left blank (value='unfiltered') on the form
         to_be_removed = []
         for k in filters:
-            print("Nyomtassuk ki a mi micsodat: elso k, masodik filters[k]")
-            print(k)
-            print(filters[k])
             if filters[k] == 'unfiltered':  
                 to_be_removed.append(k)
-                print("Ez lett a to_be_removed:")
-                print(to_be_removed)
-        
         for i in range(len(to_be_removed)):
             del filters[to_be_removed[i]]
         
+        #Filtering the database with the proper filters
         filter_result = mongo.db.details.find(filters).sort([('date_modified', -1)])
+
+        # IF no result found:
         if filter_result.count() == 0:
-#            #Should send a message later, but do nothing extra for now AND send all entries 
+#            Should send a message later, but do nothing extra for now AND send all entries 
 #            entries_to_send = mongo.db.details.find().sort([('date_modified', -1)])
-            print("no result")
+            
+            entries_to_send = filter_result
+        # Otherwise pass the list of result to the renderer
         else:
             entries_to_send = filter_result
     
@@ -109,7 +110,7 @@ def landing():
             photographers.append(the_photographer)
     photographers.sort()
     
-    return render_template('landing.html', entries = entries_to_send, countries = countries, categories = category_list, photographers = photographers)
+    return render_template('landing.html', entries = entries_to_send, countries = countries, categories = category_list, photographers = photographers, filters = filters)
 
 
 

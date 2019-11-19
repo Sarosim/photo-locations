@@ -4,6 +4,7 @@
 <!--****************   The FILTER and SEARCH dropdowns and input fields   *********************************-->
 <section>
     <div class="row">
+        <div class="filters">{{ filters }}</div>
         <form class="col-12" action="{{ url_for('landing') }}">
             <div class="row mx-md-4">
                 <div class="form-group col-12 col-md-4 p-2 px-md-4">
@@ -11,7 +12,11 @@
                     <select class="form-control" id="country" name="country">
                         <option title="Leave empty if you don't want to filter" value='unfiltered'></option>
                         {% for country in countries %}
-                            <option>{{ country }}</option>
+                            {% if country == filters.country %}
+                                <option selected value={{ country }}>{{ country }}</option>
+                            {% else %}
+                                <option value={{ country }}>{{ country }}</option>    
+                            {% endif %}    
                         {% endfor %}    
                     </select>
                 </div>
@@ -20,7 +25,12 @@
                     <select class="form-control" id="category" name="category_name">
                         <option title="Leave empty if you don't want to filter" value='unfiltered'></option>
                         {% for category in categories %}
-                            <option>{{ category.category_name }}</option>
+                            {% if category.category_name == filters.category_name %}
+                                <option selected value={{ category.category_name }}>{{ category.category_name }}</option>
+                            {% else %}
+                                <option value={{ category.category_name }}>{{ category.category_name }}</option>    
+                            {% endif %}   
+          
                         {% endfor %}    
                     </select>
                 </div>
@@ -29,7 +39,11 @@
                     <select class="form-control" id="photographer" name="photographer">
                         <option title="Leave empty if you don't want to filter" value='unfiltered'></option>
                         {% for photographer in photographers %}
-                            <option>{{ photographer }}</option>
+                            {% if photographer == filters.photographer %}
+                                <option selected value={{ photographer }}>{{ photographer }}</option>
+                            {% else %}
+                                <option value={{ photographer }}>{{ photographer }}</option>    
+                            {% endif %}    
                         {% endfor %}    
                     </select>
                 </div>
