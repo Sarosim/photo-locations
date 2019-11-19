@@ -62,18 +62,54 @@ def index():
 # The Landing page where filtering and search can be performed, locations are diplayed in cards with primary info.    
 @app.route('/landing')
 def landing():
+    # Checking if there is a filtering request
+    entries_to_send = mongo.db.details.find().sort([('date_modified', -1)])
+    if request.args:
+        filters = request.args.to_dict()
+        
+        to_be_removed = []
+        for k in filters:
+            print("Nyomtassuk ki a mi micsodat: elso k, masodik filters[k]")
+            print(k)
+            print(filters[k])
+            if filters[k] == 'unfiltered':  
+                to_be_removed.append(k)
+                print("Ez lett a to_be_removed:")
+                print(to_be_removed)
+        
+        for i in range(len(to_be_removed)):
+            del filters[to_be_removed[i]]
+        
+        filter_result = mongo.db.details.find(filters).sort([('date_modified', -1)])
+        if filter_result.count() == 0:
+#            #Should send a message later, but do nothing extra for now AND send all entries 
+#            entries_to_send = mongo.db.details.find().sort([('date_modified', -1)])
+            print("no result")
+        else:
+            entries_to_send = filter_result
+    
     # Creating the list of countries for the dropdown
-    countries = []
     entries = mongo.db.details.find()
+    countries = []
     for entry in entries:
         the_country = entry['country'].title() #capitalising each word in the country name to display nicely and avoid duplications
-  #      print(the_country)
         if the_country not in countries:
             countries.append(the_country)
     countries.sort()
+
     # getting the categories for the dropdown
     category_list = mongo.db.categories.find()
-    return render_template('landing.html', entries = mongo.db.details.find().sort([('date_modified', -1)]), countries = countries, categories = category_list)
+
+    # Creating the list of Phtographers for its dropdown
+    photographers = []
+    entries = mongo.db.details.find()
+    for entry in entries:
+        the_photographer = entry['photographer'].title() #capitalising names to display nicely and avoid duplications
+        if the_photographer not in photographers:
+            photographers.append(the_photographer)
+    photographers.sort()
+    
+    return render_template('landing.html', entries = entries_to_send, countries = countries, categories = category_list, photographers = photographers)
 
 
 
