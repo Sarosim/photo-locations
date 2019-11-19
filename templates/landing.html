@@ -4,33 +4,40 @@
 <!--****************   The FILTER and SEARCH dropdowns and input fields   *********************************-->
 <section>
     <div class="row">
-        <div class="col-12 col-md-4">
-            <div class="form-group p-2 p-md-4 mr-5" action="">
-                <label for="Select1">Filter by Country</label>
-                <select class="form-control" id="Select1">
-                    <option title="Leave empty if you don't want to filter" value='unfiltered'></option>
-                    {% for country in countries %}
-                        <option>{{ country }}</option>
-                    {% endfor %}    
-                </select>
+        <form class="col-12" action="{{ url_for('landing') }}">
+            <div class="row mx-md-4">
+                <div class="form-group col-12 col-md-4 p-2 px-md-4">
+                    <label for="country">Filter by Country</label>
+                    <select class="form-control" id="country" name="country">
+                        <option title="Leave empty if you don't want to filter" value='unfiltered'></option>
+                        {% for country in countries %}
+                            <option>{{ country }}</option>
+                        {% endfor %}    
+                    </select>
+                </div>
+                <div class="form-group col-12 col-md-4 p-2 px-md-4">
+                    <label for="category">Filter by Category</label>
+                    <select class="form-control" id="category" name="category_name">
+                        <option title="Leave empty if you don't want to filter" value='unfiltered'></option>
+                        {% for category in categories %}
+                            <option>{{ category.category_name }}</option>
+                        {% endfor %}    
+                    </select>
+                </div>
+                <div class="form-group col-12 col-md-4 p-2 px-md-4">
+                    <label for="photographer">Filter by Photographer</label>
+                    <select class="form-control" id="photographer" name="photographer">
+                        <option title="Leave empty if you don't want to filter" value='unfiltered'></option>
+                        {% for photographer in photographers %}
+                            <option>{{ photographer }}</option>
+                        {% endfor %}    
+                    </select>
+                </div>
+            </div>                
+            <div class="text-center mt-1 mb-md-3">
+                <button type="submit" class="btn btn-outline-warning mt-2">Let's Gooo... !!!</button>
             </div>
-        </div>
-        <div class="col-12 col-md-4">
-            <div class="form-group p-2 p-md-4 mr-5">
-                <label for="Select2">Filter by Category</label>
-                <select class="form-control" id="Select2">
-                    <option title="Leave empty if you don't want to filter" value='unfiltered'></option>
-                    {% for category in categories %}
-                        <option>{{ category.category_name }}</option>
-                    {% endfor %}    
-                </select>
-            </div>
-        </div>
-        <div class="col-12 col-md-4">
-            <div class="buttons p-2 p-md-4 mr-5">
-                <a href="{{ url_for('filtering', search_param = usp) }}" type="button" class="btn btn-outline-warning mt-5" id="filter_button">{{ searchParam }}Let's Gooo... !!!</a>
-            </div>
-        </div>
+        </form>
     </div>
 </section>
 
@@ -41,31 +48,31 @@
         <div class="postcard-container">
             {% for entry in entries %}
             <!--<div class="col-12 col-sm-6 col-lg-4 col-xl-3 py-3">-->
-                <div class="flex-cards card bg-light mb-3">
-                    <div class="card-header">{{entry.category_name}}</div>
-                    <a class=postcard-link href="{{url_for('display_details', rec_id = entry._id)}}">
+            <div class="flex-cards card bg-light mb-3">
+                <div class="card-header">{{entry.category_name}}</div>
+                <a class=postcard-link href="{{url_for('display_details', rec_id = entry._id)}}">
                         <img class="postcard-image" id="{{entry._id}}" src="{{entry.image_url}}" alt="Card image">
                     </a>
-                    <div class="card-body">
-                        <a class=postcard-title-link href="{{url_for('display_details', rec_id = entry._id)}}">
-                            <h4 class="card-title">{{entry.title}}</h4>
-                        </a>
-                        <span class="card-text pr-3">{{entry.country}}</span>
-                        <span class="card-text"></span>
-                    </div>
-                    <div class="card-footer text-muted">
-                        <div class="card-data">
-                            <div class='p-1'>
-                                <span class='mr-1'>Likes:</span>
-                                <span class="badge badge-info">{{ entry.num_of_likes }}</span>
-                            </div>
-                            <div class='p-1'>
-                                <span class='mr-1'>Views:</span>
-                                <span class="badge badge-info postcard-text-right">{{ entry.num_of_views }}</span>
-                            </div>
+                <div class="card-body">
+                    <a class=postcard-title-link href="{{url_for('display_details', rec_id = entry._id)}}">
+                        <h4 class="card-title">{{entry.title}}</h4>
+                    </a>
+                    <span class="card-text pr-3">{{entry.country}}</span>
+                    <span class="card-text"></span>
+                </div>
+                <div class="card-footer text-muted">
+                    <div class="card-data">
+                        <div class='p-1'>
+                            <span class='mr-1'>Likes:</span>
+                            <span class="badge badge-info">{{ entry.num_of_likes }}</span>
+                        </div>
+                        <div class='p-1'>
+                            <span class='mr-1'>Views:</span>
+                            <span class="badge badge-info postcard-text-right">{{ entry.num_of_views }}</span>
                         </div>
                     </div>
                 </div>
+            </div>
             <!--</div>-->
             {% endfor %}
         </div>
@@ -74,17 +81,15 @@
 <!--**********************************  /. The 'POSTCARDS'  ********************************************************************-->
 
 <script>
-
-   
-    var selected_country;
+/*    var selected_country;
     var selected_category;
     const usp = new URLSearchParams();
     var selectCountry = document.getElementById("Select1");
     var selectCategory = document.getElementById("Select2");
     var searchParam;
     var filter_btn = document.getElementById("filter_button");
-    
-    
+
+
     // Event listener for the country selector drop-down
     selectCountry.addEventListener("change", function() {
         console.log(selectCountry.value);
@@ -93,9 +98,9 @@
         searchParam = usp.toString();
         console.log("searchParam = ");
         console.log(searchParam);
-//        filter_btn.href = '/filtering/'.concat(searchParam);
+        //        filter_btn.href = '/filtering/'.concat(searchParam);
     });
-    
+
     // Event listener for the category selector drop-down
     selectCategory.addEventListener("change", function() {
         console.log(selectCategory.value);
@@ -103,9 +108,8 @@
         console.log("USP: (not stringified)");
         console.log(usp);
         searchParam = usp.toString();
-//        filter_btn.href = '/filtering/'.concat(searchParam);
-    });
-    
+        //        filter_btn.href = '/filtering/'.concat(searchParam);
+    });*/
 </script>
 
 
