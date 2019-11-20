@@ -124,7 +124,6 @@
                 map: map,
                 position: location,
                 label: icon.label,
-                title: title,
                 url: combinedLink
             });
             
@@ -133,7 +132,7 @@
 
             //Adding the Google API's listener to the marker
                 //Display the infoWindow on moseover
-            google.maps.event.addListener(marker, 'click', (function(marker, i) {
+            google.maps.event.addListener(marker, 'mouseover', (function(marker, i) {
                 return function() {
                     infoWindow.setContent(infoWindowContent[i]);
                     infoWindow.open(map, marker);
@@ -141,6 +140,11 @@
             })(marker, i));
             
             // ... and hide it on mouseout
+            google.maps.event.addListener(marker, 'mouseout', (function(marker, i) {
+                return function() {
+                    infoWindow.close();
+                }
+            })(marker, i));
  /*           marker.addListener('mouseout', function() {
                 infoWindow.close();
             });
