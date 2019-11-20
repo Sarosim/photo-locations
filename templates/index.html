@@ -73,109 +73,49 @@
         Cityscape: {label: 'C'},
         Seascape: {label: 'S'}
       };
-      
-      function initMap() {
+
+    function initMap() {
 
         var map = new google.maps.Map(document.getElementById('map'), {
             zoom: 4,
             center: { lat: 50, lng: 30 }
         });
-        var markers = [];
+        var markers = []
+        var infoWindow = new google.maps.InfoWindow;
 
         for (i = 0; i < data_source.length; i++) {
             var id
             var category
             var title
             var location
+            var imgUrl
             var detailsLink
             var infowincontent
-            var contentString 
             var strong
             var text
             var icon
             var marker
-
+            
             //Loading data to the markers
             id = data_source[i]["id"];
             category= data_source[i]["cat"];
             title = data_source[i]["title"]
             location = data_source[i]["point"];
-            
-            // Link for the marker to lead to the 'details' view
             detailsLink = "{{ url_for('display_details', rec_id=id) }}"
-                // This is a workaround for the id not passing through to the url, so I add it again:
+            
+            // This is a workaround for the id not passing through to the url:
             var combinedLink = detailsLink.concat(id); 
-            contentString = `<div><strong>TITLE</strong><br><text>CATEGORY</text></div>`
-            
-            infowincontent = document.createElement('div');
-            infowincontent.textContent = title;
-/*            
-            
-            // Creating content for the Google map API' infoWindow 
+
+            //Creating content for the Google map API' infoWindow 
             infowincontent = document.createElement('div');
             strong = document.createElement('strong');
-            strong.textContent = title;
+            strong.textContent = title
             infowincontent.appendChild(strong);
             infowincontent.appendChild(document.createElement('br'));
             text = document.createElement('text');
-            text.textContent = category;
- 
+            text.textContent = category
             infowincontent.appendChild(text);
-            console.log(infowincontent);
-            console.log(contentString);
-            var tmp = document.createElement("div");
-            tmp.appendChild(infowincontent);
-            solution = tmp.innerHTML;
-            console.log(solution);*/
-            
-            var infowindow = new google.maps.InfoWindow({
-                content: infowincontent
-            });
             icon = customLabel[category] || {};
-            
-            
-
-            var marker = new google.maps.Marker({
-                position: location,
-                map: map,
-                title: 'Uluru (Ayers Rock)'
-            });
-            marker.addListener('click', function() {
-                infowindow.open(map, this);
-            });
-            
-            // adding the marker to the array of markers for the marker Clusterer
-            markers.push(marker);
-        }
-        
-// Add a marker clusterer to manage the markers.
-        var markerCluster = new MarkerClusterer(map, markers, 
-            {
-                imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m',
-                averageCenter: true,
-                gridSize: 20,
-            });
-
-/*    function initMap() {
-
- 
-
-                                                                                  var infoWindow = new google.maps.InfoWindow;
-
-                                                                                 for (i = 0; i < data_source.length; i++) {
-
-                        //Creating content for the Google map API' infoWindow 
-                        infowincontent = document.createElement('div');
-                        strong = document.createElement('strong');
-                        strong.textContent = title
-                        infowincontent.appendChild(strong);
-                        infowincontent.appendChild(document.createElement('br'));
-                        text = document.createElement('text');
-                        text.textContent = category
-                        infowincontent.appendChild(text);
-
-
-
 
             //Putting the marker together
             marker = new google.maps.Marker({
@@ -185,33 +125,36 @@
                 title: title,
                 url: combinedLink
             });
+            
             //Assigning value to the infoWindow
             infoWindow.setContent(infowincontent);
-            //Creating a clone of it to prevent it from changing with the original infoWindow object on the next iteration
-            var clonedInfoWindow = Object.assign({}, infoWindow);
-            console.log(infoWindow);
-            console.log(clonedInfoWindow);
 
             //Adding the Google API's listener to the marker
                 //Display the infoWindow on moseover
             marker.addListener('mouseover', function() {
-                clonedInfoWindow.open(map, this);
+                infoWindow.open(map, this);
             });
                 // ... and hide it on mouseout
             marker.addListener('mouseout', function() {
-                clonedInfoWindow.close();
+                infoWindow.close();
             });
-            //This cloning currently still not working, probably I need a deep copy... (will get back to it later if time permits)
             
             //Adding an event listener to the marker with the url to the details view of that location
             google.maps.event.addListener(marker, 'click', function() {
                 window.location.href = this.url;
             });
 
-            
+            // adding the marker to the array of markers for the marker Clusterer
+            markers.push(marker);
         }
 
-        */
+        // Add a marker clusterer to manage the markers.
+        var markerCluster = new MarkerClusterer(map, markers, 
+            {
+                imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m',
+                averageCenter: true,
+                gridSize: 20,
+            });
         
     }
 </script>
