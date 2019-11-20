@@ -81,7 +81,8 @@
             center: { lat: 50, lng: 30 }
         });
         var markers = []
-        var infoWindow = new google.maps.InfoWindow;
+        var infoWindow = new google.maps.InfoWindow(), marker, i;
+        var infoWindowContent = []
 
         for (i = 0; i < data_source.length; i++) {
             var id
@@ -116,6 +117,7 @@
             text.textContent = category
             infowincontent.appendChild(text);
             icon = customLabel[category] || {};
+            infoWindowContent.push(infowincontent)
 
             //Putting the marker together
             marker = new google.maps.Marker({
@@ -131,11 +133,15 @@
 
             //Adding the Google API's listener to the marker
                 //Display the infoWindow on moseover
-            marker.addListener('mouseover', function() {
-                infoWindow.open(map, this);
-            });
-                // ... and hide it on mouseout
-            marker.addListener('mouseout', function() {
+            google.maps.event.addListener(marker, 'click', (function(marker, i) {
+                return function() {
+                    infoWindow.setContent(infoWindowContent[i]);
+                    infoWindow.open(map, marker);
+                }
+            })(marker, i));
+            
+            // ... and hide it on mouseout
+ /*           marker.addListener('mouseout', function() {
                 infoWindow.close();
             });
             
@@ -143,7 +149,7 @@
             google.maps.event.addListener(marker, 'click', function() {
                 window.location.href = this.url;
             });
-
+*/
             // adding the marker to the array of markers for the marker Clusterer
             markers.push(marker);
         }
