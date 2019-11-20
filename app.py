@@ -63,11 +63,10 @@ def index():
 @app.route('/landing')
 def landing():
     filters = {}
-    # Checking if there is a filtering request
     entries_to_send = mongo.db.details.find().sort([('date_modified', -1)])
+    # Checking if there is a filtering request
     if request.args:
         filters = request.args.to_dict()
-        
         #Removing filter from dictionary of filters if left blank (value='unfiltered') on the form
         to_be_removed = []
         for k in filters:
@@ -76,16 +75,13 @@ def landing():
         for i in range(len(to_be_removed)):
             del filters[to_be_removed[i]]
         
-        #Filtering the database with the proper filters
+        #Filtering the database with the uncluttered filters
         filter_result = mongo.db.details.find(filters).sort([('date_modified', -1)])
 
-        # IF no result found:
+        # IF no result found: (Should send a message later, but) do nothing extra for now AND send the empty 'entries' 
         if filter_result.count() == 0:
-#            Should send a message later, but do nothing extra for now AND send all entries 
-#            entries_to_send = mongo.db.details.find().sort([('date_modified', -1)])
-            
             entries_to_send = filter_result
-        # Otherwise pass the list of result to the renderer
+        # Otherwise: pass the list of result to the renderer
         else:
             entries_to_send = filter_result
     

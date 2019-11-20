@@ -4,7 +4,7 @@
 <!--****************   The FILTER and SEARCH dropdowns and input fields   *********************************-->
 <section>
     <div class="row">
-        <div class="filters">{{ filters }}</div>
+        <div class="filters d-none">{{ filters }}</div>
         <form class="col-12" action="{{ url_for('landing') }}">
             <div class="row mx-md-4">
                 <div class="form-group col-12 col-md-4 p-2 px-md-4">
@@ -16,7 +16,7 @@
                                 <option selected value={{ country }}>{{ country }}</option>
                             {% else %}
                                 <option value={{ country }}>{{ country }}</option>    
-                            {% endif %}    
+                            {% endif %}
                         {% endfor %}    
                     </select>
                 </div>
@@ -30,7 +30,6 @@
                             {% else %}
                                 <option value={{ category.category_name }}>{{ category.category_name }}</option>    
                             {% endif %}   
-          
                         {% endfor %}    
                     </select>
                 </div>
@@ -87,7 +86,6 @@
                     </div>
                 </div>
             </div>
-            <!--</div>-->
             {% endfor %}
         </div>
     </div>
