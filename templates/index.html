@@ -145,15 +145,12 @@
                     infoWindow.close();
                 }
             })(marker, i));
- /*           marker.addListener('mouseout', function() {
-                infoWindow.close();
-            });
             
             //Adding an event listener to the marker with the url to the details view of that location
             google.maps.event.addListener(marker, 'click', function() {
                 window.location.href = this.url;
             });
-*/
+
             // adding the marker to the array of markers for the marker Clusterer
             markers.push(marker);
         }
