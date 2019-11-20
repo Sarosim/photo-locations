@@ -13,9 +13,9 @@
                         <option title="Leave empty if you don't want to filter" value='unfiltered'></option>
                         {% for country in countries %}
                             {% if country == filters.country %}
-                                <option selected value={{ country }}>{{ country.title() }}</option>
+                                <option selected>{{ country.title() }}</option>
                             {% else %}
-                                <option value={{ country }}>{{ country.title() }}</option>    
+                                <option>{{ country.title() }}</option>    
                             {% endif %}
                         {% endfor %}    
                     </select>
@@ -26,9 +26,9 @@
                         <option title="Leave empty if you don't want to filter" value='unfiltered'></option>
                         {% for category in categories %}
                             {% if category.category_name == filters.category_name %}
-                                <option selected value={{ category.category_name }}>{{ category.category_name }}</option>
+                                <option selected>{{ category.category_name }}</option>
                             {% else %}
-                                <option value={{ category.category_name }}>{{ category.category_name }}</option>    
+                                <option>{{ category.category_name }}</option>    
                             {% endif %}   
                         {% endfor %}    
                     </select>
@@ -39,9 +39,9 @@
                         <option title="Leave empty if you don't want to filter" value='unfiltered'></option>
                         {% for photographer in photographers %}
                             {% if photographer == filters.photographer %}
-                                <option selected value={{ photographer }}>{{ photographer }}</option>
+                                <option selected>{{ photographer }}</option>
                             {% else %}
-                                <option value={{ photographer }}>{{ photographer.title() }}</option>    
+                                <option>{{ photographer.title() }}</option>    
                             {% endif %}    
                         {% endfor %}    
                     </select>

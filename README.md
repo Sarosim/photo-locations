@@ -83,7 +83,7 @@ To display all the available information about each database entry.
 ### Database structure:
 MongoDB data on Atlas with the following collections:
 1.	Details:
-- Title
+→ Title
 - Category name
 - Country
 - Region/City
