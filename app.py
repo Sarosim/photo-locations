@@ -89,7 +89,7 @@ def landing():
     entries = mongo.db.details.find()
     countries = []
     for entry in entries:
-        the_country = entry['country'].title() #capitalising each word in the country name to display nicely and avoid duplications
+        the_country = entry['country']
         if the_country not in countries:
             countries.append(the_country)
     countries.sort()
@@ -101,7 +101,7 @@ def landing():
     photographers = []
     entries = mongo.db.details.find()
     for entry in entries:
-        the_photographer = entry['photographer'].title() #capitalising names to display nicely and avoid duplications
+        the_photographer = entry['photographer']
         if the_photographer not in photographers:
             photographers.append(the_photographer)
     photographers.sort()
