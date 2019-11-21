@@ -83,6 +83,7 @@
         var markers = []
         var infoWindow = new google.maps.InfoWindow(), marker, i;
         var infoWindowContent = []
+        var bounds = new google.maps.LatLngBounds();
 
         for (i = 0; i < data_source.length; i++) {
             var id
@@ -103,6 +104,7 @@
             title = data_source[i]["title"]
             location = data_source[i]["point"];
             detailsLink = "{{ url_for('display_details', rec_id=id) }}"
+            bounds.extend(location);
             
             // This is a workaround for the id not passing through to the url:
             var combinedLink = detailsLink.concat(id); 
@@ -129,6 +131,9 @@
             
             //Assigning value to the infoWindow
             infoWindow.setContent(infowincontent);
+            
+            // Automatically center the map fitting all markers on the screen
+            map.fitBounds(bounds);
 
             //Adding the Google API's listener to the marker
                 //Display the infoWindow on moseover
@@ -139,7 +144,7 @@
                 }
             })(marker, i));
             
-            // ... and hide it on mouseout
+                // ... and hide it on mouseout
             google.maps.event.addListener(marker, 'mouseout', (function(marker, i) {
                 return function() {
                     infoWindow.close();
@@ -150,17 +155,23 @@
             google.maps.event.addListener(marker, 'click', function() {
                 window.location.href = this.url;
             });
-
+            
             // adding the marker to the array of markers for the marker Clusterer
             markers.push(marker);
         }
+
+/*        // Override the map zoom level once the fitBounds function runs (Make sure it only runs once)
+        var boundsListener = google.maps.event.addListener((map), 'bounds_changed', function(event) {
+            this.setZoom(2);
+            google.maps.event.removeListener(boundsListener);
+        });*/
 
         // Add a marker clusterer to manage the markers.
         var markerCluster = new MarkerClusterer(map, markers, 
             {
                 imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m',
                 averageCenter: true,
-                gridSize: 20,
+                //gridSize: 20,
             });
         
     }
