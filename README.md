@@ -21,7 +21,7 @@ collection of the dataset as a whole.
 
 ## My Project idea - Photography Locations
 Create an on-line landscape & cityscape photography location recommendation site. Users can upload their landscape images with location information, to recommend places to 
-visit for landscape photographers (hobbyists and pros as well). They can also help the community with providing detailed info about their pictures or useful hints and tips.
+visit for landscape photographers (hobbyists and pros as well). They can also help the community by providing detailed info about their pictures or useful hints and tips.
 
 ### External user’s goal:
 
@@ -35,13 +35,15 @@ High quality pictures can inspire others to try and achieve similar results, eit
 #### Get hints how to approach photographing a particular site 
 Check what equipment others used, what technique they applied. Also they may figure out what the best season or time of the day it is to visit a particular scene.
 
-Site owner’s goal may include:
+### Site owner’s goal may include:
 #### Build an extensive location database 
-A go-to place for landscape photographers.
+A go-to place for landscape photographers. Once reached a critical mess, advertisement income may be generated.
 
-#### Promote their web shop of photo equipment and accessories 
+#### Promote their web shop of photo equipment and accessories or their services offered
+The owner may run a shop where thye are selling photo equipments (camera, lens, etc... ) or accessories (filters, tripods, cleaning sets, etc...). They may build a webshop 
+integrated around the database, offering relevant products to users.
 
-#### Advertising their photography courses 
+Should they have a business around offering photgraphy services, they can advertise themselves, e.g. offering landscape photo courses.
 
 # UX
 
@@ -59,6 +61,24 @@ On top of the obvious CRUD operations, must have elements are:
 - Map view with all geo-coordinates displayed from database. (Advanced feature but this is the single best option to display locations)
 - Overview page with postcard type display of (selected) database records (with limited information to save real estate)
 - Detailed view with larger image and full info from database
+
+### What's out of scope?
+
+According to the project brief: No authentication is expected for this project. The focus is on the data, rather than any business logic.
+In a real-life situation the obvious first step would be to authenticate users to avoid modifying and deleting each other's entries. 
+In order to keep focus on passing data to and from the frontend as well as 'organising' data on the backend and writing to, retrieving from and deleting from the MongoDB database, I 
+left user authentication out of scope. (they're indicated in the navbar as disabled nav items, though)
+
+Marketing the site itself and utilising advertising opportunities within the site is also out of scope, therefore no links to social media sites or contacts or T&Cs are incorporated.
+
+### User Stories
+
+Based on the Scope, the following user stories are to be satisfied:
+
+- As a frequent traveller, I'd like to find nice sceneries to photograph around the palces I visit. E.g. 'I have a weekend trip to Lisbon mext month, what are the most 
+beautiful sites to visit?
+- As a hobby photographer, I'd like to improve the quality of my landscape images. There are so many beautiful pictures on the web, but how are those made? Do they use filters? Is there a secret?
+- 
 
 ## Structure
 
@@ -80,10 +100,10 @@ To display all the available information about each database entry.
 3. **U**pdate entries - allows to make changes to existing records
 4. **D**elete entries
 
-### Database structure:
+### Database structure and schema:
 MongoDB data on Atlas with the following collections:
 1.	Details:
-→ Title
+- Title 
 - Category name
 - Country
 - Region/City
