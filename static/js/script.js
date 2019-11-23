@@ -32,6 +32,22 @@
         unBlur();
     });
     
+    
+    /* Require PASSWORD for delting a record on the confirmation modal */
+    var conf = document.getElementById('confirm');
+    var delBtn = document.getElementById(('delete-btn'));
+    
+    conf.addEventListener("input", function(){
+        console.log(conf.value)
+        if (conf.value == "Delete") {  
+            delBtn.removeAttribute("disabled");
+            delBtn.setAttribute('href', "{{url_for('delete_record', record_id = record._id)}}");
+        } else {
+            delBtn.removeAttribute("href");
+            delBtn.setAttribute("disabled");
+        }    
+    });
+        
 
 /*end of IIFE*/
 })();
