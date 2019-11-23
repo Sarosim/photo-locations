@@ -60,6 +60,7 @@ Users should be able to browse images and locations conveniently.
 On top of the obvious CRUD operations, must have elements are:
 - Map view with all geo-coordinates displayed from database. (Advanced feature but this is the single best option to display locations)
 - Overview page with postcard type display of (selected) database records (with limited information to save real estate)
+- Let the viewer focus on a single image in the postcard view when they move the mouse over an image by bluring all other pictures.
 - Detailed view with larger image and full info from database
 
 ### What's out of scope?
@@ -71,14 +72,19 @@ left user authentication out of scope. (they're indicated in the navbar as disab
 
 Marketing the site itself and utilising advertising opportunities within the site is also out of scope, therefore no links to social media sites or contacts or T&Cs are incorporated.
 
+Providing an upload functionality would be a more convenient and user friendly way of supplying images. In order to avoid storing and handling potentially large image files, only URLs to images can be entered to the forms.
+
 ### User Stories
 
 Based on the Scope, the following user stories are to be satisfied:
 
-- As a frequent traveller, I'd like to find nice sceneries to photograph around the palces I visit. E.g. 'I have a weekend trip to Lisbon mext month, what are the most 
+- As a frequent traveller, I'd like to find nice sceneries to photograph around the palces I visit. E.g. 'I have a weekend trip to Lisbon next month, what are the most 
 beautiful sites to visit?
-- As a hobby photographer, I'd like to improve the quality of my landscape images. There are so many beautiful pictures on the web, but how are those made? Do they use filters? Is there a secret?
-- 
+- As a hobby photographer, I'd like to improve the quality of my landscape images. There are so many beautiful pictures on the web, but how are those taken? Were there any special filters used? 
+What is the key to taking outstanding images?
+- As a passionate and experienced photographer, I'd like to help others to improve their technique by showcasing my best images and explaining the process behind.
+- As the site owner, I'd like to build a platform, where poeple can share their images, get votes from the community, be proud of their work.
+- As an advanced hobbyist, I'd like to see whether people like my latest landscape images.
 
 ## Structure
 
@@ -130,8 +136,8 @@ MongoDB data on Atlas with the following collections:
 
 ### Wireframe sketches:
 
-[Search page: ](documentation/wireframes/wireframe_search.jpg)
-[Details page: ](documentation/wireframes/wireframe-details-view.jpg)
+![alt text](https://github.com/Sarosim/photo-locations/blob/master/documentation/wireframes/wireframe_search.jpg "Search page")
+![alt text](https://github.com/Sarosim/photo-locations/blob/master/documentation/wireframes/wireframe-details-view.jpg "Details view")
 
 ## Surface
 
