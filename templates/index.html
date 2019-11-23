@@ -85,7 +85,7 @@
         var infoWindowContent = []
         var bounds = new google.maps.LatLngBounds();
 
-        for (i = 0; i < data_source.length; i++) {
+        for (i = 0; i < data_source.length; i++) { 
             var id
             var category
             var title
@@ -134,6 +134,7 @@
             
             // Automatically center the map fitting all markers on the screen
             map.fitBounds(bounds);
+            var currentZoom = map.getZoom();
 
             //Adding the Google API's listener to the marker
                 //Display the infoWindow on moseover
@@ -159,12 +160,6 @@
             // adding the marker to the array of markers for the marker Clusterer
             markers.push(marker);
         }
-
-/*        // Override the map zoom level once the fitBounds function runs (Make sure it only runs once)
-        var boundsListener = google.maps.event.addListener((map), 'bounds_changed', function(event) {
-            this.setZoom(2);
-            google.maps.event.removeListener(boundsListener);
-        });*/
 
         // Add a marker clusterer to manage the markers.
         var markerCluster = new MarkerClusterer(map, markers, 
