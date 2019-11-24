@@ -26,29 +26,6 @@ def check_tripod(this_id):
         tripod_y_n = False
     return tripod_y_n
 
-#Eliminating multiple versions of same 'CouNTry' and 'PhotogRApher' from the details collection
-def title_case():
-    print("It's running")
-    collection = mongo.db.details
-    entries = collection.find()
-    for entry in entries:
-        the_id = entry["_id"]
-        country_name = entry["country"].title()
-        photographer_name = entry["photographer"].title()
-        print(the_id, country_name, photographer_name)
-        collection.update_one({"_id": ObjectId(the_id)},
-        {
-            '$set': {
-                # updating the 'Title Case' names
-                'country': country_name,
-                'photographer': photographer_name,
-            }
-        })
-        print(entry["country"])
-    print("finished the loop")
-    return
-
-title_case()
 
 @app.route('/')
 @app.route('/index')
