@@ -111,14 +111,6 @@ def landing():
 
 
 
-# Filtering based on input from landing page 
-@app.route('/filtering/<search_param>')
-def filtering(search_param):
-    print(search_param)
-    return redirect(url_for('index'))
-    
-
-
 # Displaying the form to be filled for adding a new location
 @app.route('/add_location')    
 def add_location():
@@ -132,14 +124,14 @@ def insert_location():
     entries=mongo.db.details
     # inserting and retrieving the _id that was generated at insertion
     new_id = entries.insert_one(request.form.to_dict()).inserted_id
-    # fixing CaPitaL letter issue in entries for filtered fields by converting each word of them to Uppercase
+    # fixing CaPitaL letter issue in entries for filtered fields by converting each word of those to Uppercase
     country_name = request.form.to_dict()["country"].title()
     photographer_name = request.form.to_dict()["photographer"].title()
     entries.update({'_id': new_id},
     {
         '$currentDate': {'date_modified': True},
         '$set': {
-            # updating the Titlecase names
+            # updating the TitleCase names
             'country': country_name,
             'photographer': photographer_name,
             # "initializing" the date_modified and the num_of_views, num_of_likes fields
