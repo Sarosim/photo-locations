@@ -24,16 +24,16 @@
 </div>
 
 
-<section>
-    <!--WE are sending here one document from the details collection named 'record' and all the collections as a list named 'categories'-->
-    <div class="row mx-auto">
-        <div class="col-md-8 text-center">
-            <h3>Picture</h3>
+<section class="container-fluid">
+    <!--WE are sending here one document from the details collection named 'record' and the categories as a list named 'categories'-->
+    <div class="row dev-help-border mx-auto">
+        <div class="dev-help-border col-12 col-md-8 mt-2 mt-md-4 text-center">
+            <h3>{{ record.title }}</h3>
             <img class='photo-display' src="{{record.image_url}}"></img>
         </div>
-        <div class="col-md-4 text-center">
+        <div class="col-12 col-md-4 mt-2 mt-md-4 text-center">
             <h3>Details</h3>
-            <div class="row mr-3">
+            <div class="row">
                 <table class="table table-striped text-left">
                     <tbody>
                         <tr class="table">

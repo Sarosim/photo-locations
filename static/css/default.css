@@ -18,7 +18,7 @@ a:active {
 /******************** NAVBAR ********************/
 
 .navbar {
-    font-family: 'Black And White Picture', sans-serif;
+    font-family: 'Didact Gothic', sans-serif;
     font-size: 1.6rem;
     position: fixed;
     top: 0;
@@ -58,7 +58,6 @@ a:active {
 }
 
 .flex-cards {
-  
     height: 500px;
 }
 
@@ -189,7 +188,7 @@ a:active {
         0 0 35px rgba(240, 173, 78, .8);
 }
 
-/*************************  MAP Section  *****************************/
+/************************* INDEX.HTML MAP Section  *****************************/
 
 .map-container {
     margin-top: 0;
@@ -216,7 +215,7 @@ div #map {
 
 }
 
-/*************************  Further info  *******************/
+/************************* INDEX.HTML Further info  *******************/
 
 .instructions-container {
     background-color: transparent;
@@ -273,9 +272,13 @@ div #map {
 
 .photo-display {
     max-width: 100%;
-    max-height: 90vh;
+    max-height: 75vh;
 }
-
+.dev-help-border {
+    border-color: red;
+    border-style: solid;
+    border-width: 5px;
+}
 .row-others {
     display: block;
 }
