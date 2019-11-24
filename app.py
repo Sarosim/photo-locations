@@ -26,7 +26,29 @@ def check_tripod(this_id):
         tripod_y_n = False
     return tripod_y_n
 
+#Eliminating multiple versions of same 'CouNTry' and 'PhotogRApher' from the details collection
+def title_case():
+    print("It's running")
+    collection = mongo.db.details
+    entries = collection.find()
+    for entry in entries:
+        the_id = entry["_id"]
+        country_name = entry["country"].title()
+        photographer_name = entry["photographer"].title()
+        print(the_id, country_name, photographer_name)
+        collection.update_one({"_id": ObjectId(the_id)},
+        {
+            '$set': {
+                # updating the 'Title Case' names
+                'country': country_name,
+                'photographer': photographer_name,
+            }
+        })
+        print(entry["country"])
+    print("finished the loop")
+    return
 
+title_case()
 
 @app.route('/')
 @app.route('/index')
@@ -90,10 +112,12 @@ def landing():
     countries = []
     for entry in entries:
         the_country = entry['country']
+#        print(the_country)
         if the_country not in countries:
+#            print("Is it in or is it not? - NOT. It seems as we are in the 'not in'")
             countries.append(the_country)
     countries.sort()
-
+#    print(countries)
     # getting the categories for the dropdown
     category_list = mongo.db.categories.find()
 
@@ -131,12 +155,20 @@ def insert_location():
     entries=mongo.db.details
     # inserting and retrieving the _id that was generated at insertion
     new_id = entries.insert_one(request.form.to_dict()).inserted_id
-    # "initializing" the date_modified and the num_of_views, num_of_likes fields
+    # fixing CaPitaL letter issue in entries for filtered fields by converting each word of them to Uppercase
+    country_name = request.form.to_dict()["country"].title()
+    photographer_name = request.form.to_dict()["photographer"].title()
     entries.update({'_id': new_id},
     {
         '$currentDate': {'date_modified': True},
-        '$set': {'num_of_views': 0,
-                'num_of_likes': 0}        
+        '$set': {
+            # updating the Titlecase names
+            'country': country_name,
+            'photographer': photographer_name,
+            # "initializing" the date_modified and the num_of_views, num_of_likes fields
+            'num_of_views': 0,
+            'num_of_likes': 0
+        }
     })
     
     #check tripod_used field and convert to boolean with the helper function
