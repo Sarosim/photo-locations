@@ -82,7 +82,7 @@ a:active {
     filter: blur(6px);
 }
 
-/*UPDATE LOCATION PAGE*/
+/***********************************   UPDATE LOCATION PAGE   **************************************/
 
 .image-small {
     max-height: 200px;
@@ -93,13 +93,13 @@ a:active {
 /*************************  Jumbotron  ********************************/
 
 .callout-container {
-    min-height: 100vh;
+    min-height: 95vh;
     background: url('https://live.staticflickr.com/65535/48906355932_38ae8045dc_k.jpg') no-repeat center center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
-    display: flex;
+    /*display: flex;*/
     justify-content: center;
     position: relative;
     min-width: 100vh;
@@ -175,28 +175,44 @@ a:active {
     0 0 35px rgba(240, 173, 78, .8);
 }
 
+.counter {
+    margin-top: 8rem;
+    text-shadow: 
+        0 0 5px #fff,
+        0 0 4px #fff,
+        0 0 8px #fff,
+        0 0 12px #fff,
+        0 0 16px #fff,
+        0 0 20px #fff,
+        0 0 25px rgba(240, 173, 78, 1),
+        0 0 30px rgba(240, 173, 78, .9),
+        0 0 35px rgba(240, 173, 78, .8);
+}
+
 /*************************  MAP Section  *****************************/
 
 .map-container {
     margin-top: 0;
-    height: 95vh;
+    padding-right: 60px;
+    padding-left: 60px;    
 }
 
 div #map {
-    height: 80vh;
+    height: 75vh;
 }
 
 .section-title {
-    color: #b77846;
-    text-shadow: 0 0 5px #fff,
-    0 0 4px #fff,
-    0 0 8px #fff,
-    0 0 12px #fff,
-    0 0 16px #fff,
-    0 0 20px #fff,
-    0 0 25px rgba(240, 173, 78, 1),
-    0 0 30px rgba(240, 173, 78, .9),
-    0 0 35px rgba(240, 173, 78, .8);
+    color: #004290;
+    text-shadow: 
+        0 0 5px #fff,
+        0 0 4px #fff,
+        0 0 8px #fff,
+        0 0 12px #fff,
+        0 0 16px #fff,
+        0 0 20px #fff,
+        0 0 25px rgba(240, 173, 78, 1),
+        0 0 30px rgba(240, 173, 78, .9),
+        0 0 35px rgba(240, 173, 78, .8);
 
 }
 
@@ -210,12 +226,30 @@ div #map {
     width: 76%;
     height: 50vh;
     background-color: transparent;
-    margin: 25px;
+    color: #000;
 
 }
+
+.instructions-box h4 {
+    margin-top: 1.2rem;
+}
+.instructions-box h3 {
+    color: #004290;
+    text-shadow: 
+        0 0 5px #ddd,
+        0 0 4px #eee,
+        0 0 8px #fff,
+        0 0 12px #ddd,
+        0 0 16px #ddd,
+        0 0 20px #ddd,
+        0 0 25px rgba(240, 173, 78, 1),
+        0 0 30px rgba(240, 173, 78, .9),
+        0 0 35px rgba(240, 173, 78, .8);
+}        
+
 /********************MEDIA QUERIES for INDEX ****************/
 
-@media only screen and (max-width: 600px) {
+/*@media only screen and (max-width: 600px) {
     .jumbotron h1 {
         font-size: 2rem;
         font-weight: 600;
@@ -232,7 +266,7 @@ div #map {
         font-size: 1.6rem;
         font-weight: 400;
     }    
-}
+}*/
 
 
 /***************************** DETAILS HTML *****************************************************/

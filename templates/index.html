@@ -6,7 +6,7 @@
 <div class="container-fluid callout-container">
     <div class="row">
         <div class="col-12">
-            <section class="callout jumbotron text-center py-0 pt-md-2">
+            <section class="callout jumbotron text-center mt-3">
                 <h1>Landscape Photography Locations</h1>
                 <h2 class="d-none d-md-inline">Find stunning photo locations </h2>
                 <p class="lead py-0 py-md-5">
@@ -15,31 +15,30 @@
                     <span class="d-none d-md-inline"> ... or get inspiration for your next trip</span>
                 </p>
             </section>
-            <section class="callout jumbotron text-center py-0 pt-md-2">
-                <h4 class='counter'>Already {{counter}} locations in our database!</h4>
-            </section>
+        </div>
+        <div class="counter text-center col-12">
+            <h2>Already {{counter}} locations in our database</h2>
         </div>
     </div>
-
 </div>
 <!-- *************** /. Jumbotron ********************* -->
 
 <!-- ********************* MAP ********************* -->
 
-<div class="container map-container d-none d-md-block" id="map-container">
+<div class="container-fluid map-container d-none d-md-block" id="map-container">
     <section>
         <div class="row">
             <div class="col-12">
-                <div class="section-title mt-5 mb-3 text-center">
+                <div class="section-title mt-3 mb-2 text-center">
                     <h2>Find a location on the Map</h2>
                 </div>
             </div>
         </div>
-
-    </section>
-    <div>
+    <div class="mb-2">
         <div id="map"></div>
     </div>
+    </section>
+
 </div>
 
 
@@ -48,19 +47,46 @@
 <!-- *************** Further Instructions ********************* -->
 
 <div class="container-fluid callout-container">
-    <section class="callout jumbotron text-center py-0 pt-md-2">
-        <div class="row">
-            <h2 class="section-title">Further information comes here</h2>
-            <div class="row">
-                <div class="col-12 instructions-box">
-                </div>
+    <section class="container-fluid text-center py-0 pt-md-2">
+        <div class="row ">
+            <div class="col-12 mt-3">
+                <h2 class="section-title">How to search the database</h2>
             </div>
+        </div>            
+        <div class="row">
+            <div class="d-none d-md-block col-md-2"></div>
+            <div class="col-12 col-md-8 instructions-box">
+                <h3 class="mt-1 mt-md-3">Searching / Filtering</h3>
+                <div class="p-1 p-md-3" style="background-color: #ccf"> 
+                    <h4>
+                        Dedicated search page is available from the navigation memu for you to filter the database. When all filters are left blank,
+                        all the database entries are shown on 'postcards', sorted by date of last modification, with the most recent on the top.
+                    </h4> 
+                    <h4>
+                        Filering is possible for Countries, Photographers and Categories (Cityscape, Landscape, Seascape and Cloudscape)
+                    </h4>
+                    <h4>
+                        When filtered results are shown, the locations are sorted by the number of likes, with the most popular on the top.
+                    </h4>
+                </div>
+                    <h3 class="mt-1 mt-md-3">
+                        Map view
+                        <br>
+                        <small><em>(not available on screen sizes less than 768 pixels wide)</em></small>
+                    </h3>
+                <div class="p-1 p-md-3" style="background-color: #ccf"> 
+                    <h4>
+                        Checking the details of a particular location you can simply click on the marker on the map (in order to avoid congestion
+                        on the map, markers of close proximity are grouped and the numbers shown indicate the number of the underlying markers)
+                    </h4>
+                </div>    
+            </div>
+            <div class="d-none d-md-block col-md-2"></div>
         </div>
     </section>
 </div>
 
 <!-- *************** /. Instructions  ********************* -->
-
 
 <script>
     //receiving the location coordinates from the route function 
