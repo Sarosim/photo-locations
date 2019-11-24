@@ -74,18 +74,6 @@ Marketing the site itself and utilising advertising opportunities within the sit
 
 Providing an upload functionality would be a more convenient and user friendly way of supplying images. In order to avoid storing and handling potentially large image files, only URLs to images can be entered to the forms.
 
-### User Stories
-
-Based on the Scope, the following user stories are to be satisfied:
-
-- As a frequent traveller, I'd like to find nice sceneries to photograph around the palces I visit. E.g. 'I have a weekend trip to Lisbon next month, what are the most 
-beautiful sites to visit?
-- As a hobby photographer, I'd like to improve the quality of my landscape images. There are so many beautiful pictures on the web, but how are those taken? Were there any special filters used? 
-What is the key to taking outstanding images?
-- As a passionate and experienced photographer, I'd like to help others to improve their technique by showcasing my best images and explaining the process behind.
-- As the site owner, I'd like to build a platform, where poeple can share their images, get votes from the community, be proud of their work.
-- As an advanced hobbyist, I'd like to see whether people like my latest landscape images.
-
 ## Structure
 
 ### Page structure
@@ -135,20 +123,53 @@ MongoDB data on Atlas with the following collections:
 ## Skeleton
 
 ### Wireframe sketches:
-
+#### Search Page:
 ![alt text](https://github.com/Sarosim/photo-locations/blob/master/documentation/wireframes/wireframe_search.jpg "Search page")
+#### Details View:
 ![alt text](https://github.com/Sarosim/photo-locations/blob/master/documentation/wireframes/wireframe-details-view.jpg "Details view")
 
 ## Surface
 
-For the home page, I wanted to use a strong background image and big bold letters to draw attention, then the map under the headlines.
+For the home page, I wanted to use a strong background image and big bold letters to draw attention, followed by the map underneath as well as some instructions on how to use the site (call for action).
 
 ## User stoies
-Translating it to user stoies I wanted to:
+Taking the Scope into consideration, the following user stories are to be satisfied:
 
+- As a frequent traveller, I'd like to find nice sceneries to photograph around the palces I visit. E.g. 'I have a weekend trip to Lisbon next month, what are the most 
+beautiful sites to visit?
+- As a hobby photographer, I'd like to improve the quality of my landscape images. There are so many beautiful pictures on the web, but how are those taken? Were there any special filters used? 
+What is the key to taking outstanding images?
+- As a passionate and experienced photographer, I'd like to help others to improve their technique by showcasing my best images and explaining the process behind.
+- As the site owner, I'd like to build a platform, where poeple can share their images, get votes from the community, be proud of their work.
+- As an advanced hobbyist, I'd like to see whether people like my latest landscape images.
 
 # Design
 
+## The final design of the key pages:
+
+![alt text](https://github.com/Sarosim/ "Index page")
+![alt text](https://github.com/Sarosim/ "Search page")
+![alt text](https://github.com/Sarosim/ "Details page")
+
+
+## Mobile layout
+
+![alt text](https://github.com/Sarosim/ "Index page mobile layout")
+
+## Tablet layout
+
+![alt text](https://github.com/Sarosim "tablet landscape")...
+![alt text](https://github.com/Sarosim "tablet portrait")
+
+## Desktop layout
+
+![alt text](https://github.com/Sarosim/2048/blob/master/assets/images/desktop.png "laptop/desktop")
+
+## Confirming deletion:
+Since there is no authentication on the site, anyone could potentially delete from the database. In order to avoid 'unauthorised' or accidental deleting, a confirmation modal
+pops up if someone wanted to delete a record from the database. It includes a hard coded password as well. 
+_Note for the assessor: When testing the delete functionality, please insert a test record first and delete that record for testing purposes, please. :)_
+_Although it's easy to figure out the password for deleting, it is: 'Delete'_
 
 # Features
 
