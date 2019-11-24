@@ -75,7 +75,7 @@ def landing():
             del filters[to_be_removed[i]]
         
         #Filtering the database with the uncluttered filters
-        filter_result = mongo.db.details.find(filters).sort([('date_modified', -1)])
+        filter_result = mongo.db.details.find(filters).sort([('num_of_likes', -1)])
 
         # IF no result found: (Should send a message later, but) do nothing extra for now AND send the empty 'entries' 
         if filter_result.count() == 0:
@@ -89,12 +89,9 @@ def landing():
     countries = []
     for entry in entries:
         the_country = entry['country']
-#        print(the_country)
         if the_country not in countries:
-#            print("Is it in or is it not? - NOT. It seems as we are in the 'not in'")
             countries.append(the_country)
     countries.sort()
-#    print(countries)
     # getting the categories for the dropdown
     category_list = mongo.db.categories.find()
 
@@ -145,7 +142,6 @@ def insert_location():
         {
             "$set": {"tripod_used": check_tripod(new_id)}
         })
-
     return redirect(url_for('landing'))
     
 
