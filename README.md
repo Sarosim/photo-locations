@@ -184,6 +184,8 @@ When I prepared the details view, I just quickly followed the wireframe but didn
 
 
 # Credits
+I used CSS prefixer at https://autoprefixer.github.io/ to ensure cross browser functionality. Also validated the CSS with https://jigsaw.w3.org/css-validator/validator.
+The scripts embedded in the html docs as well as the script.js file were validated with https://jshint.com/
 
 ## Content
 

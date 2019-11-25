@@ -19,11 +19,6 @@
                         <h3>... or get inspiration for your next trip</h3>
                     </div>
                 </div>
-<!--                <p class="lead py-0 py-md-5">
-                    <span>near you, or when on holidays...</span>
-                    <br>
-                    <span class="d-none d-md-inline"> ... or get inspiration for your next trip</span>
-                </p>-->
             </section>
         </div>
         <div class="counter text-center col-12">
@@ -116,46 +111,44 @@
             zoom: 4,
             center: { lat: 50, lng: 30 }
         });
-        var markers = []
+        var markers = [];
         var infoWindow = new google.maps.InfoWindow(), marker, i;
-        var infoWindowContent = []
+        var infoWindowContent = [];
         var bounds = new google.maps.LatLngBounds();
 
         for (i = 0; i < data_source.length; i++) { 
-            var id
-            var category
-            var title
-            var location
-            var imgUrl
-            var detailsLink
-            var infowincontent
-            var strong
-            var text
-            var icon
-            var marker
+            var id;
+            var category;
+            var title;
+            var location;
+            var detailsLink;
+            var infowincontent;
+            var strong;
+            var text;
+            var icon;
             
             //Loading data to the markers
             id = data_source[i]["id"];
             category= data_source[i]["cat"];
-            title = data_source[i]["title"]
+            title = data_source[i]["title"];
             location = data_source[i]["point"];
-            detailsLink = "{{ url_for('display_details', rec_id=id) }}"
+            detailsLink = "{{ url_for('display_details', rec_id=id) }}";
             bounds.extend(location);
             
             // This is a workaround for the id not passing through to the url:
             var combinedLink = detailsLink.concat(id); 
 
-            //Creating content for the Google map API' infoWindow 
+            //Creating content for the Google map API's infoWindow 
             infowincontent = document.createElement('div');
             strong = document.createElement('strong');
-            strong.textContent = title
+            strong.textContent = title;
             infowincontent.appendChild(strong);
             infowincontent.appendChild(document.createElement('br'));
             text = document.createElement('text');
-            text.textContent = category
+            text.textContent = category;
             infowincontent.appendChild(text);
             icon = customLabel[category] || {};
-            infoWindowContent.push(infowincontent)
+            infoWindowContent.push(infowincontent);
 
             //Putting the marker together
             marker = new google.maps.Marker({
@@ -170,7 +163,6 @@
             
             // Automatically center the map fitting all markers on the screen
             map.fitBounds(bounds);
-            var currentZoom = map.getZoom();
 
             //Adding the Google API's listener to the marker
                 //Display the infoWindow on moseover
@@ -178,14 +170,14 @@
                 return function() {
                     infoWindow.setContent(infoWindowContent[i]);
                     infoWindow.open(map, marker);
-                }
+                };
             })(marker, i));
             
                 // ... and hide it on mouseout
             google.maps.event.addListener(marker, 'mouseout', (function(marker, i) {
                 return function() {
                     infoWindow.close();
-                }
+                };
             })(marker, i));
             
             //Adding an event listener to the marker with the url to the details view of that location
@@ -202,7 +194,6 @@
             {
                 imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m',
                 averageCenter: true,
-                //gridSize: 20,
             });
         
     }
