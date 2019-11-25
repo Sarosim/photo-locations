@@ -53,12 +53,12 @@ a:active {
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: space-around;
     width: 100%;
 }
 
 .flex-cards {
-    height: 500px;
+    max-height: 500px;
 }
 
 .card-data {
@@ -68,12 +68,11 @@ a:active {
 
 .postcard-image {
     display: block;
-    max-width: 450px;
+    max-width: 100%;
     max-height: 300px;
-    object-fit: contain;
     margin-left: auto;
     margin-right: auto;
-    border-radius: 2px;
+    border-radius: 4px;
 }
 
 .postcard-image-blur {
@@ -98,11 +97,20 @@ a:active {
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
-    /*display: flex;*/
     justify-content: center;
     position: relative;
-    min-width: 100vh;
     
+}
+
+.instructions-container {
+    background: url('https://live.staticflickr.com/65535/48906355932_38ae8045dc_k.jpg') no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    justify-content: center;
+    position: relative;
+    height: 1100px;
 }
 
 .jumbotron {
@@ -121,7 +129,6 @@ a:active {
     0 0 35px rgba(240, 173, 78, .8);
     color: #004290;
     font-weight: 700;
-    font-size: 3.4rem;
     padding-bottom: 4px;
 }
 
@@ -137,7 +144,21 @@ a:active {
     0 0 35px rgba(240, 173, 78, .8);
     color: #004290;
     font-weight: 500;
-    font-size: 2.8rem;
+    padding-bottom: 4px;
+}
+
+.jumbotron h3 {
+    text-shadow: 0 0 5px #fff,
+    0 0 4px #fff,
+    0 0 8px #fff,
+    0 0 12px #fff,
+    0 0 16px #fff,
+    0 0 20px #fff,
+    0 0 25px rgba(240, 173, 78, 1),
+    0 0 30px rgba(240, 173, 78, .9),
+    0 0 35px rgba(240, 173, 78, .8);
+    color: #004290;
+    font-weight: 500;
     padding-bottom: 4px;
 }
 
@@ -153,15 +174,11 @@ a:active {
     0 0 35px rgba(240, 173, 78, .8);
     color: #004290;
     font-weight: 500;
-    font-size: 3.1rem;
     padding-bottom: 4px;
-    position: absolute;
-    bottom: 15vh;
 }
 
-.lead {
+/*.lead {
     font-weight: 700;
-    font-size: 2rem;
     color: #aa3c9e;
     text-shadow: 0 0 5px #fff,
     0 0 4px #fff,
@@ -173,9 +190,8 @@ a:active {
     0 0 30px rgba(240, 173, 78, .9),
     0 0 35px rgba(240, 173, 78, .8);
 }
-
+*/
 .counter {
-    margin-top: 8rem;
     text-shadow: 
         0 0 5px #fff,
         0 0 4px #fff,
@@ -246,27 +262,6 @@ div #map {
         0 0 35px rgba(240, 173, 78, .8);
 }        
 
-/********************MEDIA QUERIES for INDEX ****************/
-
-/*@media only screen and (max-width: 600px) {
-    .jumbotron h1 {
-        font-size: 2rem;
-        font-weight: 600;
-    }    
-    .jumbotron h2 {
-        font-size: 1.7rem;
-        font-weight: 400;
-    }    
-    .jumbotron h4 {
-        font-size: 1.5rem;
-        font-weight: 300;
-    }    
-    .lead {
-        font-size: 1.6rem;
-        font-weight: 400;
-    }    
-}*/
-
 
 /***************************** DETAILS HTML *****************************************************/
 
@@ -274,11 +269,7 @@ div #map {
     max-width: 100%;
     max-height: 75vh;
 }
-.dev-help-border {
-    border-color: red;
-    border-style: solid;
-    border-width: 5px;
-}
+
 .row-others {
     display: block;
 }

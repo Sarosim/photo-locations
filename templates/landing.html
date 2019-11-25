@@ -3,11 +3,10 @@
 
 <!--****************   The FILTER and SEARCH dropdowns and input fields   *********************************-->
 <section>
-    <div class="row">
-        <div class="filters d-none">{{ filters }}</div>
+    <div class="row px-1">
         <form class="col-12" action="{{ url_for('landing') }}">
-            <div class="row mx-md-4">
-                <div class="form-group col-12 col-md-4 p-2 px-md-4">
+            <div class="row mx-2 mx-md-4">
+                <div class="form-group col-12 col-md-4 p-2 px-md-3 px-lg-5 m-0">
                     <label for="country">Filter by Country</label>
                     <select class="form-control" id="country" name="country">
                         <option title="Leave empty if you don't want to filter" value='unfiltered'>&nbsp;</option>
@@ -20,7 +19,7 @@
                         {% endfor %}    
                     </select>
                 </div>
-                <div class="form-group col-12 col-md-4 p-2 px-md-4">
+                <div class="form-group col-12 col-md-4 p-2 px-md-3 px-lg-5 m-0">
                     <label for="category">Filter by Category</label>
                     <select class="form-control" id="category" name="category_name">
                         <option title="Leave empty if you don't want to filter" value='unfiltered'>&nbsp;</option>
@@ -33,7 +32,7 @@
                         {% endfor %}    
                     </select>
                 </div>
-                <div class="form-group col-12 col-md-4 p-2 px-md-4">
+                <div class="form-group col-12 col-md-4 p-2 px-md-3 px-lg-5 m-0">
                     <label for="photographer">Filter by Photographer</label>
                     <select class="form-control" id="photographer" name="photographer">
                         <option title="Leave empty if you don't want to filter" value='unfiltered'>&nbsp;</option>
@@ -61,7 +60,7 @@
         <div class="postcard-container">
             {% for entry in entries %}
             <!--<div class="col-12 col-sm-6 col-lg-4 col-xl-3 py-3">-->
-            <div class="flex-cards card bg-light mb-3">
+            <div class="flex-cards card bg-light px-1 mb-3">
                 <div class="card-header">{{entry.category_name}}</div>
                 <a class=postcard-link href="{{url_for('display_details', rec_id = entry._id)}}">
                         <img class="postcard-image" id="{{entry._id}}" src="{{entry.image_url}}" alt="Card image">
