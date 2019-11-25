@@ -278,6 +278,14 @@ div #map {
     max-height: 75vh;
 }
 
+.description-box {
+    border-style: solid;
+    border-color: #ccc;
+    border-width: 1px;
+    padding-bottom: 3px;
+    padding-top: 3px;
+}
+
 .row-others {
     display: block;
 }
@@ -293,8 +301,11 @@ div #map {
 }
 
 .btn-row {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    justify-content: space-around;
+    -ms-flex-pack: distribute;
+        justify-content: space-around;
 }
 
 .invisible-like-btn {
