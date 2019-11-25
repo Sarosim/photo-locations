@@ -10,7 +10,7 @@
                 <div class="form-group col-12 col-md-4 p-2 px-md-4">
                     <label for="country">Filter by Country</label>
                     <select class="form-control" id="country" name="country">
-                        <option title="Leave empty if you don't want to filter" value='unfiltered'></option>
+                        <option title="Leave empty if you don't want to filter" value='unfiltered'>&nbsp;</option>
                         {% for country in countries %}
                             {% if country == filters.country %}
                                 <option selected>{{ country.title() }}</option>
@@ -23,7 +23,7 @@
                 <div class="form-group col-12 col-md-4 p-2 px-md-4">
                     <label for="category">Filter by Category</label>
                     <select class="form-control" id="category" name="category_name">
-                        <option title="Leave empty if you don't want to filter" value='unfiltered'></option>
+                        <option title="Leave empty if you don't want to filter" value='unfiltered'>&nbsp;</option>
                         {% for category in categories %}
                             {% if category.category_name == filters.category_name %}
                                 <option selected>{{ category.category_name }}</option>
@@ -36,7 +36,7 @@
                 <div class="form-group col-12 col-md-4 p-2 px-md-4">
                     <label for="photographer">Filter by Photographer</label>
                     <select class="form-control" id="photographer" name="photographer">
-                        <option title="Leave empty if you don't want to filter" value='unfiltered'></option>
+                        <option title="Leave empty if you don't want to filter" value='unfiltered'>&nbsp;</option>
                         {% for photographer in photographers %}
                             {% if photographer == filters.photographer %}
                                 <option selected>{{ photographer }}</option>
@@ -56,7 +56,7 @@
 
 
 <!--****************   The 'POSTCARDS' for displaying database enrtries nicely   *********************************-->
-<section>
+<section class="container-fluid">
     <div class="row p-3">
         <div class="postcard-container">
             {% for entry in entries %}

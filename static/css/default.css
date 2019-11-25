@@ -18,8 +18,8 @@ a:active {
 /******************** NAVBAR ********************/
 
 .navbar {
-    font-family: 'Didact Gothic', sans-serif;
-    font-size: 1.6rem;
+    font-family: 'Anton', sans-serif;
+    font-size: 1.4rem;
     position: fixed;
     top: 0;
     width: 100%;
@@ -42,7 +42,7 @@ a:active {
 }
 
 .margin-for-navbar {
-    margin-top: 50px;
+    margin-top: 45px;
 }
 
 /******************** /. NAVBAR ********************/
@@ -92,7 +92,7 @@ a:active {
 /*************************  Jumbotron  ********************************/
 
 .callout-container {
-    min-height: 95vh;
+    min-height: 100vh;
     background: url('https://live.staticflickr.com/65535/48906355932_38ae8045dc_k.jpg') no-repeat center center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;

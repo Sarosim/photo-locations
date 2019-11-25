@@ -26,21 +26,16 @@
 
 <section class="container-fluid">
     <!--WE are sending here one document from the details collection named 'record' and the categories as a list named 'categories'-->
-    <div class="row dev-help-border mx-auto">
-        <div class="dev-help-border col-12 col-md-8 mt-2 mt-md-4 text-center">
+    <div class="row mx-auto">
+        <div class="col-12 col-md-8 mt-2 mt-md-4 text-center">
             <h3>{{ record.title }}</h3>
             <img class='photo-display' src="{{record.image_url}}"></img>
         </div>
         <div class="col-12 col-md-4 mt-2 mt-md-4 text-center">
-            <h3>Details</h3>
+            <h3>Detailed Info</h3>
             <div class="row">
-                <table class="table table-striped text-left">
+                <table class="table text-left px-2">
                     <tbody>
-                        <tr class="table">
-                            <!-- may alternate default, light, and secondary-->
-                            <th scope="row">Title</th>
-                            <td>{{ record.title }}</td>
-                        </tr>
                         <tr class="table">
                             <th scope="row">Category</th>
                             <td>{{ record.category_name }}</td>
@@ -56,10 +51,6 @@
                         <tr class="table">
                             <th scope="row">Post Code</th>
                             <td>{{ record.post_code }}</td>
-                        </tr>
-                        <tr class="table">
-                            <th scope="row">Coordinates</th>
-                            <td>{{ record.lat }} ,&nbsp; {{ record.lon }}</td>
                         </tr>
                         <tr class="table">
                             <th scope="row">Camera</th>
@@ -81,12 +72,11 @@
                             <th scope="row">Photographer</th>
                             <td>{{ record.photographer }}</td>
                         </tr>
-                        <tr class="table">
-                            <th scope="row">Year</th>
-                            <td>{{ year }}</td>
-                        </tr>
                     </tbody>
                 </table>
+                <div class="col-12 text-left my-2">
+                    <span clas="description-box">{{ record.description }}</span>
+                </div>
                 <div class="col-12">
                     <div class="row btn-row p-2">
                         <div class="buttons">
@@ -114,14 +104,6 @@
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-    <div class="row text-left">
-        <div class="col-sm-4">
-            <h5>{{ record.title }}</h5>
-        </div>
-        <div class="col-sm-8">
-            <span>{{ record.description }}</span>
         </div>
     </div>
 
