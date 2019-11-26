@@ -143,13 +143,13 @@ What is the key to taking outstanding images?
 
 ## The final design of the key pages:	
 ![alt text](https://github.com/Sarosim/photo-locations/blob/master/documentation/design/index_page_desktop.jpg "Index page")	
-![alt text](https://github.com/Sarosim/ "Search page")	
-![alt text](https://github.com/Sarosim/ "Details page")	
+![alt text](https://github.com/Sarosim/photo-locations/blob/master/documentation/design/search_page_desktop.jpg "Search page")	
+![alt text](https://github.com/Sarosim/photo-locations/blob/master/documentation/design/details_page_desktop.jpg "Details page")	
 ## Mobile layout	
-![alt text](https://github.com/Sarosim/ "Index page mobile layout")	
+![alt text](https://github.com/Sarosim/photo-locations/blob/master/documentation/design/details_page_mobile.jpg "Details page mobile layout")	
 ## Tablet layout	
-![alt text](https://github.com/Sarosim "tablet landscape")...	
-![alt text](https://github.com/Sarosim "tablet portrait")	
+![alt text](https://github.com/Sarosim/photo-locations/blob/master/documentation/design/details_page_tablet_landscape.jpg "Details page tablet landscape")...	
+![alt text](https://github.com/Sarosim/photo-locations/blob/master/documentation/design/details_page_tablet_portrait.jpg "Details page tablet portrait")	
 ## Confirming deletion:	
 Since there is no authentication on the site, anyone could potentially delete from the database. In order to avoid 'unauthorised' or accidental deleting,
 a confirmation modal pops up if someone wanted to delete a record from the database. It includes a hard coded password as well. 	
