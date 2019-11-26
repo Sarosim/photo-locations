@@ -60,16 +60,23 @@ Users should be able to browse images and locations conveniently.
 On top of the obvious CRUD operations, must have elements are:
 - Map view with all geo-coordinates displayed from database. (Advanced feature but this is the single best option to display locations)
 - Overview page with postcard type display of (selected) database records (with limited information to save real estate)
+- Let the viewer focus on a single image in the postcard view when they move the mouse over an image by bluring all other pictures.
 - Detailed view with larger image and full info from database
 
 ### What's out of scope?
 
 According to the project brief: No authentication is expected for this project. The focus is on the data, rather than any business logic.
 In a real-life situation the obvious first step would be to authenticate users to avoid modifying and deleting each other's entries. 
-In order to keep focus on passing data to and from the frontend as well as 'organising' data on the backend and writing to, retrieving from and deleting from the MongoDB database, I 
+In order to keep focus on passing data to and from the frontend as well as 'organising' data on the backend and writing to, retrieving from 
+and deleting from the MongoDB database, I 
 left user authentication out of scope. (they're indicated in the navbar as disabled nav items, though)
 
-Marketing the site itself and utilising advertising opportunities within the site is also out of scope, therefore no links to social media sites or contacts or T&Cs are incorporated.
+Marketing the site itself and utilising advertising opportunities within the site is also out of scope, therefore no links to social 
+media sites or contacts or T&Cs are incorporated.
+
+Providing an upload functionality would be a more convenient and user friendly way of supplying images. In order to avoid storing and 
+handling potentially large image files, only URLs to images can be entered to the forms. This is certainly not the best UX, but integration 
+with Amazon S3 is in the scope of the next milestone project.
 
 ### User Stories
 
@@ -102,7 +109,7 @@ To display all the available information about each database entry.
 
 ### Database structure and schema:
 MongoDB data on Atlas with the following collections:
-[*Schema of the 'Details' collection:*](documentation/schema.jpg) 
+![alt text](documentation/schema.jpg "*Schema of the 'Details' collection:*") 
 
 2.	Categories:
 - Landscape
@@ -114,19 +121,50 @@ MongoDB data on Atlas with the following collections:
 
 ### Wireframe sketches:
 
-[Search page: ](documentation/wireframes/wireframe_search.jpg)
-[Details page: ](documentation/wireframes/wireframe-details-view.jpg)
+#### Search Page:	
+![alt text](https://github.com/Sarosim/photo-locations/blob/master/documentation/wireframes/wireframe_search.jpg "Search page")	[Search page: ](documentation/wireframes/wireframe_search.jpg)
+
+#### Details View:	[Details page: ](documentation/wireframes/wireframe-details-view.jpg)
+![alt text](https://github.com/Sarosim/photo-locations/blob/master/documentation/wireframes/wireframe-details-view.jpg "Details view")
 
 ## Surface
 
-For the home page, I wanted to use a strong background image and big bold letters to draw attention, then the map under the headlines.
+For the home page, I wanted to use a strong background image and big bold letters to draw attention, then the map under the headlines, clearly separated.
+Recently, there are quite some websites using the technique of something scrolling over the fixed background, which I like. This gave me the idea of placing the map 
+like that.
+
+For the search page and the detailed view, the focus is on the images, therefore I didn't want to distract with a 'busy' background and left it as simple as possible.
 
 ## User stoies
-Translating it to user stoies I wanted to:
 
+Taking the Scope into consideration, the following user stories are to be satisfied:
+
+1. As a frequent traveller, I'd like to find nice sceneries to photograph around the palces I visit. E.g. 'I have a weekend trip to Lisbon next month, what are the most 	
+beautiful sites to visit?	
+2. As a hobby photographer, I'd like to improve the quality of my landscape images. There are so many beautiful pictures on the web, but how are those taken? Were there any special filters used? 	
+What is the key to taking outstanding images?	
+3. As a passionate and experienced photographer, I'd like to help others to improve their technique by showcasing my best images and explaining the process behind.	
+4. As the site owner, I'd like to build a platform, where poeple can share their images, get votes from the community, be proud of their work.	
+5. As an advanced hobbyist, I'd like to see whether people like my latest landscape images.	
 
 # Design
 
+## The final design of the key pages:	
+![alt text](https://github.com/Sarosim/ "Index page")	
+![alt text](https://github.com/Sarosim/ "Search page")	
+![alt text](https://github.com/Sarosim/ "Details page")	
+## Mobile layout	
+![alt text](https://github.com/Sarosim/ "Index page mobile layout")	
+## Tablet layout	
+![alt text](https://github.com/Sarosim "tablet landscape")...	
+![alt text](https://github.com/Sarosim "tablet portrait")	
+## Desktop layout	
+![alt text](https://github.com/Sarosim/2048/blob/master/assets/images/desktop.png "laptop/desktop")	
+## Confirming deletion:	
+Since there is no authentication on the site, anyone could potentially delete from the database. In order to avoid 'unauthorised' or accidental deleting,
+a confirmation modal pops up if someone wanted to delete a record from the database. It includes a hard coded password as well. 	
+_Note for the assessor: When testing the delete functionality, insert a test record first and delete that record for testing purposes, please. :)_	
+_Although it's easy to figure out the password for deleting from the code, it is: 'Delete'_
 
 # Features
 
@@ -154,29 +192,61 @@ During testing, I wanted to test:
 ## Design and responsiveness
 During the development process I focused on functionality, although I included Bootstrap grid in the html, I haven't checked if everything looked okay on all sizes.
 After finishing the functionality, I started with the index page. Repositioned elements, fixed margins and paddings. There was still one issue, the picures caused the 
-mobile view scaled unexpectedly.
+mobile view scaled unexpectedly, which was caused by a _'min-width of 100vw'_ and unnecessary font sizes for ```<h*>``` tags.
 
 When I prepared the details view, I just quickly followed the wireframe but didn't really like the look and feel. I redesigned it after finished with the functionality.
+
+Image and container sizes needed to be reset to achieve the desired look especially on smaller screen sizes.
 
 ## Functioning and operability
 
 ### JavaScript
 
-**There were several bugs, a few of the interesting ones:**
+There are practically three features that require javaScript:
+- the Google Map API, 
+- the bluring effect on the search page, and
+- the modal that prevents accidental deleting from the database 
+
+I heavily tested all of them and used javasScript debugger and console.log-s until they worked the intented way.
+
+There was an interesting issue with the ..............................................................................................................................................
 
 ### Testing in different browsers
 
 **Chrome**
+I used Chrome throughout the development, so everything was tested in Chrome first. I frequently checked things on my Android phone with Chrome.
 
 **Safari**
+I asked family members to check the page on Apple devices, it worked well on iPhone 4S, SE and 6.
 
-**Firefox**
+**Firefox and Microsoft Edge**
+After autoprefixing my CSS, I checked functionality and appearance in Firefox and Edge, no issues found.
 
 ## Testing against the user stories
-
+1. The 'frequent traveller', can find nice sceneries to photograph either browsing the map or filtering the database and check out photos of those. 	
+2. The hobby photographer can learn and improve the quality of their landscape images by checking the equipment used for images in the database as well as from description. 
+3. The experienced photographer can showcase their best images and provide explanation in the description field for others.	
+4. The site owner, achieved their goal of building a platform, where poeple can share their images, get votes from the community, be proud of their work.	
+5. The advanced hobbyist can get feedback through the number of likes of their landscape images.
 
 ## Defensive testing
 
+### Insufficent information provided. 
+To avoid inserting records into the database with insufficient information I set the most important fields as _required_ on the form. This way they can not be left blank. However, 
+insufficient or irrelevant information still can be inserted.
+
+### Image missing
+Attaching an image is by providing a URL. The form checks wherther URL is inserted, but cannot check if it is a valid URL and whether it is an image or not.
+
+I tested what happens if a user enters a URL that is not an image, but a website. Obviously no images will be displayed then on the search page or in the details, but 
+right-clicking on the broken image icon and opening it on a new tab wlll load that page............................................................................................................................
+
+### Image sizes
+I uploaded a relatively large panoramic image (6000 pixels wide, 3MB), it displayed properly on all screen sizes and TIME.....................................................................................
+
+### Number of database entries
+As the database is growing, the number of images displayed on the search page is growing and soon it will create problems especially if someone is opening the page on mobile phone
+with mobile data. The best solution would be to include pagination, but for time constraints, I simply limited the number of records to be displayed.
 
 # Deployment
 
@@ -194,6 +264,6 @@ Images are either my own or of family and frends (names, nicknames of photograph
 
 ## Acknowledgements
 
-Thanks to Ali Ashik - my mentor - 
+Thanks to Ali Ashik - my mentor - for not only the development ideas and support but orienting me in time management.
 
-Advice from Code Institute Slack community has also helped me to learn about debugging in *JavaScript*. 
+Tutor support helped me with debugging, not only finding certain bugs, but improving my thinking process when searching for bugs. Tim was exceptionally awesome.
