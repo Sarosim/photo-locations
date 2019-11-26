@@ -142,19 +142,25 @@ What is the key to taking outstanding images?
 # Design
 
 ## The final design of the key pages:	
-![alt text](https://github.com/Sarosim/photo-locations/blob/master/documentation/design/index_page_desktop.jpg "Index page")	
+### Desktop size
+#### Index page
+![alt text](https://github.com/Sarosim/photo-locations/blob/master/documentation/design/index_page_desktop.jpg "Index page")
+#### Search page
 ![alt text](https://github.com/Sarosim/photo-locations/blob/master/documentation/design/search_page_desktop.jpg "Search page")	
+#### Details page
 ![alt text](https://github.com/Sarosim/photo-locations/blob/master/documentation/design/details_page_desktop.jpg "Details page")	
-## Mobile layout	
+### Mobile layout	
 ![alt text](https://github.com/Sarosim/photo-locations/blob/master/documentation/design/details_page_mobile.jpg "Details page mobile layout")	
-## Tablet layout	
+### Tablet layout	
 ![alt text](https://github.com/Sarosim/photo-locations/blob/master/documentation/design/details_page_tablet_landscape.jpg "Details page tablet landscape")...	
 ![alt text](https://github.com/Sarosim/photo-locations/blob/master/documentation/design/details_page_tablet_portrait.jpg "Details page tablet portrait")	
-## Confirming deletion:	
+### Confirming deletion:	
 Since there is no authentication on the site, anyone could potentially delete from the database. In order to avoid 'unauthorised' or accidental deleting,
 a confirmation modal pops up if someone wanted to delete a record from the database. It includes a hard coded password as well. 	
 _Note for the assessor: When testing the delete functionality, insert a test record first and delete that record for testing purposes, please. :)_	
 _Although it's easy to figure out the password for deleting from the code, it is: 'Delete'_
+
+![alt text](https://github.com/Sarosim/photo-locations/blob/master/documentation/design/modal.jpg "Delete confirmation modal")
 
 # Features
 ## Map integration
