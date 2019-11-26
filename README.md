@@ -159,7 +159,7 @@ Since there is no authentication on the site, anyone could potentially delete fr
 a confirmation modal pops up if someone wanted to delete a record from the database. It includes a hard coded password as well. 	
 _Note for the assessor: When testing the delete functionality, insert a test record first and delete that record for testing purposes, please. :)_
 
-_Although it's easy to figure out the password for deleting from the code, it is: 'Delete'_
+_Although it's easy to figure out from the script what the password for deleting is, but - for yur convenience - it is: **'Delete'**_
 
 ![alt text](https://github.com/Sarosim/photo-locations/blob/master/documentation/design/modal.jpg "Delete confirmation modal")
 
