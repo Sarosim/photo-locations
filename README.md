@@ -78,15 +78,6 @@ Providing an upload functionality would be a more convenient and user friendly w
 handling potentially large image files, only URLs to images can be entered to the forms. This is certainly not the best UX, but integration 
 with Amazon S3 is in the scope of the next milestone project.
 
-### User Stories
-
-Based on the Scope, the following user stories are to be satisfied:
-
-- As a frequent traveller, I'd like to find nice sceneries to photograph around the palces I visit. E.g. 'I have a weekend trip to Lisbon mext month, what are the most 
-beautiful sites to visit?
-- As a hobby photographer, I'd like to improve the quality of my landscape images. There are so many beautiful pictures on the web, but how are those made? Do they use filters? Is there a secret?
-- 
-
 ## Structure
 
 ### Page structure
@@ -109,6 +100,7 @@ To display all the available information about each database entry.
 
 ### Database structure and schema:
 MongoDB data on Atlas with the following collections:
+1. Details:
 ![alt text](documentation/schema.jpg "*Schema of the 'Details' collection:*") 
 
 2.	Categories:
@@ -150,7 +142,7 @@ What is the key to taking outstanding images?
 # Design
 
 ## The final design of the key pages:	
-![alt text](https://github.com/Sarosim/ "Index page")	
+![alt text](https://github.com/Sarosim/photo-locations/blob/master/documentation/design/index_page_desktop.jpg "Index page")	
 ![alt text](https://github.com/Sarosim/ "Search page")	
 ![alt text](https://github.com/Sarosim/ "Details page")	
 ## Mobile layout	
@@ -158,8 +150,6 @@ What is the key to taking outstanding images?
 ## Tablet layout	
 ![alt text](https://github.com/Sarosim "tablet landscape")...	
 ![alt text](https://github.com/Sarosim "tablet portrait")	
-## Desktop layout	
-![alt text](https://github.com/Sarosim/2048/blob/master/assets/images/desktop.png "laptop/desktop")	
 ## Confirming deletion:	
 Since there is no authentication on the site, anyone could potentially delete from the database. In order to avoid 'unauthorised' or accidental deleting,
 a confirmation modal pops up if someone wanted to delete a record from the database. It includes a hard coded password as well. 	
@@ -167,6 +157,17 @@ _Note for the assessor: When testing the delete functionality, insert a test rec
 _Although it's easy to figure out the password for deleting from the code, it is: 'Delete'_
 
 # Features
+## Map integration
+Google map is inserted on the index page. Markers are placed on the map showing each location in the database. In order to avoid croudiness on the map, 
+marker clusteres are used to group markers in close proximity. 
+When a user move the mouse over a marker, the key features of that location are displayed in an infoWindow.
+Clicking on the marker directs the user to the detailed info of that location displayed on a single page, including the image that was taken at that location.
+
+## Filtering
+Users can filter entries by:
+- country
+- image category
+- photographer
 
 
 # Technologies used
