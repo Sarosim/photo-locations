@@ -4,6 +4,8 @@
 
 To build a full-stack site that allows users to manage a common dataset about a particular domain
 
+Link to the live app: [here](https://photography-locations.herokuapp.com/)
+
 ## My aims with the project
 
 - Practice and learn Flask and MongoDb in more detail.
@@ -159,7 +161,7 @@ Since there is no authentication on the site, anyone could potentially delete fr
 a confirmation modal pops up if someone wanted to delete a record from the database. It includes a hard coded password as well. 	
 _Note for the assessor: When testing the delete functionality, insert a test record first and delete that record for testing purposes, please. :)_
 
-_Although it's easy to figure out from the script what the password for deleting is, but - for yur convenience - it is: **'Delete'**_
+_Although it's easy to figure out from the script what the password for deleting is, but - for your convenience - it is: **'Delete'**_
 
 ![alt text](https://github.com/Sarosim/photo-locations/blob/master/documentation/design/modal.jpg "Delete confirmation modal")
 
@@ -258,7 +260,52 @@ with mobile data. The best solution would be to include pagination, but for time
 
 # Deployment
 
+I deployed the project to Heroku following the below process:
+
+Created a new app in Heroku, named photography-locations. (The name has to be unique, has to start with a lowercase character, may 
+contain only lowercase characters, numbers and dashes)
+
+Installed Heroku in AWS Cloud9:
+```
+nvm i v8
+npm install –g heroku
+heroku login –i
+```
+
+```heroku git:remote -a photography-locations```
+
+After initialising and making the initial commit:
+
+```git push heroku master```
+
+In order to have it working, requirements.txt and Procfile are needed.
+
+So, I created the requirements.txt:
+
+```sudo pip3 freeze –local > requirements.txt```
+
+Added to git and commited it.
+
+```
+git add requirements.txt
+git commit –m “requirements.txt added” 
+```
+
+Similarly, I created the Procfile (it is an instruction to Heroku, as to which file is used as our entry at our application – which file we
+use to call the app {convention is to name it either run.py or app.py – I chose app.py})
+
+```echo web: python app.py > Procfile```
+
+In order to avoid committing .c9/ folder and its contents, I added them to the .gitignore file and committed the .gitignore file to Git.
+
+
 ## Differences between the deployed production version and the development version
+In production, we should never commit secure keys, API keys, usernames, passwords.
+
+I moved the Atlas MongoDB connection string to the .bashrc file: 
+
+```export MONGO_URI = " ...the connections string here... " ```
+
 
 
 # Credits
