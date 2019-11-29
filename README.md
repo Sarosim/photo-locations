@@ -103,6 +103,7 @@ To display all the available information about each database entry.
 ### Database structure and schema:
 MongoDB data on Atlas with the following collections:
 1. Details:
+
 ![alt text](documentation/schema.jpg "*Schema of the 'Details' collection:*") 
 
 2.	Categories:
