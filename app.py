@@ -18,7 +18,7 @@ mongo=PyMongo(app)
 def check_tripod(this_id):
     entries=mongo.db.details
     the_record = entries.find_one({"_id": ObjectId(this_id)})
-    if "tripod_used" in the_record & the_record["tripod_used"] == "on":
+    if "tripod_used" in the_record and the_record["tripod_used"] == "on":
         return True
     else:
         return False
@@ -60,8 +60,10 @@ def index():
 @app.route('/landing')
 def landing():
     filters = {}
-    entries = mongo.db.details.find()
+    collection = mongo.db.details
+    entries = collection.find()
     entries_to_send = entries.sort([('date_modified', -1)])
+    print(entries_to_send[0])
     # Checking if there is a filtering request
     if request.args:
         filters = request.args.to_dict()
@@ -74,7 +76,7 @@ def landing():
             del filters[to_be_removed[i]]
         
         #Filtering the database with the uncluttered filters and sorting by the number of likes
-        filter_result = mongo.db.details.find(filters).sort([('num_of_likes', -1)])
+        filter_result = collection.find(filters).sort([('num_of_likes', -1)])
 
         # IF no result found: (Should send a message later, but) do nothing extra for now AND send the empty 'entries' 
         if filter_result.count() == 0:
@@ -87,6 +89,7 @@ def landing():
 
     countries = []
     photographers = []
+    entries = collection.find()
     for entry in entries:
         the_country = entry['country']
         if the_country not in countries:
@@ -99,7 +102,8 @@ def landing():
 
     # getting the categories for the dropdown
     category_list = mongo.db.categories.find()
-
+    print("megegyszer: ")
+    print(entries_to_send[0])
     return render_template('landing.html', entries = entries_to_send, countries = countries, categories = category_list, photographers = photographers, filters = filters)
 
 
@@ -116,27 +120,28 @@ def add_location():
 def insert_location():
     entries=mongo.db.details
     # inserting and retrieving the _id that was generated at insertion
-    new_id = entries.insert_one(request.form.to_dict()).inserted_id
-    # fixing CaPitaL letter issue in entries for filtered fields by converting each word of those to Uppercase
+    location_id = entries.insert_one(request.form.to_dict()).inserted_id
+    # entries for name fields are converted to TitleCase (each word to Uppercase)
     country_name = request.form.to_dict()["country"].title()
     photographer_name = request.form.to_dict()["photographer"].title()
-    entries.update({'_id': new_id},
+    entries.update({'_id': location_id},
     {
+        # "initializing" the date_modified field
         '$currentDate': {'date_modified': True},
         '$set': {
             # updating the TitleCase names
             'country': country_name,
             'photographer': photographer_name,
-            # "initializing" the date_modified and the num_of_views, num_of_likes fields
+            # "initializing" the num_of_views and num_of_likes fields
             'num_of_views': 0,
             'num_of_likes': 0
         }
     })
     
-    #check tripod_used field and convert to boolean with the helper function
-    entries.update_one({"_id": ObjectId(new_id)},
+    #check tripod_used field and convert to boolean with the helper function 
+    entries.update_one({"_id": ObjectId(location_id)},
         {
-            "$set": {"tripod_used": check_tripod(new_id)}
+            "$set": {"tripod_used": check_tripod(location_id)}
         })
     return redirect(url_for('landing'))
     
@@ -148,7 +153,7 @@ def display_details(rec_id):
     entries=mongo.db.details
     #Incrementing the number of views for the selected/displayed location
     entries.update({'_id': ObjectId(rec_id)}, {'$inc': {'num_of_views': 1}})
-    the_record = mongo.db.details.find_one({"_id": ObjectId(rec_id)})
+    the_record = entries.find_one({"_id": ObjectId(rec_id)})
     category_list = mongo.db.categories.find()
     return render_template('details.html', record = the_record, categories = category_list)
 
@@ -168,7 +173,7 @@ def edit_record(record_id):
 def save_updates(record_id):
     timestamp = datetime.datetime.utcnow()
     details = mongo.db.details
-    the_record = mongo.db.details.find_one({"_id": ObjectId(record_id)})
+    the_record = details.find_one({"_id": ObjectId(record_id)})
     #I have to check whether the num_of_views and/or num_of_likes fields exist, because these were later introduced therefore not all documents have these fields
     if "num_of_views" in the_record:
         #Setting its value to rewrite to the document
@@ -217,7 +222,7 @@ def add_like(record_id):
     #To compensate it, I decrease the num of views by 1 here, because it is not a new viewing of the page:
     entries.update({'_id': ObjectId(record_id)}, {'$inc': {'num_of_views': -1}})
     category_list = mongo.db.categories.find()
-    the_record = mongo.db.details.find_one({"_id": ObjectId(record_id)})
+    the_record = entries.find_one({"_id": ObjectId(record_id)})
     return redirect(url_for('display_details', rec_id = record_id))
     
 
