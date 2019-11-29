@@ -13,18 +13,15 @@ app.config['MONGO_URI']='mongodb+srv://nick:n1ckUser@myfirstcluster-mbpma.mongod
 mongo=PyMongo(app)
 
 
+
 #check tripod_used field and convert to boolean
 def check_tripod(this_id):
     entries=mongo.db.details
     the_record = entries.find_one({"_id": ObjectId(this_id)})
-    if "tripod_used" in the_record:
-        if the_record["tripod_used"] == "on":
-            tripod_y_n = True
-        else:
-            tripod_y_n = False
+    if "tripod_used" in the_record & the_record["tripod_used"] == "on":
+        return True
     else:
-        tripod_y_n = False
-    return tripod_y_n
+        return False
 
 
 @app.route('/')
@@ -36,13 +33,15 @@ def index():
     data_to_send_all = []
 # Creating the dictionary of the locations to pass to the Google map API
     for entry in entries:
-# because of the schema wasn't set up properly at the beginning, the database contains mixed types for lat/lon (as well as documents without...), so I have to check for existance and type
+# Because of the schema wasn't set up properly at the beginning, the database contains mixed types for lat/lon (as well as documents
+# without...), so I have to check for existance and type
         if "lat" in entry:
             if isinstance(entry["lat"], str):
                 location["lat"] = float(entry["lat"])
                 location["lng"] = float(entry["lon"])
-            else:
-                location["lat"] = float(str(entry["lat"])) #has to be in a format JSON can sterilize (Decimal128 is not), Float can not take decimal128 as argument either...
+# Location has to be in a format JSON can sterilize (Decimal128 is not), Float can not take decimal128 as argument either...
+            else: 
+                location["lat"] = float(str(entry["lat"])) 
                 location["lng"] = float(str(entry["lon"]))
             clone_of_location = location.copy()
 # On top of the coordinates, I send more info 
@@ -57,12 +56,12 @@ def index():
     return render_template('index.html', counter = mongo.db.details.find().count(), data_source = data_to_send_all) 
 
 
-
 # The Landing page where filtering and search can be performed, locations are diplayed in cards with primary info.    
 @app.route('/landing')
 def landing():
     filters = {}
-    entries_to_send = mongo.db.details.find().sort([('date_modified', -1)])
+    entries = mongo.db.details.find()
+    entries_to_send = entries.sort([('date_modified', -1)])
     # Checking if there is a filtering request
     if request.args:
         filters = request.args.to_dict()
@@ -74,7 +73,7 @@ def landing():
         for i in range(len(to_be_removed)):
             del filters[to_be_removed[i]]
         
-        #Filtering the database with the uncluttered filters
+        #Filtering the database with the uncluttered filters and sorting by the number of likes
         filter_result = mongo.db.details.find(filters).sort([('num_of_likes', -1)])
 
         # IF no result found: (Should send a message later, but) do nothing extra for now AND send the empty 'entries' 
@@ -84,26 +83,23 @@ def landing():
         else:
             entries_to_send = filter_result
     
-    # Creating the list of countries for the dropdown
-    entries = mongo.db.details.find()
+    # Creating the list of countries and photographers for the dropdown
+
     countries = []
+    photographers = []
     for entry in entries:
         the_country = entry['country']
         if the_country not in countries:
             countries.append(the_country)
-    countries.sort()
-    # getting the categories for the dropdown
-    category_list = mongo.db.categories.find()
-
-    # Creating the list of Phtographers for its dropdown
-    photographers = []
-    entries = mongo.db.details.find()
-    for entry in entries:
         the_photographer = entry['photographer']
         if the_photographer not in photographers:
             photographers.append(the_photographer)
-    photographers.sort()
-    
+    photographers.sort()            
+    countries.sort()
+
+    # getting the categories for the dropdown
+    category_list = mongo.db.categories.find()
+
     return render_template('landing.html', entries = entries_to_send, countries = countries, categories = category_list, photographers = photographers, filters = filters)
 
 
