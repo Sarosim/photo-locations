@@ -109,7 +109,8 @@
 
         var map = new google.maps.Map(document.getElementById('map'), {
             zoom: 4,
-            center: { lat: 50, lng: 30 }
+            center: { lat: 50, lng: 30 },
+            mapTypeControl: false
         });
         var markers = [];
         var infoWindow = new google.maps.InfoWindow(), marker, i;
@@ -197,9 +198,10 @@
             });
         
     }
+
 </script>
 
 <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js"></script>
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCh5hquqnIYsTyfmzkJds-warsV1FJ4smU&callback=initMap" type="text/javascript"></script>
-
+<script src="{{ url_for('static', filename='js/map.js') }}"></script>
 {% endblock %}
