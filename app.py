@@ -14,36 +14,6 @@ mongo=PyMongo(app)
 
 
 
-
-
-def views_to_correct():
-    entries=mongo.db.details
-    all_entries = entries.find()
-    for entry in all_entries:
-        if 'num_of_views' in entry:
-            print("Do nothing")
-        else:
-            entries.update({'_id': ObjectId(entry["_id"])},
-            {
-            '$set': {
-            'num_of_views': 0,
-        }
-    })
-        if 'num_of_likes' in entry:
-            print("Ne csinalj semmit")
-        else:
-            entries.update({'_id': ObjectId(entry["_id"])},
-            {
-            '$set': {'num_of_likes': 0}})
-
-
-
-views_to_correct()
-
-
-
-
-
 #check tripod_used field and convert to boolean
 def check_tripod(this_id):
     entries=mongo.db.details
