@@ -58,7 +58,7 @@
 <section class="container-fluid">
     <div class="row p-3">
         <div class="postcard-container">
-            <!--If there is no result for the filter give a nice message and some tips to the user-->
+            <!--If there is no result for the filter, give a nice message and some tips to the user-->
             {% if entries.count() == 0 %}
                 <div class="no-results">
                     <h3 class="mb-2 mb-md-4">Sorry, we couldn't find any results for your filter</h3>
@@ -80,7 +80,6 @@
                         <li>Try your filter step by step, use one filter at first, then filter it further.</li>
                     </ul>
                 </div>
-            
             {% endif %}
             
             {% for entry in entries %}
@@ -88,7 +87,7 @@
             <div class="flex-cards card bg-light px-1 mb-3">
                 <div class="card-header">{{entry.category_name}}</div>
                 <a class=postcard-link href="{{url_for('display_details', rec_id = entry._id)}}">
-                        <img class="postcard-image" id="{{entry._id}}" src="{{entry.image_url}}" alt="Card image">
+                        <img class="postcard-image" id="{{entry._id}}" src="{{entry.image_url}}" alt="Photo of the location">
                     </a>
                 <div class="card-body">
                     <a class=postcard-title-link href="{{url_for('display_details', rec_id = entry._id)}}">
