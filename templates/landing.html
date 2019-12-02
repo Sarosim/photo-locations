@@ -58,6 +58,31 @@
 <section class="container-fluid">
     <div class="row p-3">
         <div class="postcard-container">
+            <!--If there is no result for the filter give a nice message and some tips to the user-->
+            {% if entries.count() == 0 %}
+                <div class="no-results">
+                    <h3 class="mb-2 mb-md-4">Sorry, we couldn't find any results for your filter</h3>
+                    <h4>It looks like the database doesn't contain any locations with the combination of the these filters:</h4>
+                    <ul>
+                        {% if filters.country %}
+                            <li>Country of {{filters.country}}</li>
+                        {% endif %}
+                        {% if filters.category_name %}
+                            <li>Category of {{filters.category_name}}</li>
+                        {% endif %}
+                        {% if filters.photographer %}
+                            <li>Photographer of {{filters.photographer}}</li>
+                        {% endif %}
+                    </ul>
+                    <h4>Search tips:</h4>
+                    <ul>
+                        <li>Try removing one of the filters by leaving it empty</li>
+                        <li>Try your filter step by step, use one filter at first, then filter it further.</li>
+                    </ul>
+                </div>
+            
+            {% endif %}
+            
             {% for entry in entries %}
             <!--<div class="col-12 col-sm-6 col-lg-4 col-xl-3 py-3">-->
             <div class="flex-cards card bg-light px-1 mb-3">

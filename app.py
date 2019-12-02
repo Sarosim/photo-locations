@@ -62,8 +62,8 @@ def landing():
     filters = {}
     collection = mongo.db.details
     entries = collection.find()
-    entries_to_send = entries.sort([('date_modified', -1)])
-    print(entries_to_send[0])
+    entries_to_send = entries.sort([('date_modified', -1)]).limit(25)
+
     # Checking if there is a filtering request
     if request.args:
         filters = request.args.to_dict()
@@ -86,7 +86,6 @@ def landing():
             entries_to_send = filter_result
     
     # Creating the list of countries and photographers for the dropdown
-
     countries = []
     photographers = []
     entries = collection.find()
@@ -102,8 +101,7 @@ def landing():
 
     # getting the categories for the dropdown
     category_list = mongo.db.categories.find()
-    print("megegyszer: ")
-    print(entries_to_send[0])
+
     return render_template('landing.html', entries = entries_to_send, countries = countries, categories = category_list, photographers = photographers, filters = filters)
 
 
