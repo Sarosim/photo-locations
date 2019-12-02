@@ -77,13 +77,7 @@ def landing():
         
         #Filtering the database with the uncluttered filters and sorting by the number of likes
         filter_result = collection.find(filters).sort([('num_of_likes', -1)])
-
-        # IF no result found: (Should send a message later, but) do nothing extra for now AND send the empty 'entries' 
-        if filter_result.count() == 0:
-            entries_to_send = filter_result
-        # Otherwise: pass the list of result to the renderer
-        else:
-            entries_to_send = filter_result
+        entries_to_send = filter_result
     
     # Creating the list of countries and photographers for the dropdown
     countries = []
