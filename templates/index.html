@@ -86,6 +86,10 @@
                         Checking the details of a particular location you can simply click on the marker on the map (in order to avoid congestion
                         on the map, markers of close proximity are grouped and the numbers shown indicate the number of the underlying markers)
                     </h5>
+                    <h5>
+                        Pins on the map are marked with the starting letter of the corresponding category. 
+                    </h5>
+                    <h6>(C - Cityscape, L - Landscape, S - Seascape. Cl - Cloudscape)</h6>
                 </div>    
             </div>
             <div class="d-none d-md-block col-md-2"></div>
@@ -205,5 +209,4 @@
 
 <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js"></script>
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCh5hquqnIYsTyfmzkJds-warsV1FJ4smU&callback=initMap" type="text/javascript"></script>
-<script src="{{ url_for('static', filename='js/map.js') }}"></script>
 {% endblock %}
