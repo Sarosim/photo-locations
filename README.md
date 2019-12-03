@@ -42,10 +42,10 @@ Check what equipment others used, what technique they applied. Also they may fig
 A go-to place for landscape photographers. Once reached a critical mess, advertisement income may be generated.
 
 #### Promote their web shop of photo equipment and accessories or their services offered
-The owner may run a shop where thye are selling photo equipments (camera, lens, etc... ) or accessories (filters, tripods, cleaning sets, etc...). They may build a webshop 
+The owner may run a shop where they are selling photo equipments (camera, lens, etc... ) or accessories (filters, tripods, cleaning sets, etc...). They may build a webshop 
 integrated around the database, offering relevant products to users.
 
-Should they have a business around offering photgraphy services, they can advertise themselves, e.g. offering landscape photo courses.
+Should they have a business around offering photography services, they can advertise themselves, e.g. offering landscape photo courses.
 
 # UX
 
@@ -62,7 +62,7 @@ Users should be able to browse images and locations conveniently.
 On top of the obvious CRUD operations, must have elements are:
 - Map view with all geo-coordinates displayed from database. (Advanced feature but this is the single best option to display locations)
 - Overview page with postcard type display of (selected) database records (with limited information to save real estate)
-- Let the viewer focus on a single image in the postcard view when they move the mouse over an image by bluring all other pictures.
+- Let the viewer focus on a single image in the postcard view when they move the mouse over an image by blurring all other pictures.
 - Detailed view with larger image and full info from database
 
 ### What's out of scope?
@@ -75,7 +75,7 @@ and deleting from the MongoDB database, I left user authentication out of scope 
 Marketing the site itself and utilising advertising opportunities within the site is also out of scope, therefore no links to social 
 media sites or contacts or T&Cs are incorporated.
 
-Providing an upload functionality would be a more convenient and user friendly way of supplying images. In order to avoid storing and 
+Providing upload functionality would be a more convenient and user friendly way of supplying images. In order to avoid storing and 
 handling potentially large image files, only URLs to images can be entered to the forms. This is certainly not the best UX, but integration 
 with Amazon S3 is in the scope of the next milestone project.
 
@@ -130,16 +130,16 @@ like that.
 
 For the search page and the detailed view, the focus is on the images, therefore I didn't want to distract with a 'busy' background and left it as simple as possible.
 
-## User stoies
+## User stories
 
 Taking the Scope into consideration, the following user stories are to be satisfied:
 
-1. As a frequent traveller, I'd like to find nice sceneries to photograph around the palces I visit. E.g. 'I have a weekend trip to Lisbon next month, what are the most 	
+1. As a frequent traveller, I'd like to find nice sceneries to photograph around the places I visit. E.g. 'I have a weekend trip to Lisbon next month, what are the most 	
 beautiful sites to visit?	
 2. As a hobby photographer, I'd like to improve the quality of my landscape images. There are so many beautiful pictures on the web, but how are those taken? Were there any special filters used? 	
 What is the key to taking outstanding images?	
 3. As a passionate and experienced photographer, I'd like to help others to improve their technique by showcasing my best images and explaining the process behind.	
-4. As the site owner, I'd like to build a platform, where poeple can share their images, get votes from the community, be proud of their work.	
+4. As the site owner, I'd like to build a platform, where people can share their images, get votes from the community and be proud of their work.	
 5. As an advanced hobbyist, I'd like to see whether people like my latest landscape images.	
 
 # Design
@@ -169,7 +169,7 @@ _Although it's easy to figure out from the script what the password for deleting
 # Features
 ## Map integration
 Google map is inserted on the index page. Markers are placed on the map showing each location in the database. In order to avoid the map becoming overcrowded with markers, 
-marker clusteres are used to group markers in close proximity. 
+marker clusters are used to group markers in close proximity. 
 When a user moves the mouse over a marker, the key features of that location are displayed in an infoWindow.
 Clicking on the marker directs the user to the detailed info of that location displayed on a single page, including the image that was taken at that location.
 
@@ -179,8 +179,8 @@ Users can filter entries by:
 - image category
 - photographer
 
-Corresponding dropdown boxes are placed on top of the search page, where any combination of filterning can be set and by clicking on the 'Lets Gooo' button filtering is launched.
-Results are shown on the same page, sorted by 'poularity' (number of likes).
+Corresponding dropdown boxes are placed on top of the search page, where any combination of filtering can be set and by clicking on the 'Lets Gooo' button filtering is launched.
+Results are shown on the same page, sorted by 'popularity' (number of likes).
 
 # Technologies used
 
@@ -209,7 +209,7 @@ During testing, I wanted to test:
 
 ## Design and responsiveness
 During the development process I focused on functionality, although I included Bootstrap grid in the html, I haven't checked if everything looked okay on all sizes.
-After finishing the functionality, I started with the index page. Repositioned elements, fixed margins and paddings. There was still one issue, the picures caused the 
+After finishing the functionality, I started with the index page. Repositioned elements, fixed margins and paddings. There was still one issue, the pictures caused the 
 mobile view scaled unexpectedly, which was caused by a _'min-width of 100vw'_ and unnecessary font sizes for ```<h*>``` tags.
 
 When I prepared the details view, I just quickly followed the wireframe I had created at the very beginning, but I didn't really like the look and feel. 
@@ -230,8 +230,8 @@ The general, most important finding is that we should always store date and time
 
 - I added the number of views and number of likes fields to the database after already creating some entries. It meant that some old records showed up without these fields, 
 therefore I created a function, which looped through the database and added these fields if they weren't there. I deleted this function after fixing this issue.
-- During the development process sometimes I realised I wanted something more/different or things worked differently then I expected. This resulted in necessary workarounds with 
-tripod used and format of lat lon, for example. The issue with the tripod used field was that the Bootsrap switch field isn't creating a Boolean output, but 
+- During the development process sometimes I realised I wanted something more/different or things worked differently than I expected. This resulted in necessary workarounds with 
+tripod used and format of lat lon, for example. The issue with the tripod used field was that the Bootsrtap switch field isn't creating a Boolean output, but 
 sends "on" if switched on and sends nothing if not switched on. I had to handle it in on the backend. I haven't set properly the schema and didn't always use validation 
 for the lat lon fields, therefore the database contains different data types for these fields. I created a workaround on the backend, commented all the reasons in the code. 
 
@@ -246,10 +246,10 @@ names including a space character returned empty search. It turned out the value
 
 There are practically three features that require javaScript:
 - the Google Map API, 
-- the bluring effect on the search page, and
+- the blurring effect on the search page, and
 - checking the password on the modal that prevents accidental deleting from the database 
 
-I heavily tested all of them and used javasScript debugger and console.log-s until they worked the intented way.
+I heavily tested all of them and used javasScript debugger and console.log-s until they worked the intended way.
 
 I analysed and validated the scripts with JSHints.
 
@@ -257,7 +257,7 @@ There was an interesting issue with the Google Map API's built-in infoWindow. I 
 My issue was that if I simply set the infowindow content to a string, it did work, but I wanted to display data passed from my MongoDB through Flask.
 I was iterating through the data with a for loop, then assigning the data to various variables, then instantiating the infoWindow and the Marker.
 Markers worked fine, also the infoWindow worked fine as long as I assigned a string to it. But I wanted to assign the 'title' and 'category_name' fields from my collection.
-Assigning the corresponding variables also woreked within the loop (I logged it to the console from the loop, printed just fine), but after the loop finished, 
+Assigning the corresponding variables also worked within the loop (I logged it to the console from the loop, printed just fine), but after the loop finished, 
 the map actually showed the same infoWindow for each marker. To overcome it, I had to create an array of infoWindowContent and assign it to the markers one by one.
 
 ### Testing in different browsers
@@ -275,24 +275,24 @@ After autoprefixing my CSS, I checked functionality and appearance in Firefox an
 1. The 'frequent traveller', can find nice sceneries to photograph either browsing the map or filtering the database and check out photos of those. 	
 2. The hobby photographer can learn and improve the quality of their landscape images by checking the equipment used for images in the database as well as from description. 
 3. The experienced photographer can showcase their best images and provide explanation in the description field for others.	
-4. The site owner achieved their goal of building a platform, where poeple can share their images, get votes from the community, be proud of their work.	
+4. The site owner achieved their goal of building a platform, where people can share their images, get votes from the community, be proud of their work.	
 5. The advanced hobbyist can get feedback through the number of likes of their landscape images.
 
 ## Defensive testing
 
-### Insufficent information provided. 
-To avoid inserting records into the database with insufficient information I set the most important fields as _required_ on the form. This way they can not be left blank. However, 
+### Insufficient information provided. 
+To avoid inserting records into the database with insufficient information I set the most important fields as _required_ on the form. This way they cannot be left blank. However, 
 insufficient or irrelevant information still can be inserted.
 
 ### Image missing
-Attaching an image is by providing a URL. The form checks wherther URL is inserted, but cannot check if it is a valid URL and whether it is an image or not.
+Attaching an image is by providing a URL. The form checks whether URL is inserted, but cannot check if it is a valid URL and whether it is an image or not.
 
 I tested what happens if a user enters a URL that is not an image, but a website. Obviously no images will be displayed then on the search page or in the details, but 
 right-clicking on the broken image icon and opening it on a new tab will load that page... As this is the result of using urls for images instead of file upload, which is 
-also not the proper UX, fixing the UX would fix this isse as well. (But file upload is out of the scope for this project)
+also not the proper UX, fixing the UX would fix this issue as well. (But file upload is out of the scope for this project)
 
 ### Image sizes
-I linked a relatively large panoramic image (6000 pixels wide, 3MB), it displayed properly on all screen sizes and I haven't noticed significant delate, but surely with excessive 
+I linked a relatively large panoramic image (6000 pixels wide, 3MB), it displayed properly on all screen sizes and I haven't noticed significant delays, but surely with excessive 
 file size misbehaving users can cause disruption to the site. File upload with restrictions would eliminate this bug as well.
 
 ### Number of database entries
@@ -325,7 +325,7 @@ So, I created the requirements.txt:
 
 ```sudo pip3 freeze –local > requirements.txt```
 
-Added to git and commited it:
+Added to git and committed it:
 
 ```
 git add requirements.txt
@@ -363,12 +363,12 @@ To avoid abuse of the Google Map API key, I restricted it through Google Cloud P
 
 # Credits
 I used CSS prefixer at https://autoprefixer.github.io/ to ensure cross browser functionality. Also validated the CSS with https://jigsaw.w3.org/css-validator/validator.
-The scripts embedded in the html docs as well as the script.js file were analised and validated with https://jshint.com/
+The scripts embedded in the html docs as well as the script.js file were analysed and validated with https://jshint.com/
 
 ## Content
 
 ## Media
-Images are either my own or of family and frends (names, nicknames of photographers indicated in the database), uploaded by them.
+Images are either my own or of family and friends (names, nicknames of photographers indicated in the database), uploaded by them.
 
 ## Acknowledgements
 
