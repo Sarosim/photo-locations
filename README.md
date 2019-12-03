@@ -147,7 +147,7 @@ What is the key to taking outstanding images?
 ## The final design of the key pages:	
 ### Desktop size
 #### Index page
-![alt text](https://github.com/Sarosim/photo-locations/blob/master/documentation/design/index_page_desktop.jpg "Index page")
+![alt text](https://github.com/Sarosim/photo-locations/blob/master/documentation/design/desktop.gif "Index page")
 #### Search page
 ![alt text](https://github.com/Sarosim/photo-locations/blob/master/documentation/design/search_page_desktop.jpg "Search page")	
 #### Details page
@@ -218,6 +218,29 @@ I redesigned it after finished with the functionality.
 Image and container sizes needed to be reset to achieve the desired look especially on smaller screen sizes.
 
 ## Functioning and operability
+
+### Database, Flask, python
+
+As the aim of the project is to learn about MongoDB, Flask and database manipulation as such, I was experimenting on uncharted lands of adventure.
+
+There were a few interesting learnings:
+
+- Date and time is not as obvious as it first seems. Time zones as well as all kinds of date and time formats make life more difficult when working with date and time. 
+The general, most important finding is that we should always store date and time in UTC. And always send an ISO date string or timestamp to backend.
+
+- I added the number of views and number of likes fields to the database after already creating some entries. It meant that some old records showed up without these fields, 
+therefore I created a function, which looped through the database and added these fields if they weren't there. I deleted this function after fixing this issue.
+- During the development process sometimes I realised I wanted something more/different or things worked differently then I expected. This resulted in necessary workarounds with 
+tripod used and format of lat lon, for example. The issue with the tripod used field was that the Bootsrap switch field isn't creating a Boolean output, but 
+sends "on" if switched on and sends nothing if not switched on. I had to handle it in on the backend. I haven't set properly the schema and didn't always use validation 
+for the lat lon fields, therefore the database contains different data types for these fields. I created a workaround on the backend, commented all the reasons in the code. 
+
+- It was interesting to see that the number of views also increased when I clicked on the like button, as it is redirects to the same page. I offset this increased number of 
+views in the corresponding Flask function.
+
+- The biggest learning here is that the data structure and schema has to be designed well and created properly before anything else.
+- There was an interesting bug at with the filters. Filtering worked fine at the first glance, but testing it thoroughly, it turned out that country names and photographer 
+names including a space character returned empty search. It turned out the value attribute of the ```<option>``` tag didn't have to be set. 
 
 ### JavaScript
 
@@ -316,11 +339,12 @@ use to call the app {convention is to name it either run.py or app.py – I chos
 
 In order to avoid committing .c9/ folder and its contents, I added them to the .gitignore file and committed the .gitignore file to Git.
 
+I connected my Heroku to my GitHub repo and applied automatic deploy to the master branch.  
 
 ## Differences between the deployed production version and the development version
-In production, we should never commit secure keys, API keys, usernames, passwords. 
+**In production, we should never commit secure keys, API keys, usernames and passwords.**
 
-I moved the Atlas MongoDB connection string to the .bashrc file: 
+#### I moved the Atlas MongoDB connection string to the .bashrc file: 
 
 ```export MONGO_URI = " ...the connections string here... " ```
 
@@ -328,9 +352,14 @@ and used it in the app:
 
 ```app.config["MONGO_URI"] = os.getenv("MONGO_URI")```
 
-I also set MONGO_URI in Heroku config vars.
+#### I also set MONGO_URI in Heroku config vars.
 
-When finished with the last bug fix and all the finetuning, I set the _Debug_ mode to **False** in the ```app.run()```
+#### I left the Google Map API secure key in the production version, as it is not so easy to replace with and pass to the frontend.
+To avoid abuse of the Google Map API key, I restricted it through Google Cloud Platform and is valid only to:
+- the website on my Amazon AWS Cloud9 and
+- the production site on Heroku. 
+
+#### When finished with the last bug fix and all the finetuning, I set the _Debug_ mode to **False** in the ```app.run()```
 
 # Credits
 I used CSS prefixer at https://autoprefixer.github.io/ to ensure cross browser functionality. Also validated the CSS with https://jigsaw.w3.org/css-validator/validator.
