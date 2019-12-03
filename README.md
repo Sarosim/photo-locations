@@ -4,7 +4,7 @@
 
 To build a full-stack site that allows users to manage a common dataset about a particular domain
 
-Link to the live app: [here](https://photography-locations.herokuapp.com/)
+[Link to the live app on Heroku:](https://photography-locations.herokuapp.com/)
 
 ## My aims with the project
 
@@ -70,8 +70,7 @@ On top of the obvious CRUD operations, must have elements are:
 According to the project brief: No authentication is expected for this project. The focus is on the data, rather than any business logic.
 In a real-life situation the obvious first step would be to authenticate users to avoid modifying and deleting each other's entries. 
 In order to keep focus on passing data to and from the frontend as well as 'organising' data on the backend and writing to, retrieving from 
-and deleting from the MongoDB database, I 
-left user authentication out of scope. (they're indicated in the navbar as disabled nav items, though)
+and deleting from the MongoDB database, I left user authentication out of scope (it is indicated in the navbar with disabled nav items, though).
 
 Marketing the site itself and utilising advertising opportunities within the site is also out of scope, therefore no links to social 
 media sites or contacts or T&Cs are incorporated.
@@ -117,9 +116,10 @@ MongoDB data on Atlas with the following collections:
 ### Wireframe sketches:
 
 #### Search Page:	
-![alt text](https://github.com/Sarosim/photo-locations/blob/master/documentation/wireframes/wireframe_search.jpg "Search page")	[Search page: ](documentation/wireframes/wireframe_search.jpg)
+![alt text](https://github.com/Sarosim/photo-locations/blob/master/documentation/wireframes/wireframe_search.jpg "Search page")
 
-#### Details View:	[Details page: ](documentation/wireframes/wireframe-details-view.jpg)
+#### Details View:	
+
 ![alt text](https://github.com/Sarosim/photo-locations/blob/master/documentation/wireframes/wireframe-details-view.jpg "Details view")
 
 ## Surface
@@ -168,9 +168,9 @@ _Although it's easy to figure out from the script what the password for deleting
 
 # Features
 ## Map integration
-Google map is inserted on the index page. Markers are placed on the map showing each location in the database. In order to avoid croudiness on the map, 
+Google map is inserted on the index page. Markers are placed on the map showing each location in the database. In order to avoid the map becoming overcrowded with markers, 
 marker clusteres are used to group markers in close proximity. 
-When a user move the mouse over a marker, the key features of that location are displayed in an infoWindow.
+When a user moves the mouse over a marker, the key features of that location are displayed in an infoWindow.
 Clicking on the marker directs the user to the detailed info of that location displayed on a single page, including the image that was taken at that location.
 
 ## Filtering
@@ -179,15 +179,22 @@ Users can filter entries by:
 - image category
 - photographer
 
+Corresponding dropdown boxes are placed on top of the search page, where any combination of filterning can be set and by clicking on the 'Lets Gooo' button filtering is launched.
+Results are shown on the same page, sorted by 'poularity' (number of likes).
 
 # Technologies used
 
-[*HTML*](https://en.wikipedia.org/wiki/HTML5) 
-[*CSS*](https://en.wikipedia.org/wiki/Cascading_Style_Sheets)
+[*HTML*](https://en.wikipedia.org/wiki/HTML5), 
+
+[*CSS*](https://en.wikipedia.org/wiki/Cascading_Style_Sheets), 
+
 [Bootstrap](https://getbootstrap.com/docs/4.0/getting-started/introduction/) framework, more specifically 
 [**Bootswatch Cyborg theme**](https://bootswatch.com/cyborg/).   
 
-[*JavaScript*](https://www.javascript.com/), I used [*jQuery*](https://jquery.com/) library to simplify DOM manipulation.
+[*JavaScript*](https://www.javascript.com/), I also used [*jQuery*](https://jquery.com/) library to simplify DOM manipulation.
+
+I chose MongoDB as my database, it is a versatile document based database - non-relational or NoSQL. It is useful to store large (hu**_mongo_**us) amount of 
+unstructured data. I used [*MongoDB Atlas*](https://www.mongodb.com/cloud/atlas) which is the official MongoDB database-as-a-service available on AWS.
 
 # Testing
 
@@ -195,7 +202,7 @@ Users can filter entries by:
 
 During testing, I wanted to test:
 
-- design and responsiveness: to see if I like the look and feel of the game on different devices and screen sizes,
+- design and responsiveness: to see if I like the look and feel of pages on different devices and screen sizes,
 - functioning and operability in different browsers (mobile and pc),
 - against user stories,
 - against misbehaviour (defensive design).
@@ -205,7 +212,8 @@ During the development process I focused on functionality, although I included B
 After finishing the functionality, I started with the index page. Repositioned elements, fixed margins and paddings. There was still one issue, the picures caused the 
 mobile view scaled unexpectedly, which was caused by a _'min-width of 100vw'_ and unnecessary font sizes for ```<h*>``` tags.
 
-When I prepared the details view, I just quickly followed the wireframe but didn't really like the look and feel. I redesigned it after finished with the functionality.
+When I prepared the details view, I just quickly followed the wireframe I had created at the very beginning, but I didn't really like the look and feel. 
+I redesigned it after finished with the functionality.
 
 Image and container sizes needed to be reset to achieve the desired look especially on smaller screen sizes.
 
@@ -216,11 +224,18 @@ Image and container sizes needed to be reset to achieve the desired look especia
 There are practically three features that require javaScript:
 - the Google Map API, 
 - the bluring effect on the search page, and
-- the modal that prevents accidental deleting from the database 
+- checking the password on the modal that prevents accidental deleting from the database 
 
 I heavily tested all of them and used javasScript debugger and console.log-s until they worked the intented way.
 
-There was an interesting issue with the ..............................................................................................................................................
+I analysed and validated the scripts with JSHints.
+
+There was an interesting issue with the Google Map API's built-in infoWindow. I managed to set the map properly with the exception of the InfoWindow. 
+My issue was that if I simply set the infowindow content to a string, it did work, but I wanted to display data passed from my MongoDB through Flask.
+I was iterating through the data with a for loop, then assigning the data to various variables, then instantiating the infoWindow and the Marker.
+Markers worked fine, also the infoWindow worked fine as long as I assigned a string to it. But I wanted to assign the 'title' and 'category_name' fields from my collection.
+Assigning the corresponding variables also woreked within the loop (I logged it to the console from the loop, printed just fine), but after the loop finished, 
+the map actually showed the same infoWindow for each marker. To overcome it, I had to create an array of infoWindowContent and assign it to the markers one by one.
 
 ### Testing in different browsers
 
@@ -237,7 +252,7 @@ After autoprefixing my CSS, I checked functionality and appearance in Firefox an
 1. The 'frequent traveller', can find nice sceneries to photograph either browsing the map or filtering the database and check out photos of those. 	
 2. The hobby photographer can learn and improve the quality of their landscape images by checking the equipment used for images in the database as well as from description. 
 3. The experienced photographer can showcase their best images and provide explanation in the description field for others.	
-4. The site owner, achieved their goal of building a platform, where poeple can share their images, get votes from the community, be proud of their work.	
+4. The site owner achieved their goal of building a platform, where poeple can share their images, get votes from the community, be proud of their work.	
 5. The advanced hobbyist can get feedback through the number of likes of their landscape images.
 
 ## Defensive testing
@@ -250,10 +265,12 @@ insufficient or irrelevant information still can be inserted.
 Attaching an image is by providing a URL. The form checks wherther URL is inserted, but cannot check if it is a valid URL and whether it is an image or not.
 
 I tested what happens if a user enters a URL that is not an image, but a website. Obviously no images will be displayed then on the search page or in the details, but 
-right-clicking on the broken image icon and opening it on a new tab wlll load that page............................................................................................................................
+right-clicking on the broken image icon and opening it on a new tab will load that page... As this is the result of using urls for images instead of file upload, which is 
+also not the proper UX, fixing the UX would fix this isse as well. (But file upload is out of the scope for this project)
 
 ### Image sizes
-I uploaded a relatively large panoramic image (6000 pixels wide, 3MB), it displayed properly on all screen sizes and TIME.....................................................................................
+I linked a relatively large panoramic image (6000 pixels wide, 3MB), it displayed properly on all screen sizes and I haven't noticed significant delate, but surely with excessive 
+file size misbehaving users can cause disruption to the site. File upload with restrictions would eliminate this bug as well.
 
 ### Number of database entries
 As the database is growing, the number of images displayed on the search page is growing and soon it will create problems especially if someone is opening the page on mobile phone
@@ -279,13 +296,13 @@ After initialising and making the initial commit:
 
 ```git push heroku master```
 
-In order to have it working, requirements.txt and Procfile are needed.
+In order to have it working, **requirements.txt** and **Procfile** are needed.
 
 So, I created the requirements.txt:
 
 ```sudo pip3 freeze –local > requirements.txt```
 
-Added to git and commited it.
+Added to git and commited it:
 
 ```
 git add requirements.txt
@@ -301,17 +318,23 @@ In order to avoid committing .c9/ folder and its contents, I added them to the .
 
 
 ## Differences between the deployed production version and the development version
-In production, we should never commit secure keys, API keys, usernames, passwords.
+In production, we should never commit secure keys, API keys, usernames, passwords. 
 
 I moved the Atlas MongoDB connection string to the .bashrc file: 
 
 ```export MONGO_URI = " ...the connections string here... " ```
 
+and used it in the app:
 
+```app.config["MONGO_URI"] = os.getenv("MONGO_URI")```
+
+I also set MONGO_URI in Heroku config vars.
+
+When finished with the last bug fix and all the finetuning, I set the _Debug_ mode to **False** in the ```app.run()```
 
 # Credits
 I used CSS prefixer at https://autoprefixer.github.io/ to ensure cross browser functionality. Also validated the CSS with https://jigsaw.w3.org/css-validator/validator.
-The scripts embedded in the html docs as well as the script.js file were validated with https://jshint.com/
+The scripts embedded in the html docs as well as the script.js file were analised and validated with https://jshint.com/
 
 ## Content
 
@@ -320,6 +343,6 @@ Images are either my own or of family and frends (names, nicknames of photograph
 
 ## Acknowledgements
 
-Thanks to Ali Ashik - my mentor - for not only the development ideas and support but orienting me in time management.
+Thanks to Ali Ashik - my mentor - for not only the development ideas and support but orienting me in time management and what to include and what to leave out of scope.
 
-Tutor support helped me with debugging, not only finding certain bugs, but improving my thinking process when searching for bugs. Tim was exceptionally awesome.
+Tutor support helped me with debugging, not only finding certain bugs, but improving my thinking process when searching for bugs. Tim was exceptionally awesome!
