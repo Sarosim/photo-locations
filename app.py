@@ -13,26 +13,6 @@ app.config["MONGO_DBNAME"]='photo_locations'
 app.config["MONGO_URI"] = os.getenv("MONGO_URI")
 mongo=PyMongo(app)
 
-#def mongo_connect(url):
- #   try:
-  #      conn=pymongo.MongoClient(url)
-   #     print("Mongo is connected")
-    #    return conn
-#    except pymongo.errors.ConnectionFailure as e:
-#        print("Could not connect to Mongo: %s") %e
-
-#conn = mongo_connect(MONGO_URI)
-
-#mongo = conn['photo_locations']
-
-#print(mongo['categories'][0])
-
-
-
-
-
-
-
 
 #check tripod_used field and convert to boolean
 def check_tripod(this_id):
@@ -247,4 +227,4 @@ def delete_record(record_id):
     
 
 if __name__ == '__main__':
-    app.run(host=os.environ.get('IP'), port=int(os.environ.get('PORT')), debug=True)    
+    app.run(host=os.environ.get('IP'), port=int(os.environ.get('PORT')), debug=False)    
