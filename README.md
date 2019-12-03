@@ -366,7 +366,7 @@ I used CSS prefixer at https://autoprefixer.github.io/ to ensure cross browser f
 The scripts embedded in the html docs as well as the script.js file were analysed and validated with https://jshint.com/
 
 ## Content
-All texts are written my me.
+All texts are written by me.
 
 ## Media
 Images are either my own or of family and friends (names, nicknames of photographers indicated in the database), uploaded by them.
