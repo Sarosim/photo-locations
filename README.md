@@ -146,7 +146,7 @@ What is the key to taking outstanding images?
 
 ## The final design of the key pages:	
 ### Desktop size
-#### Index page
+#### Index page and the link to Details page:
 ![alt text](https://github.com/Sarosim/photo-locations/blob/master/documentation/design/desktop1.gif "Index page")
 #### Search page
 ![alt text](https://github.com/Sarosim/photo-locations/blob/master/documentation/design/search_page_desktop.jpg "Search page")	
