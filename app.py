@@ -5,12 +5,32 @@ from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
 import time
 import datetime
+import pymongo
 
 app=Flask(__name__)
 
 app.config["MONGO_DBNAME"]='photo_locations'
-app.config['MONGO_URI']='mongodb+srv://nick:n1ckUser@myfirstcluster-mbpma.mongodb.net/photo_locations?retryWrites=true&w=majority'
+app.config["MONGO_URI"] = os.getenv("MONGO_URI")
 mongo=PyMongo(app)
+
+#def mongo_connect(url):
+ #   try:
+  #      conn=pymongo.MongoClient(url)
+   #     print("Mongo is connected")
+    #    return conn
+#    except pymongo.errors.ConnectionFailure as e:
+#        print("Could not connect to Mongo: %s") %e
+
+#conn = mongo_connect(MONGO_URI)
+
+#mongo = conn['photo_locations']
+
+#print(mongo['categories'][0])
+
+
+
+
+
 
 
 
