@@ -31,28 +31,27 @@ def index():
     location = {}
     data_to_send_to_map = {}
     data_to_send_all = []
-# Creating the dictionary of the locations to pass to the Google map API
+    # Creating the dictionary of the locations to pass to the Google map API
     for entry in entries:
-# Because of the schema wasn't set up properly at the beginning, the database contains mixed types for lat/lon (as well as documents
-# without...), so I have to check for existance and type
+        # Because of the schema wasn't set up properly at the beginning, the database contains mixed types for lat/lon (as well as documents
+        # without...), so I have to check for existance and type
         if "lat" in entry:
             if isinstance(entry["lat"], str):
                 location["lat"] = float(entry["lat"])
                 location["lng"] = float(entry["lon"])
-# Location has to be in a format JSON can sterilize (Decimal128 is not), Float can not take decimal128 as argument either...
+            # Location has to be in a format JSON can sterilize (Decimal128 is not), Float can not take decimal128 as argument either...
             else: 
                 location["lat"] = float(str(entry["lat"])) 
                 location["lng"] = float(str(entry["lon"]))
             clone_of_location = location.copy()
-# On top of the coordinates, I send more info 
+            # On top of the coordinates, I send more info 
             data_to_send_to_map["id"] = str(entry["_id"])
             data_to_send_to_map["cat"] = entry['category_name']
             data_to_send_to_map["title"] = entry["title"]
             data_to_send_to_map["point"] = clone_of_location
             clone_of_data = data_to_send_to_map.copy()
             data_to_send_all.append(clone_of_data)
-#   convert into JSON: 
-#   y = json.dumps(locations) THIS WASN'T needed in my case, as I convert on the javaScript side with: |tojson
+
     return render_template('index.html', counter = mongo.db.details.find().count(), data_source = data_to_send_all) 
 
 
@@ -210,11 +209,9 @@ def save_updates(record_id):
 def add_like(record_id):
     entries=mongo.db.details
     entries.update({'_id': ObjectId(record_id)}, {'$inc': {'num_of_likes': 1}})
-    #Because of redirecting to the display_details page, the number of views will be incremented there.
+    #Because of redirecting to the display_details page, the number of views will be incremented when someone cliks 'like'.
     #To compensate it, I decrease the num of views by 1 here, because it is not a new viewing of the page:
     entries.update({'_id': ObjectId(record_id)}, {'$inc': {'num_of_views': -1}})
-    category_list = mongo.db.categories.find()
-    the_record = entries.find_one({"_id": ObjectId(record_id)})
     return redirect(url_for('display_details', rec_id = record_id))
     
 
