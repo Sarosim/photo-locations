@@ -206,7 +206,7 @@ def save_updates(record_id):
 
 
 # Increasing the number of likes 
-@app.route('/add_like/<record_id>', methods=['GET','POST']) #NO NEED FOR POST I GUESS!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+@app.route('/add_like/<record_id>', methods=['GET','POST'])
 def add_like(record_id):
     entries=mongo.db.details
     entries.update({'_id': ObjectId(record_id)}, {'$inc': {'num_of_likes': 1}})
